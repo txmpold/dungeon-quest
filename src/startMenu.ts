@@ -1,4 +1,4 @@
-class Menu {
+class StartMenu {
 private game: Game;
 private menuItems: string[];
 constructor(){
