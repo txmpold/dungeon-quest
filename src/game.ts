@@ -1,9 +1,9 @@
 class Game {
-  private startMenu: Menu;
+  // private startMenu: Menu;
   private levelFactory: LevelFactory;
 
   constructor() {
-    this.startMenu = new Menu();
+    // this.startMenu = new Menu();
     this.levelFactory = new LevelFactory();
   }
 
