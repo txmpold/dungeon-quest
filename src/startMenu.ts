@@ -1,8 +1,6 @@
-class Menu {
-    constructor(){}
+class StartMenu {
+  constructor() {}
 
-    public update() {}
-    public draw() {
-
-    }
+  public update() {}
+  public draw() {}
 }

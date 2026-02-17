@@ -12,9 +12,9 @@ let mapImage: p5.Image;
  */
 function preload() {
   music = {
-    mystery: loadSound("assets/music/mystery.mp3"),
+    mystery: loadSound('assets/music/mystery.mp3'),
   };
-  mapImage = loadImage("assets/images/josefineLevelimg.png");
+  mapImage = loadImage('assets/images/josefineLevelimg.png');
 }
 
 /**
@@ -28,7 +28,7 @@ function setup() {
   frameRate(60);
   music.mystery.setVolume(0.8);
 
-  game = new Game(mapImage);
+  game = new Game();
 }
 
 /**
