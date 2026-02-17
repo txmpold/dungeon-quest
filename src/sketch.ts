@@ -3,6 +3,7 @@ let game: Game;
 let music: {
   mystery: p5.SoundFile;
 };
+let mapImage: p5.Image;
 
 /**
  * Built in preload function in P5
@@ -11,8 +12,9 @@ let music: {
  */
 function preload() {
   music = {
-    mystery: loadSound("/assets/music/mystery.mp3"),
+    mystery: loadSound("assets/music/mystery.mp3"),
   };
+  mapImage = loadImage("assets/images/josefineLevelimg.png");
 }
 
 /**
@@ -26,7 +28,7 @@ function setup() {
   frameRate(60);
   music.mystery.setVolume(0.8);
 
-  game = new Game();
+  game = new Game(mapImage);
 }
 
 /**
@@ -45,3 +47,7 @@ function draw() {
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
+(window as any).preload = preload;
+(window as any).setup = setup;
+(window as any).draw = draw;
+(window as any).windowResized = windowResized;
