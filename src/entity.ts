@@ -3,11 +3,11 @@ class Entity {
   protected velocity: p5.Vector;
   protected size: number; //vector kanske?
   private image: p5.Image;
-  protected row: number; //antal rader character.png?
+  protected frameSize: number = 16;
 
+  protected row: number; //antal rader character.png?
   protected col: number;
   protected totalCol: number;
-  protected frameSize: number = 16;
 
   constructor(
     position: p5.Vector,
@@ -27,10 +27,10 @@ class Entity {
   }
 
   public update() {
-    this.updatePosition();
+    this.entityAnimation();
   }
 
-  protected updatePosition() {
+  protected entityAnimation() {
     this.position.add(this.velocity);
 
     if (frameCount % 10 === 0) {

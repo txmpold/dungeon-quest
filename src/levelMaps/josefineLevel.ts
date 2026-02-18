@@ -580,6 +580,7 @@ const josefineLevel = {
   width: 70,
 };
 
+//Davids förslag för hur vi ska rita ut kartan
 const level = josefineLevel;
 
 for (let row = 0; row < level.height; row++) {
