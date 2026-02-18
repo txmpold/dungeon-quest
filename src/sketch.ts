@@ -4,8 +4,9 @@ let music: {
   mystery: p5.SoundFile;
 };
 let images: {
-  tile: p5.Image;
+  // tile: p5.Image;
   map: p5.Image;
+  character: p5.Image;
 };
 
 /**
@@ -18,8 +19,9 @@ function preload() {
     mystery: loadSound('assets/music/mystery.mp3'),
   };
   images = {
+    // tile: loadImage("assets/images/tile.png"),
     map: loadImage('assets/images/josefineLevelimg.png'),
-    tile: loadImage('assets/images/tile.png'),
+    character: loadImage('assets/images/character.png'),
   };
 }
 

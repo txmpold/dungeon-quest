@@ -21,6 +21,6 @@ class LevelFactory {
 
     const x = width / 2 - mapWidth / 2;
     const y = height / 2 - mapHeight / 2;
-    image(this.mapImage, x, y);
+    image(this.mapImage, 0, 0);
   }
 }

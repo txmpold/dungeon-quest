@@ -1,5 +1,5 @@
 const josefineLevel = {
-  backgroundcolor: "#000000",
+  backgroundcolor: '#000000',
   compressionlevel: -1,
   height: 50,
   infinite: false,
@@ -156,9 +156,9 @@ const josefineLevel = {
       ],
       height: 50,
       id: 1,
-      name: "Floor",
+      name: 'Floor',
       opacity: 1,
-      type: "tilelayer",
+      type: 'tilelayer',
       visible: true,
       width: 70,
       x: 0,
@@ -351,9 +351,9 @@ const josefineLevel = {
       ],
       height: 50,
       id: 2,
-      name: "Wall",
+      name: 'Wall',
       opacity: 1,
-      type: "tilelayer",
+      type: 'tilelayer',
       visible: true,
       width: 70,
       x: 0,
@@ -520,9 +520,9 @@ const josefineLevel = {
       ],
       height: 50,
       id: 5,
-      name: "Props",
+      name: 'Props',
       opacity: 1,
-      type: "tilelayer",
+      type: 'tilelayer',
       visible: true,
       width: 70,
       x: 0,
@@ -531,27 +531,27 @@ const josefineLevel = {
   ],
   nextlayerid: 6,
   nextobjectid: 1,
-  orientation: "orthogonal",
-  renderorder: "right-down",
-  tiledversion: "1.11.2",
+  orientation: 'orthogonal',
+  renderorder: 'right-down',
+  tiledversion: '1.11.2',
   tileheight: 16,
   tilesets: [
     {
       firstgid: 1,
-      source: "..\/tilesets\/dungeon.tsx",
+      source: '..\/tilesets\/dungeon.tsx',
     },
     {
       firstgid: 145,
-      source: "..\/tilesets\/AnimatedProps.tsx",
+      source: '..\/tilesets\/AnimatedProps.tsx',
     },
     {
       columns: 5,
       firstgid: 225,
-      image: "..\/images\/Dungeon Set - Tiny Terrors v0.2\/AnimatedProps.png",
+      image: '..\/images\/Dungeon Set - Tiny Terrors v0.2\/AnimatedProps.png',
       imageheight: 256,
       imagewidth: 80,
       margin: 0,
-      name: "AnimatedProps",
+      name: 'AnimatedProps',
       spacing: 0,
       tilecount: 80,
       tileheight: 16,
@@ -559,23 +559,55 @@ const josefineLevel = {
     },
     {
       firstgid: 305,
-      source: "..\/tilesets\/Props.tsx",
+      source: '..\/tilesets\/Props.tsx',
     },
     {
       firstgid: 467,
-      source: "..\/tilesets\/Skull.tsx",
+      source: '..\/tilesets\/Skull.tsx',
     },
     {
       firstgid: 539,
-      source: "..\/tilesets\/SkullDeath.tsx",
+      source: '..\/tilesets\/SkullDeath.tsx',
     },
     {
       firstgid: 575,
-      source: "..\/tilesets\/Ritual.tsx",
+      source: '..\/tilesets\/Ritual.tsx',
     },
   ],
   tilewidth: 16,
-  type: "map",
-  version: "1.10",
+  type: 'map',
+  version: '1.10',
   width: 70,
 };
+
+const level = josefineLevel;
+
+for (let row = 0; row < level.height; row++) {
+  for (let col = 0; col < level.width; col++) {
+    const x = level.tilewidth * col;
+    const y = level.tilewidth * row;
+  }
+}
+
+// 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17
+
+// I
+// 0 - |00|01|02|03|04|05|06|07|
+// 1 - |08|09|10|11|12|13|14|15|
+// 2 - |16|17|18|19|20|21|22|23|
+// 3 - |24|25|26|27|28|29|30|31|
+// 4 - |32|33|34|35|36|37|38|39|
+
+// X
+// 0 - |00|16|32|48|64|72|88|96|
+// 1 - |00|16|32|48|64|72|88|96|
+// 2 - |00|16|32|48|64|72|88|96|
+// 3 - |00|16|32|48|64|72|88|96|
+// 4 - |00|16|32|48|64|72|88|96|
+
+// Y
+// 0 - |00|00|00|00|00|00|00|00|
+// 1 - |16|16|16|16|16|16|16|16|
+// 2 - |32|32|32|32|32|32|32|32|
+// 3 - |48|48|48|48|48|48|48|48|
+// 4 - |64|64|64|64|64|64|64|64|

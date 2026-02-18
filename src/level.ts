@@ -5,7 +5,7 @@ class Level {
 
   constructor() {
     // Vad ska skapas direkt när leveln skapas?
-    this.entities = [new Entity()];
+    this.entities = [new Player()];
     this.isLevelCompleted = false;
     this.isGameOver = false;
   }
@@ -22,7 +22,10 @@ class Level {
 
   public draw() {
     push();
-    background(0);
+    background(255);
+
+    image(images.map, 0, 0);
+
     for (let entity of this.entities) {
       entity.draw();
     }
