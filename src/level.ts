@@ -5,7 +5,7 @@ class Level {
 
   constructor() {
     // Vad ska skapas direkt när leveln skapas?
-    this.entities = [new Player()];
+    this.entities = [new Player(), new Enemy()];
     this.isLevelCompleted = false;
     this.isGameOver = false;
   }

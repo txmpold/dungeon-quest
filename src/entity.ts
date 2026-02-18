@@ -3,25 +3,34 @@ class Entity {
   protected velocity: p5.Vector;
   protected size: number; //vector kanske?
   private image: p5.Image;
-  protected row: number = 6;
+  protected row: number; //antal rader character.png?
 
-  private col: number = 0;
-  private frameSize: number = 16;
-  protected totalCol: number = 1;
+  protected col: number;
+  protected totalCol: number;
+  protected frameSize: number = 16;
 
-  constructor(image: p5.Image) {
-    this.position = createVector(width * 0.5, height * 0.5);
-    this.velocity = createVector(0, 0);
-    this.size = 64;
+  constructor(
+    position: p5.Vector,
+    velocity: p5.Vector,
+    image: p5.Image,
+    row: number,
+    col: number,
+    totalCol: number,
+  ) {
+    this.position = position;
+    this.velocity = velocity;
     this.image = image;
+    this.row = row;
+    this.col = col;
+    this.totalCol = totalCol;
+    this.size = 16;
   }
 
   public update() {
-    this.position.add(this.velocity);
     this.updatePosition();
   }
 
-  private updatePosition() {
+  protected updatePosition() {
     this.position.add(this.velocity);
 
     if (frameCount % 10 === 0) {

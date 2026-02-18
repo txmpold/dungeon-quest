@@ -1,7 +1,12 @@
 /// <reference path="entity.ts" />
 class Player extends Entity {
   constructor() {
-    super(images.character);
+    const position = createVector(width * 0.5, height * 0.5);
+    const velocity = createVector(0, 0);
+    const row = 0;
+    const col = 0;
+    const totalCol = 6;
+    super(position, velocity, images.character, row, col, totalCol);
   }
 
   public update() {
@@ -35,4 +40,6 @@ class Player extends Entity {
       this.totalCol = 4;
     }
   }
+
+  public playerAttack() {}
 }

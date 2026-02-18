@@ -7,6 +7,7 @@ let images: {
   // tile: p5.Image;
   map: p5.Image;
   character: p5.Image;
+  slime: p5.Image;
 };
 
 /**
@@ -22,6 +23,7 @@ function preload() {
     // tile: loadImage("assets/images/tile.png"),
     map: loadImage('assets/images/josefineLevelimg.png'),
     character: loadImage('assets/images/character.png'),
+    slime: loadImage('assets/images/slims.png'),
   };
 }
 
