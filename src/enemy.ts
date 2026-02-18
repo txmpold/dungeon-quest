@@ -1,22 +1,28 @@
 /// <reference path="entity.ts" />
 class Enemy extends Entity {
-  constructor() {
-    const position = createVector(0, 0);
-    const velocity = createVector(0, 0);
-
-    const row = 0;
-    const col = 0;
-    const totalCol = 8;
-    super(position, velocity, images.slime, row, col, totalCol);
+  constructor(
+    position: p5.Vector,
+    velocity: p5.Vector,
+    image: p5.Image,
+    row: number,
+    col: number,
+    totalCol: number,
+  ) {
+    position = position;
+    velocity = velocity;
+    row = row;
+    col = col;
+    totalCol = totalCol;
+    super(position, velocity, image, row, col, totalCol);
   }
 
   public update() {
     super.update();
   }
 
-  public move() {
+  /*   public move() {
     this.velocity.set(random(width), random(height));
     this.row = 0;
     // this.totalCol = 3;
-  }
+  } */
 }
