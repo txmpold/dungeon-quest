@@ -8,7 +8,7 @@ class LevelFactory {
 
   constructor() {
     this.levelData = josefineLevel;
-    this.mapImage = mapImage;
+    this.mapImage = images.map;
   }
 
   public update() {}

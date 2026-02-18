@@ -3,7 +3,10 @@ let game: Game;
 let music: {
   mystery: p5.SoundFile;
 };
-let mapImage: p5.Image;
+let images: {
+  tile: p5.Image;
+  map: p5.Image;
+};
 
 /**
  * Built in preload function in P5
@@ -14,7 +17,10 @@ function preload() {
   music = {
     mystery: loadSound('assets/music/mystery.mp3'),
   };
-  mapImage = loadImage('assets/images/josefineLevelimg.png');
+  images = {
+    map: loadImage('assets/images/josefineLevelimg.png'),
+    tile: loadImage('assets/images/tile.png'),
+  };
 }
 
 /**
