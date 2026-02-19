@@ -12,4 +12,6 @@ class Projectile extends Entity {
   public update() {
     super.update();
   }
+
+  public onCollision() {}
 }

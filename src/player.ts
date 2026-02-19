@@ -3,6 +3,7 @@ class Player extends Entity {
   protected health: number;
   protected weaponInventory: p5.Image[];
   protected direction: p5.Vector;
+  private attackCoolDown: number;
 
   constructor() {
     const position = createVector(width * 0.5, height * 0.5);
@@ -14,7 +15,13 @@ class Player extends Entity {
     this.health = 5;
     this.weaponInventory = [images.weapon];
     this.direction = this.velocity;
+    this.attackCoolDown = 0;
   }
+
+  public updatePlayerPosition() {}
+  public getWeapon() {}
+  public getHealth() {}
+  public checkDamage() {}
 
   public update() {
     this.move();
@@ -56,7 +63,7 @@ class Player extends Entity {
       this.direction = createVector(0, -4);
     } else this.direction = createVector(4, 0);
 
-    if (keyIsDown(75)) {
+    if (keyIsDown(32)) {
       const bullet = new Projectile(
         this.position.copy(),
         this.direction.copy(),
@@ -65,8 +72,3 @@ class Player extends Entity {
     }
   }
 }
-// }
-// public updatePlayerPosition() {}
-// public getWeapon() {}
-// public getHealth() {}
-// public checkDamage() {}

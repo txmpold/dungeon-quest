@@ -1,10 +1,14 @@
 class Game {
-  // private startMenu: Menu;
   protected levelFactory: LevelFactory;
   private level: Level;
 
+  /* protected pauseMenu: pauseMenu;
+  protected gameOverMenu: gameOverMenu; */
+
   constructor() {
-    // this.startMenu = new Menu();
+    /* this.pauseMenu = pauseMenu;
+    this.gameOverMenu = gameOverMenu; */
+
     this.levelFactory = new LevelFactory();
     this.level = new Level();
     // this.level = this.levelFactory.generateLevel(1);

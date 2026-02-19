@@ -19,6 +19,7 @@ class Level {
 
   public update() {
     this.updateEntities();
+    this.draw();
   }
 
   private updateEntities() {
@@ -42,4 +43,7 @@ class Level {
     }
     pop();
   }
+  public drawTreasure() {}
+  public checkCollisions() {}
+  public updateGame() {}
 }
