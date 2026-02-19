@@ -2,16 +2,16 @@ class Player extends Entity {
   public screenX: number;
   public screenY: number;
   protected health: number;
-  protected weaponInventory: p5.Image[];
+  /* protected weaponInventory: p5.Image[];
+  public attackCoolDown: number; */
   protected direction: p5.Vector;
-  public attackCoolDown: number;
 
   constructor(
     gp: GamePanel,
     health: number,
-    weaponInventory: p5.Image[],
+    /*  weaponInventory: p5.Image[],
+    attackCoolDown: number, */
     direction: p5.Vector,
-    attackCoolDown: number,
   ) {
     const row = 0;
     const col = 0;
@@ -27,9 +27,9 @@ class Player extends Entity {
       totalCol,
     );
     this.health = health;
-    this.weaponInventory = weaponInventory;
-    this.direction = direction;
-    this.attackCoolDown = attackCoolDown;
+    /* this.weaponInventory = weaponInventory;
+    this.attackCoolDown = attackCoolDown; */
+    this.direction = this.speed;
     this.screenX = GamePanel.screenWidth / 2 - GamePanel.tileSize / 2;
     this.screenY = GamePanel.screenHeight / 2 - GamePanel.tileSize / 2;
   }

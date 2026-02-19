@@ -22,7 +22,7 @@ class Enemy extends Entity {
   }
 
   public move() {
-    this.velocity.set(random(width), random(height));
+    this.speed.set(random(width), random(height));
     this.row = 0;
     // this.totalCol = 3;
   }
