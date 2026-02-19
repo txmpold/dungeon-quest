@@ -1,19 +1,24 @@
 class Game {
+  public gp: GamePanel;
   // private startMenu: Menu;
-  private levelFactory: LevelFactory;
+  /* public levelFactory: LevelFactory; */
+  public player: Player;
   private level: Level;
 
   constructor() {
     // this.startMenu = new Menu();
-    this.levelFactory = new LevelFactory();
+    /* this.levelFactory = new LevelFactory(tiles, 0, 0, levelOneGrid); */
     this.level = new Level();
-    // this.level = this.levelFactory.generateLevel(1);
+    this.gp = new GamePanel();
+    this.player = new Player(this.gp);
   }
 
   public update() {
-    this.level.update();
+    this.player.update();
   }
   public draw() {
+    background("white");
     this.level.draw();
+    this.player.draw();
   }
 }

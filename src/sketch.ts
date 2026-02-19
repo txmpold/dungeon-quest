@@ -17,13 +17,13 @@ let images: {
  */
 function preload() {
   music = {
-    mystery: loadSound('assets/music/mystery.mp3'),
+    mystery: loadSound("assets/music/mystery.mp3"),
   };
   images = {
     // tile: loadImage("assets/images/tile.png"),
-    map: loadImage('assets/images/josefineLevelimg.png'),
-    character: loadImage('assets/images/character.png'),
-    slime: loadImage('assets/images/slims.png'),
+    map: loadImage("assets/images/josefineLevelimg.png"),
+    character: loadImage("assets/images/character.png"),
+    slime: loadImage("assets/images/slims.png"),
   };
 }
 
@@ -34,7 +34,7 @@ function preload() {
  * in the draw function belows
  */
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(GamePanel.screenWidth, GamePanel.screenHeight);
   frameRate(60);
   music.mystery.setVolume(0.8);
 

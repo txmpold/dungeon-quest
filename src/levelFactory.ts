@@ -1,26 +1,21 @@
-/// <reference path="./levelMaps/josefineLevel.ts" />
-
 class LevelFactory {
-  private levelData: any;
-  private mapImage: p5.Image;
-  // private tileSize: number = 16;
-  // private tileColumns: number = 8;
+  public tiles: p5.Image[] = [];
+  public x: number = 0;
+  public y: number = 0;
+  public levelOneGrid: number[][];
+  /*   public collisionTiles: number[] = []; */
 
-  constructor() {
-    this.levelData = josefineLevel;
-    this.mapImage = images.map;
+  constructor(
+    tiles: p5.Image[],
+    x: number,
+    y: number,
+    levelOneGrid: number[][],
+  ) {
+    this.tiles = tiles;
+    this.x = x;
+    this.y = y;
+    this.levelOneGrid = levelOneGrid;
   }
 
-  public update() {}
-
-  public draw() {
-    background(0);
-
-    const mapWidth = this.mapImage.width;
-    const mapHeight = this.mapImage.height;
-
-    const x = width / 2 - mapWidth / 2;
-    const y = height / 2 - mapHeight / 2;
-    image(this.mapImage, 0, 0);
-  }
+  public draw() {}
 }
