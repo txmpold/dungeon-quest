@@ -1,6 +1,6 @@
 class Game {
   // private startMenu: Menu;
-  private levelFactory: LevelFactory;
+  protected levelFactory: LevelFactory;
   private level: Level;
 
   constructor() {

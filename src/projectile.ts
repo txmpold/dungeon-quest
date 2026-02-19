@@ -1,3 +1,15 @@
-/// <reference path="entity.ts" />
+/// <reference path="entity.ts" />kk
+class Projectile extends Entity {
+  constructor(position: p5.Vector) {
+    const velocity = createVector(5, 0);
+    const row = 1;
+    const col = 0;
+    const totalCol = 3;
+    super(position, velocity, images.weapon, row, col, totalCol);
+    this.position;
+  }
 
-class Projectile extends Entity {}
+  public update() {
+    super.update();
+  }
+}

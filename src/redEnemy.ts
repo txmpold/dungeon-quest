@@ -7,9 +7,11 @@ class RedEnemy extends Enemy {
     const row = 2;
     const col = 0;
     const totalCol = 8;
-    super(position, velocity, images.slime, row, col, totalCol);
+    const health = 5;
+    super(position, velocity, images.slime, row, col, totalCol, health);
   }
   public update() {
     super.update();
   }
+  public shootProjectile() {}
 }

@@ -10,6 +10,8 @@ class Level {
       new GreenEnemy(),
       new RedEnemy(),
       new BlueEnemy(),
+      new Boss(),
+      // new Projectile(),
     ];
     this.isLevelCompleted = false;
     this.isGameOver = false;
@@ -33,6 +35,10 @@ class Level {
 
     for (let entity of this.entities) {
       entity.draw();
+    }
+    for (let projectile of projectiles) {
+      projectile.draw();
+      projectile.update();
     }
     pop();
   }

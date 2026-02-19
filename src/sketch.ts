@@ -1,5 +1,6 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game;
+let projectiles = [] as Projectile[];
 let music: {
   mystery: p5.SoundFile;
 };
@@ -8,6 +9,8 @@ let images: {
   map: p5.Image;
   character: p5.Image;
   slime: p5.Image;
+  boss: p5.Image;
+  weapon: p5.Image;
 };
 
 /**
@@ -24,6 +27,8 @@ function preload() {
     map: loadImage('assets/images/josefineLevelimg.png'),
     character: loadImage('assets/images/character.png'),
     slime: loadImage('assets/images/slims.png'),
+    boss: loadImage('assets/images/boss.png'),
+    weapon: loadImage('assets/images/fireball.png'),
   };
 }
 

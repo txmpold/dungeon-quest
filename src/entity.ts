@@ -1,5 +1,5 @@
 class Entity {
-  protected position: p5.Vector;
+  public position: p5.Vector;
   protected velocity: p5.Vector;
   protected size: number; //vector kanske?
   private image: p5.Image;
