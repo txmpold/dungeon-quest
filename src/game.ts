@@ -1,23 +1,23 @@
 class Game {
-  protected levelFactory: LevelFactory;
-  private level: Level;
-
-  /* protected pauseMenu: pauseMenu;
-  protected gameOverMenu: gameOverMenu; */
+  public levelFactory: LevelFactory;
+  public gp: GamePanel;
+  public player: Player;
+  // private startMenu: Menu;
+  /* public levelFactory: LevelFactory; */
 
   constructor() {
-    /* this.pauseMenu = pauseMenu;
-    this.gameOverMenu = gameOverMenu; */
-
-    this.levelFactory = new LevelFactory();
-    this.level = new Level();
-    // this.level = this.levelFactory.generateLevel(1);
+    // this.startMenu = new Menu();
+    this.levelFactory = new LevelFactory(tiles, 0, 0, levelOneGrid);
+    this.gp = new GamePanel();
+    this.player = new Player(this.gp, 5);
   }
 
   public update() {
-    this.level.update();
+    this.player.update();
   }
   public draw() {
-    this.level.draw();
+    background("white");
+    this.levelFactory.draw(this.player);
+    this.player.draw();
   }
 }

@@ -1,21 +1,37 @@
-/// <reference path="entity.ts" />
 class Player extends Entity {
+  public screenX: number;
+  public screenY: number;
   protected health: number;
   protected weaponInventory: p5.Image[];
   protected direction: p5.Vector;
-  private attackCoolDown: number;
+  public attackCoolDown: number;
 
-  constructor() {
-    const position = createVector(width * 0.5, height * 0.5);
-    const velocity = createVector(0, 0);
+  constructor(
+    gp: GamePanel,
+    health: number,
+    weaponInventory: p5.Image[],
+    direction: p5.Vector,
+    attackCoolDown: number,
+  ) {
     const row = 0;
     const col = 0;
-    const totalCol = 4;
-    super(position, velocity, images.character, row, col, totalCol);
-    this.health = 5;
-    this.weaponInventory = [images.weapon];
-    this.direction = this.velocity;
-    this.attackCoolDown = 0;
+    const totalCol = 6;
+    super(
+      gp,
+      GamePanel.tileSize * 14, // worldX
+      GamePanel.tileSize * 12, // worldY
+      createVector(0, 0),
+      images.character,
+      row,
+      col,
+      totalCol,
+    );
+    this.health = health;
+    this.weaponInventory = weaponInventory;
+    this.direction = direction;
+    this.attackCoolDown = attackCoolDown;
+    this.screenX = GamePanel.screenWidth / 2 - GamePanel.tileSize / 2;
+    this.screenY = GamePanel.screenHeight / 2 - GamePanel.tileSize / 2;
   }
 
   public updatePlayerPosition() {}
@@ -29,30 +45,38 @@ class Player extends Entity {
     super.update();
   }
 
-  public updatePlayerPos() {
+  /* public updatePlayerPos() {
     this.position.add(this.velocity);
-  }
+  } */
 
   public move() {
-    this.velocity.set(0, 0);
+    this.speed.set(0, 0);
     this.row = 0;
 
     if (keyIsDown(RIGHT_ARROW)) {
-      this.velocity.x = 2;
+      this.speed.x = 0.25;
       this.row = 1;
-    } else if (keyIsDown(LEFT_ARROW)) {
-      this.velocity.x = -2;
+      this.totalCol = 4;
+    }
+    if (keyIsDown(LEFT_ARROW)) {
+      this.speed.x = -0.25;
       this.row = 5;
-    } else if (keyIsDown(DOWN_ARROW)) {
-      this.velocity.y = 2;
+      this.totalCol = 4;
+    }
+    if (keyIsDown(DOWN_ARROW)) {
+      this.speed.y = 0.25;
       this.row = 3;
-    } else if (keyIsDown(UP_ARROW)) {
-      this.velocity.y = -2;
+      this.totalCol = 4;
+    }
+    if (keyIsDown(UP_ARROW)) {
+      this.speed.y = -0.25;
       this.row = 2;
     }
   }
 
   public playerAttack() {
+    let position = createVector(this.worldX, this.worldY);
+
     if (keyIsDown(RIGHT_ARROW)) {
       this.direction = createVector(4, 0);
     } else if (keyIsDown(LEFT_ARROW)) {
@@ -64,11 +88,24 @@ class Player extends Entity {
     } else this.direction = createVector(4, 0);
 
     if (keyIsDown(32)) {
-      const bullet = new Projectile(
-        this.position.copy(),
-        this.direction.copy(),
-      );
+      const bullet = new Projectile(position.copy(), this.direction.copy());
       projectiles.push(bullet);
     }
+  }
+  public draw() {
+    if (this.image) {
+      image(
+        this.image,
+        this.screenX,
+        this.screenY,
+        GamePanel.tileSize,
+        GamePanel.tileSize,
+        this.col * GamePanel.originalTileSize,
+        this.row * GamePanel.originalTileSize,
+        GamePanel.originalTileSize,
+        GamePanel.originalTileSize,
+      );
+    }
+    pop();
   }
 }

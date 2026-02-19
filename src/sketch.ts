@@ -13,6 +13,10 @@ let images: {
   weapon: p5.Image;
 };
 
+let tiles: p5.Image[];
+let levelOne: string[];
+let levelOneGrid: number[][];
+
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -20,16 +24,25 @@ let images: {
  */
 function preload() {
   music = {
-    mystery: loadSound('assets/music/mystery.mp3'),
+    mystery: loadSound("assets/music/mystery.mp3"),
   };
   images = {
     // tile: loadImage("assets/images/tile.png"),
-    map: loadImage('assets/images/josefineLevelimg.png'),
-    character: loadImage('assets/images/character.png'),
-    slime: loadImage('assets/images/slims.png'),
-    boss: loadImage('assets/images/boss.png'),
-    weapon: loadImage('assets/images/fireball.png'),
+    map: loadImage("assets/images/josefineLevelimg.png"),
+    character: loadImage("assets/images/character.png"),
+    slime: loadImage("assets/images/slims.png"),
+    boss: loadImage("assets/images/boss.png"),
+    weapon: loadImage("assets/images/fireball.png"),
   };
+
+  tiles = [
+    loadImage("assets/tiles/darktile.png"),
+    loadImage("assets/tiles/floor.png"),
+    loadImage("assets/tiles/wall.png"),
+    loadImage("assets/tiles/water.png"),
+  ];
+
+  levelOne = loadStrings("assets/levels/alex-lvl-one.txt");
 }
 
 /**
@@ -39,11 +52,22 @@ function preload() {
  * in the draw function belows
  */
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(GamePanel.screenWidth, GamePanel.screenHeight);
   frameRate(60);
   music.mystery.setVolume(0.8);
 
+  levelOneGrid = loadMap(levelOne);
+
   game = new Game();
+}
+
+function loadMap(newMap: string[]): number[][] {
+  return newMap.map((line) =>
+    line
+      .trim()
+      .split(/\s+/)
+      .map((value) => Number(value)),
+  );
 }
 
 /**

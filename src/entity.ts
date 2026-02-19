@@ -1,29 +1,35 @@
 class Entity {
-  public position: p5.Vector;
-  protected velocity: p5.Vector;
-  protected size: number; //vector kanske?
-  private image: p5.Image;
-  protected frameSize: number = 16;
+  public gp: GamePanel;
+  public worldX: number;
+  public worldY: number;
+  public speed: p5.Vector;
+  public image: p5.Image;
+  public collisionOn: boolean = false;
 
-  protected row: number; //antal rader character.png?
+  //animation
+  protected row: number; // antal rader character.png?
   protected col: number;
   protected totalCol: number;
 
   constructor(
-    position: p5.Vector,
-    velocity: p5.Vector,
+    gp: GamePanel,
+    worldX: number,
+    worldY: number,
+    speed: p5.Vector,
     image: p5.Image,
+    //animation
     row: number,
     col: number,
     totalCol: number,
   ) {
-    this.position = position;
-    this.velocity = velocity;
+    this.gp = gp;
+    this.worldX = worldX;
+    this.worldY = worldY;
+    this.speed = speed;
     this.image = image;
     this.row = row;
     this.col = col;
     this.totalCol = totalCol;
-    this.size = 16;
   }
 
   public update() {
@@ -31,30 +37,35 @@ class Entity {
   }
 
   protected entityAnimation() {
-    this.position.add(this.velocity);
+    this.worldX += this.speed.x * deltaTime;
+    this.worldY += this.speed.y * deltaTime;
 
-    if (frameCount % 10 === 0) {
-      this.col++;
-      if (this.col >= this.totalCol) {
-        this.col = 0;
+    if (this.speed.x !== 0 || this.speed.y !== 0) {
+      if (frameCount % 10 === 0) {
+        this.col++;
+        if (this.col >= this.totalCol) {
+          this.col = 0;
+        }
       }
+    } else {
+      this.col = 0;
     }
   }
 
   public draw() {
-    push();
-    // scale(1, -1)
-    image(
-      this.image,
-      this.position.x,
-      this.position.y,
-      this.size,
-      this.size,
-      this.col * this.frameSize,
-      this.row * this.frameSize,
-      this.frameSize,
-      this.frameSize,
-    );
+    if (this.image) {
+      image(
+        this.image,
+        this.worldX,
+        this.worldY,
+        GamePanel.tileSize,
+        GamePanel.tileSize,
+        this.col * GamePanel.originalTileSize,
+        this.row * GamePanel.originalTileSize,
+        GamePanel.originalTileSize,
+        GamePanel.originalTileSize,
+      );
+    }
     pop();
   }
 }

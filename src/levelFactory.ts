@@ -1,26 +1,54 @@
-/// <reference path="./levelMaps/josefineLevel.ts" />
-
 class LevelFactory {
-  private levelData: any;
-  private mapImage: p5.Image;
-  // private tileSize: number = 16;
-  // private tileColumns: number = 8;
+  public tiles: p5.Image[] = [];
+  public x: number = 0;
+  public y: number = 0;
+  public levelOneGrid: number[][];
+  /*   public collisionTiles: number[] = []; */
 
-  constructor() {
-    this.levelData = josefineLevel;
-    this.mapImage = images.map;
+  constructor(
+    tiles: p5.Image[],
+    x: number,
+    y: number,
+    levelOneGrid: number[][],
+  ) {
+    this.tiles = tiles;
+    this.x = x;
+    this.y = y;
+    this.levelOneGrid = levelOneGrid;
   }
 
-  public update() {}
+  public draw(player: Player) {
+    let worldCol = 0;
+    let worldRow = 0;
 
-  public draw() {
-    background(0);
+    while (
+      worldCol < GamePanel.maxWorldCol &&
+      worldRow < GamePanel.maxWorldRow
+    ) {
+      let worldX = worldCol * GamePanel.tileSize;
+      let worldY = worldRow * GamePanel.tileSize;
+      let screenX = worldX - player.worldX + player.screenX;
+      let screenY = worldY - player.worldY + player.screenY;
 
-    const mapWidth = this.mapImage.width;
-    const mapHeight = this.mapImage.height;
+      if (
+        worldX + GamePanel.tileSize > player.worldX - player.screenX &&
+        worldX - GamePanel.tileSize < player.worldX + player.screenX &&
+        worldY + GamePanel.tileSize > player.worldY - player.screenY &&
+        worldY - GamePanel.tileSize < player.worldY + player.screenY
+      )
+        image(
+          this.tiles[this.levelOneGrid[worldRow][worldCol]],
+          screenX,
+          screenY,
+          GamePanel.tileSize,
+          GamePanel.tileSize,
+        );
+      worldCol++;
 
-    const x = width / 2 - mapWidth / 2;
-    const y = height / 2 - mapHeight / 2;
-    image(this.mapImage, 0, 0);
+      if (worldCol === GamePanel.maxWorldCol) {
+        worldCol = 0;
+        worldRow++;
+      }
+    }
   }
 }
