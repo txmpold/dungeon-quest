@@ -84,7 +84,7 @@ function draw() {
  *  Built in windowResize listener function in P5
  */
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  resizeCanvas(GamePanel.screenWidth, GamePanel.screenHeight);
 }
 (window as any).preload = preload;
 (window as any).setup = setup;
