@@ -16,7 +16,7 @@ class Game {
     this.player.update();
   }
   public draw() {
-    background("white");
+    background('white');
     this.levelFactory.draw(this.player);
     this.player.draw();
   }

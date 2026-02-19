@@ -1,15 +1,17 @@
 class Level {
+  public gp: GamePanel;
   private entities: Entity[];
   private isLevelCompleted: boolean;
   private isGameOver: boolean;
 
-  constructor() {
+  constructor(gp: GamePanel) {
     // Vad ska skapas direkt när leveln skapas?
+    this.gp = gp;
     this.entities = [
-      /* new Player(),
-      new GreenEnemy(),
-      new RedEnemy(),
-      new BlueEnemy(),
+      new Player(this.gp, 5),
+      new GreenEnemy(this.gp),
+      new RedEnemy(this.gp),
+      new BlueEnemy(this.gp),
       new Boss(),
       // new Projectile(),
     ];
@@ -31,9 +33,7 @@ class Level {
   public draw() {
     push();
     /* background(255); */
-      /* image(images.map, 0, 0); */
-    ];
-
+    /* image(images.map, 0, 0); */
     for (let entity of this.entities) {
       entity.draw();
     }

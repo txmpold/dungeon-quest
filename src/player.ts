@@ -8,10 +8,10 @@ class Player extends Entity {
 
   constructor(
     gp: GamePanel,
-    health: number,
-    /*  weaponInventory: p5.Image[],
-    attackCoolDown: number, */
-    direction: p5.Vector,
+    health: number /* 
+    weaponInventory: p5.Image[],
+    attackCoolDown: number, */,
+    // direction: p5.Vector,
   ) {
     const row = 0;
     const col = 0;
@@ -75,7 +75,7 @@ class Player extends Entity {
   }
 
   public playerAttack() {
-    let position = createVector(this.worldX, this.worldY);
+    /* let position = createVector(this.worldX, this.worldY); */
 
     if (keyIsDown(RIGHT_ARROW)) {
       this.direction = createVector(4, 0);
@@ -88,11 +88,21 @@ class Player extends Entity {
     } else this.direction = createVector(4, 0);
 
     if (keyIsDown(32)) {
-      const bullet = new Projectile(position.copy(), this.direction.copy());
+      let bullet = new Projectile(
+        this.gp,
+        this.worldX,
+        this.worldY,
+        this.speed,
+        this.image,
+        this.col * GamePanel.originalTileSize,
+        this.row * GamePanel.originalTileSize,
+        this.totalCol * GamePanel.originalTileSize,
+      );
       projectiles.push(bullet);
     }
   }
   public draw() {
+    push();
     if (this.image) {
       image(
         this.image,
