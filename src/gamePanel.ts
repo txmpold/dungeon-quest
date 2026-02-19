@@ -9,8 +9,8 @@ class GamePanel {
   static readonly screenHeight = GamePanel.tileSize * GamePanel.maxScreenRow;
 
   //world settings
-  /* static readonly maxWorldCol = 100;
-  static readonly maxWorldRow = 100;
+  static readonly maxWorldCol = 70;
+  static readonly maxWorldRow = 60;
   static readonly worldWidth = GamePanel.tileSize * GamePanel.maxScreenCol;
-  static readonly worldheight = GamePanel.tileSize * GamePanel.maxScreenRow; */
+  static readonly worldheight = GamePanel.tileSize * GamePanel.maxScreenRow;
 }

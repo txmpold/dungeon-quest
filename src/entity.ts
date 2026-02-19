@@ -1,40 +1,71 @@
 class Entity {
   public gp: GamePanel;
-  protected worldX: number;
-  protected worldY: number;
+  public worldX: number;
+  public worldY: number;
   public speed: p5.Vector;
-  public image: p5.Image[] = [];
+  public image: p5.Image;
   public collisionOn: boolean = false;
-  public direction: "up" | "down" | "left" | "right" = "down";
-  public frameIndex = 0;
-  public animations: {
-    up1: p5.Image[];
-    up2: p5.Image[];
-    down1: p5.Image[];
-    down2: p5.Image[];
-    left1: p5.Image[];
-    left2: p5.Image[];
-    right1: p5.Image[];
-    right2: p5.Image[];
-  } = {
-    up1: [],
-    up2: [],
-    down1: [],
-    down2: [],
-    left1: [],
-    left2: [],
-    right1: [],
-    right2: [],
-  };
 
-  constructor(gp: GamePanel, worldX: number, worldY: number, speed: p5.Vector) {
+  //animation
+  protected row: number; // antal rader character.png?
+  protected col: number;
+  protected totalCol: number;
+
+  constructor(
+    gp: GamePanel,
+    worldX: number,
+    worldY: number,
+    speed: p5.Vector,
+    image: p5.Image,
+    //animation
+    row: number,
+    col: number,
+    totalCol: number,
+  ) {
     this.gp = gp;
     this.worldX = worldX;
     this.worldY = worldY;
     this.speed = speed;
+    this.image = image;
+    this.row = row;
+    this.col = col;
+    this.totalCol = totalCol;
   }
 
-  public update() {}
+  public update() {
+    this.entityAnimation();
+  }
 
-  public draw() {}
+  protected entityAnimation() {
+    this.worldX += this.speed.x * deltaTime;
+    this.worldY += this.speed.y * deltaTime;
+
+    if (this.speed.x !== 0 || this.speed.y !== 0) {
+      if (frameCount % 10 === 0) {
+        this.col++;
+        if (this.col >= this.totalCol) {
+          this.col = 0;
+        }
+      }
+    } else {
+      this.col = 0;
+    }
+  }
+
+  public draw() {
+    if (this.image) {
+      image(
+        this.image,
+        this.worldX,
+        this.worldY,
+        GamePanel.tileSize,
+        GamePanel.tileSize,
+        this.col * GamePanel.originalTileSize,
+        this.row * GamePanel.originalTileSize,
+        GamePanel.originalTileSize,
+        GamePanel.originalTileSize,
+      );
+    }
+    pop();
+  }
 }

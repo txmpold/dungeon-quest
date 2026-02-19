@@ -10,6 +10,10 @@ let images: {
   slime: p5.Image;
 };
 
+let tiles: p5.Image[];
+let levelOne: string[];
+let levelOneGrid: number[][];
+
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -25,6 +29,15 @@ function preload() {
     character: loadImage("assets/images/character.png"),
     slime: loadImage("assets/images/slims.png"),
   };
+
+  tiles = [
+    loadImage("assets/tiles/darktile.png"),
+    loadImage("assets/tiles/floor.png"),
+    loadImage("assets/tiles/wall.png"),
+    loadImage("assets/tiles/water.png"),
+  ];
+
+  levelOne = loadStrings("assets/levels/alex-lvl-one.txt");
 }
 
 /**
@@ -38,7 +51,18 @@ function setup() {
   frameRate(60);
   music.mystery.setVolume(0.8);
 
+  levelOneGrid = loadMap(levelOne);
+
   game = new Game();
+}
+
+function loadMap(newMap: string[]): number[][] {
+  return newMap.map((line) =>
+    line
+      .trim()
+      .split(/\s+/)
+      .map((value) => Number(value)),
+  );
 }
 
 /**

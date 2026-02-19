@@ -1,19 +1,16 @@
 /// <reference path="entity.ts" />
 class Enemy extends Entity {
   constructor(
-    position: p5.Vector,
-    velocity: p5.Vector,
+    gp: GamePanel,
+    worldX: number,
+    worldY: number,
+    speed: p5.Vector,
     image: p5.Image,
     row: number,
     col: number,
     totalCol: number,
   ) {
-    position = position;
-    velocity = velocity;
-    row = row;
-    col = col;
-    totalCol = totalCol;
-    super(position, velocity, image, row, col, totalCol);
+    super(gp, worldX, worldY, speed, image, row, col, totalCol);
   }
 
   public update() {
