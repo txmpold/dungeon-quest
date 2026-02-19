@@ -1,7 +1,7 @@
 /// <reference path="entity.ts" />kk
 class Projectile extends Entity {
-  constructor(position: p5.Vector) {
-    const velocity = createVector(5, 0);
+  constructor(position: p5.Vector, direction: p5.Vector) {
+    const velocity = direction;
     const row = 1;
     const col = 0;
     const totalCol = 3;

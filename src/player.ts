@@ -2,6 +2,7 @@
 class Player extends Entity {
   protected health: number;
   protected weaponInventory: p5.Image[];
+  protected direction: p5.Vector;
 
   constructor() {
     const position = createVector(width * 0.5, height * 0.5);
@@ -12,6 +13,7 @@ class Player extends Entity {
     super(position, velocity, images.character, row, col, totalCol);
     this.health = 5;
     this.weaponInventory = [images.weapon];
+    this.direction = this.velocity;
   }
 
   public update() {
@@ -44,13 +46,27 @@ class Player extends Entity {
   }
 
   public playerAttack() {
+    if (keyIsDown(RIGHT_ARROW)) {
+      this.direction = createVector(4, 0);
+    } else if (keyIsDown(LEFT_ARROW)) {
+      this.direction = createVector(-4, 0);
+    } else if (keyIsDown(DOWN_ARROW)) {
+      this.direction = createVector(0, 4);
+    } else if (keyIsDown(UP_ARROW)) {
+      this.direction = createVector(0, -4);
+    } else this.direction = createVector(4, 0);
+
     if (keyIsDown(75)) {
-      const bullet = new Projectile(this.position.copy());
+      const bullet = new Projectile(
+        this.position.copy(),
+        this.direction.copy(),
+      );
       projectiles.push(bullet);
     }
   }
-  // public updatePlayerPosition() {}
-  // public getWeapon() {}
-  // public getHealth() {}
-  // public checkDamage() {}
 }
+// }
+// public updatePlayerPosition() {}
+// public getWeapon() {}
+// public getHealth() {}
+// public checkDamage() {}
