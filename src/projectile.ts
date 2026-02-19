@@ -10,15 +10,7 @@ class Projectile extends Entity {
     col: number,
     totalCol: number,
   ) {
-    super(gp, worldX, worldY, speed, images.weapon, row, col, totalCol);
-    this.gp = gp;
-    this.worldX = worldX;
-    this.worldY = worldY;
-    this.speed = speed;
-    this.image = image;
-    this.row = row;
-    this.col = col;
-    this.totalCol = totalCol;
+    super(gp, worldX, worldY, speed, image, row, col, totalCol);
   }
 
   public update() {
