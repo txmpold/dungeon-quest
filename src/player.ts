@@ -6,25 +6,26 @@ class Player extends Entity {
   public attackCoolDown: number; */
   protected direction: p5.Vector;
   private playerPos = createVector(0, 0);
+  private level: Level;
 
-  constructor(health: number) /* 
+  constructor(worldX: number, worldY: number, health: number, level: Level) /* 
     weaponInventory: p5.Image[],
     attackCoolDown: number, */ {
     const row = 0;
     const col = 0;
     const totalCol = 6;
     super(
-      GamePanel.tileSize * 14, // worldX
-      GamePanel.tileSize * 12, // worldY
-      createVector(0, 0),
+      worldX,
+      worldY,
       images.character,
+      createVector(0, 0),
       row,
       col,
       totalCol,
     );
+    /* this.attackCoolDown = attackCoolDown; */
     this.health = health;
-    /* this.weaponInventory = weaponInventory;
-    this.attackCoolDown = attackCoolDown; */
+    this.level = level;
     this.direction = this.speed.copy();
     this.screenX = GamePanel.screenWidth / 2 - GamePanel.tileSize / 2;
     this.screenY = GamePanel.screenHeight / 2 - GamePanel.tileSize / 2;
@@ -92,25 +93,7 @@ class Player extends Entity {
         this.totalCol * GamePanel.originalTileSize,
         this.direction,
       );
-      // entities.push(fireball);
+      this.level.entities.push(fireball);
     }
-  }
-
-  public draw() {
-    push();
-    if (this.image) {
-      image(
-        this.image,
-        this.screenX,
-        this.screenY,
-        GamePanel.tileSize,
-        GamePanel.tileSize,
-        this.col * GamePanel.originalTileSize,
-        this.row * GamePanel.originalTileSize,
-        GamePanel.originalTileSize,
-        GamePanel.originalTileSize,
-      );
-    }
-    pop();
   }
 }

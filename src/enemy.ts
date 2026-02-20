@@ -12,7 +12,7 @@ class Enemy extends Entity {
     totalCol: number,
     health: number,
   ) {
-    super(worldX, worldY, speed, image, row, col, totalCol);
+    super(worldX, worldY, image, speed, row, col, totalCol);
     this.health = health;
   }
 

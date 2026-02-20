@@ -5,19 +5,19 @@ class Entity {
   public image: p5.Image;
   public collisionOn: boolean = false;
   //animation
-  protected row: number; // antal rader character.png?
+  protected row: number; // animationen
   protected col: number;
   protected totalCol: number;
 
   constructor(
     worldX: number,
     worldY: number,
-    speed: p5.Vector,
     image: p5.Image,
+    speed: p5.Vector = createVector(0, 0),
     //animation
-    row: number,
-    col: number,
-    totalCol: number,
+    row: number = 0,
+    col: number = 0,
+    totalCol: number = 1,
   ) {
     this.worldX = worldX;
     this.worldY = worldY;
@@ -33,6 +33,7 @@ class Entity {
   }
 
   protected entityAnimation() {
+    //deltaTime enheter per sekund
     this.worldX += this.speed.x * deltaTime;
     this.worldY += this.speed.y * deltaTime;
 
@@ -50,19 +51,17 @@ class Entity {
 
   public draw() {
     push();
-    if (this.image) {
-      image(
-        this.image,
-        this.worldX,
-        this.worldY,
-        GamePanel.tileSize,
-        GamePanel.tileSize,
-        this.col * GamePanel.originalTileSize,
-        this.row * GamePanel.originalTileSize,
-        GamePanel.originalTileSize,
-        GamePanel.originalTileSize,
-      );
-    }
+    image(
+      this.image,
+      this.worldX,
+      this.worldY,
+      GamePanel.tileSize,
+      GamePanel.tileSize,
+      this.col * GamePanel.originalTileSize,
+      this.row * GamePanel.originalTileSize,
+      GamePanel.originalTileSize,
+      GamePanel.originalTileSize,
+    );
     pop();
   }
 }

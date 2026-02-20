@@ -2,62 +2,66 @@ class LevelFactory {
   public tiles: p5.Image[] = [];
   public x: number = 0;
   public y: number = 0;
-  public levelOneGrid: number[][];
   /*   public collisionTiles: number[] = []; */
 
   constructor(tiles: p5.Image[], x: number, y: number) {
     this.tiles = tiles;
     this.x = x;
     this.y = y;
-    this.levelOneGrid = loadMap(levels[1]);
   }
 
-  public generateLevel(levelIndex: number[][]): Level {
+  public generateLevel(index: number): Level {
     let entities: Entity[] = [];
     let worldCol = 0;
     let worldRow = 0;
+    let player: Player | undefined;
     const level = new Level(entities);
-    const player = level.entities.find((e) => e instanceof Player) as Player;
-    const levelGrid = loadMap(levels[levelIndex[worldRow][worldCol]]);
-    // 1. Loopa över gridden och skapa entiteterna
-    // 2. Skapa level och skicka in entiteterna
+    /* const player = level.entities.find((e) => e instanceof Player) as Player; */
+    const levelGrid = this.loadMap(levels[index]);
 
-    while (
-      worldCol < GamePanel.maxWorldCol &&
-      worldRow < GamePanel.maxWorldRow
-    ) {
+    while (worldCol < levelGrid[0].length && worldRow < levelGrid.length) {
       let worldX = worldCol * GamePanel.tileSize;
       let worldY = worldRow * GamePanel.tileSize;
 
-      if (
-        worldX + GamePanel.tileSize > player.worldX - player.screenX &&
-        worldX - GamePanel.tileSize < player.worldX + player.screenX &&
-        worldY + GamePanel.tileSize > player.worldY - player.screenY &&
-        worldY - GamePanel.tileSize < player.worldY + player.screenY
-      )
-        /* image(
-          this.tiles[this.levelOneGrid[worldRow][worldCol]],
-          screenX,
-          screenY,
-          GamePanel.tileSize,
-          GamePanel.tileSize,
-        ); */
-        worldCol++;
+      const entityNumber = levelGrid[worldRow][worldCol];
+      if (entityNumber === 1) {
+        entities.push(new Floor(worldX, worldY));
+      }
 
-      if (worldCol === GamePanel.maxWorldCol) {
+      if (entityNumber === 2) {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.wall));
+      }
+
+      if (entityNumber === 3) {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.water));
+      }
+      if (entityNumber === 4) {
+        entities.push(new Floor(worldX, worldY));
+        player = new Player(worldX, worldY, 5, level);
+      }
+
+      worldCol++;
+
+      if (worldCol === levelGrid[0].length) {
         worldCol = 0;
         worldRow++;
       }
     }
 
+    if (!player) {
+      throw new Error('Missing player in data');
+    }
+    entities.push(player);
+
     return level;
   }
-}
-function loadMap(newMap: string[]): number[][] {
-  return newMap.map((line) =>
-    line
-      .trim()
-      .split(/\s+/)
-      .map((value) => Number(value)),
-  );
+
+  private loadMap(newMap: string[]): number[][] {
+    return newMap.map((line) =>
+      line
+        .trim()
+        .split(/\s+/)
+        .map((value) => Number(value)),
+    );
+  }
 }

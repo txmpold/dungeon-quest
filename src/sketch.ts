@@ -10,6 +10,11 @@ let images: {
   slime: p5.Image;
   boss: p5.Image;
   weapon: p5.Image;
+  tiles: {
+    floor: p5.Image;
+    water: p5.Image;
+    wall: p5.Image;
+  };
 };
 
 let tiles: p5.Image[];
@@ -31,20 +36,18 @@ function preload() {
     slime: loadImage('assets/images/slims.png'),
     boss: loadImage('assets/images/boss.png'),
     weapon: loadImage('assets/images/fireball.png'),
+    tiles: {
+      floor: loadImage('assets/tiles/floor.png'),
+      wall: loadImage('assets/tiles/wall.png'),
+      water: loadImage('assets/tiles/water.png'),
+    },
   };
-
-  tiles = [
-    loadImage('assets/tiles/darktile.png'),
-    loadImage('assets/tiles/floor.png'),
-    loadImage('assets/tiles/wall.png'),
-    loadImage('assets/tiles/water.png'),
-  ];
 
   levels = [
     [],
-    loadStrings('assets/levels/alex-lvl-one.txt'),
-    loadStrings('assets/levels/alex-lvl-one.txt'),
-    loadStrings('assets/levels/alex-lvl-one.txt'),
+    loadStrings('assets/levels/alex-lvl-one.txt'), // Level 1
+    loadStrings('assets/levels/alex-lvl-one.txt'), // Level 2
+    loadStrings('assets/levels/alex-lvl-one.txt'), // Level 3
   ];
 }
 

@@ -1,6 +1,5 @@
 class Level {
   public entities: Entity[];
-  public static projectiles: Projectile[];
   private isLevelCompleted: boolean;
   private isGameOver: boolean;
 
@@ -23,8 +22,17 @@ class Level {
 
   public draw() {
     push();
-    /* background(255); */
+    background(0);
     /* image(images.map, 0, 0); */
+
+    for (let entity of this.entities) {
+      if (entity instanceof Player) {
+        translate(
+          -entity.worldX + GamePanel.screenWidth / 2 - GamePanel.tileSize / 2,
+          -entity.worldY + GamePanel.worldHeight / 2 - GamePanel.tileSize / 2,
+        );
+      }
+    }
     for (let entity of this.entities) {
       entity.draw();
     }
