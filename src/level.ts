@@ -1,5 +1,6 @@
 class Level {
-  private entities: Entity[];
+  public entities: Entity[];
+  public static projectiles: Projectile[];
   private isLevelCompleted: boolean;
   private isGameOver: boolean;
 

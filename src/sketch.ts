@@ -1,6 +1,5 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game;
-let projectiles = [] as Projectile[];
 let music: {
   mystery: p5.SoundFile;
 };

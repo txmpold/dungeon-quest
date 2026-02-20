@@ -7,11 +7,9 @@ class Player extends Entity {
   protected direction: p5.Vector;
   private playerPos = createVector(0, 0);
 
-  constructor(
-    health: number /* 
+  constructor(health: number) /* 
     weaponInventory: p5.Image[],
-    attackCoolDown: number, */,
-  ) {
+    attackCoolDown: number, */ {
     const row = 0;
     const col = 0;
     const totalCol = 6;
@@ -27,7 +25,7 @@ class Player extends Entity {
     this.health = health;
     /* this.weaponInventory = weaponInventory;
     this.attackCoolDown = attackCoolDown; */
-    this.direction = this.speed;
+    this.direction = this.speed.copy();
     this.screenX = GamePanel.screenWidth / 2 - GamePanel.tileSize / 2;
     this.screenY = GamePanel.screenHeight / 2 - GamePanel.tileSize / 2;
     this.playerPos = createVector(this.screenX, this.screenY);
@@ -92,10 +90,12 @@ class Player extends Entity {
         this.col * GamePanel.originalTileSize,
         this.row * GamePanel.originalTileSize,
         this.totalCol * GamePanel.originalTileSize,
+        this.direction,
       );
-      projectiles.push(fireball);
+      // entities.push(fireball);
     }
   }
+
   public draw() {
     push();
     if (this.image) {

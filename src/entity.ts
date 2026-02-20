@@ -49,6 +49,7 @@ class Entity {
   }
 
   public draw() {
+    push();
     if (this.image) {
       image(
         this.image,

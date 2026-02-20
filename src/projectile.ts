@@ -8,6 +8,7 @@ class Projectile extends Entity {
     row: number,
     col: number,
     totalCol: number,
+    direction: p5.Vector,
   ) {
     super(worldX, worldY, speed, images.weapon, row, col, totalCol);
     this.worldX = worldX;
@@ -17,6 +18,7 @@ class Projectile extends Entity {
     this.row = row;
     this.col = col;
     this.totalCol = totalCol;
+    direction;
   }
 
   public update() {
