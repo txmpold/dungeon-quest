@@ -3,22 +3,13 @@ class Projectile extends Entity {
   constructor(
     worldX: number,
     worldY: number,
-    speed: p5.Vector,
+    direction: p5.Vector,
     image: p5.Image,
     row: number,
     col: number,
     totalCol: number,
-    direction: p5.Vector,
   ) {
-    super(worldX, worldY, images.weapon, speed, row, col, totalCol);
-    this.worldX = worldX;
-    this.worldY = worldY;
-    this.speed = speed;
-    this.image = image;
-    this.row = row;
-    this.col = col;
-    this.totalCol = totalCol;
-    direction;
+    super(worldX, worldY, image, direction, row, col, totalCol);
   }
 
   public update() {
@@ -26,4 +17,10 @@ class Projectile extends Entity {
   }
 
   public onCollision() {}
+
+  draw() {
+    push();
+    super.draw();
+    pop();
+  }
 }

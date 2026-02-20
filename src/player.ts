@@ -48,50 +48,42 @@ class Player extends Entity {
 
   public move() {
     this.speed.set(0, 0);
-    this.row = 0;
 
     if (keyIsDown(RIGHT_ARROW)) {
       this.speed.x = 0.25;
       this.row = 1;
       this.totalCol = 4;
+      this.direction.set(1, 0);
     }
     if (keyIsDown(LEFT_ARROW)) {
       this.speed.x = -0.25;
       this.row = 5;
       this.totalCol = 4;
+      this.direction.set(-1, 0);
     }
     if (keyIsDown(DOWN_ARROW)) {
       this.speed.y = 0.25;
       this.row = 3;
       this.totalCol = 4;
+      this.direction.set(0, 1);
     }
     if (keyIsDown(UP_ARROW)) {
       this.speed.y = -0.25;
       this.row = 2;
+      this.direction.set(0, -1);
     }
   }
 
   public playerAttack() {
-    if (keyIsDown(RIGHT_ARROW)) {
-      this.direction = createVector(4, 0);
-    } else if (keyIsDown(LEFT_ARROW)) {
-      this.direction = createVector(-4, 0);
-    } else if (keyIsDown(DOWN_ARROW)) {
-      this.direction = createVector(0, 4);
-    } else if (keyIsDown(UP_ARROW)) {
-      this.direction = createVector(0, -4);
-    } else this.direction = createVector(4, 0);
-
     if (keyIsDown(32)) {
       let fireball = new Projectile(
         this.worldX,
         this.worldY,
-        this.speed,
-        this.image,
-        this.col * GamePanel.originalTileSize,
-        this.row * GamePanel.originalTileSize,
-        this.totalCol * GamePanel.originalTileSize,
-        this.direction,
+        this.direction.copy().mult(0.4),
+        images.weapon,
+        1, // <----- ????
+        0,
+        this.totalCol,
       );
       this.level.entities.push(fireball);
     }
