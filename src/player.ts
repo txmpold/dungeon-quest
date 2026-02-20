@@ -5,19 +5,17 @@ class Player extends Entity {
   /* protected weaponInventory: p5.Image[];
   public attackCoolDown: number; */
   protected direction: p5.Vector;
+  private playerPos = createVector(0, 0);
 
   constructor(
-    gp: GamePanel,
     health: number /* 
     weaponInventory: p5.Image[],
     attackCoolDown: number, */,
-    // direction: p5.Vector,
   ) {
     const row = 0;
     const col = 0;
     const totalCol = 6;
     super(
-      gp,
       GamePanel.tileSize * 14, // worldX
       GamePanel.tileSize * 12, // worldY
       createVector(0, 0),
@@ -32,9 +30,9 @@ class Player extends Entity {
     this.direction = this.speed;
     this.screenX = GamePanel.screenWidth / 2 - GamePanel.tileSize / 2;
     this.screenY = GamePanel.screenHeight / 2 - GamePanel.tileSize / 2;
+    this.playerPos = createVector(this.screenX, this.screenY);
   }
 
-  public updatePlayerPosition() {}
   public getWeapon() {}
   public getHealth() {}
   public checkDamage() {}
@@ -45,9 +43,9 @@ class Player extends Entity {
     super.update();
   }
 
-  /* public updatePlayerPos() {
-    this.position.add(this.velocity);
-  } */
+  public updatePlayerPos() {
+    this.playerPos.add(this.speed);
+  }
 
   public move() {
     this.speed.set(0, 0);
@@ -75,8 +73,6 @@ class Player extends Entity {
   }
 
   public playerAttack() {
-    /* let position = createVector(this.worldX, this.worldY); */
-
     if (keyIsDown(RIGHT_ARROW)) {
       this.direction = createVector(4, 0);
     } else if (keyIsDown(LEFT_ARROW)) {
@@ -88,8 +84,7 @@ class Player extends Entity {
     } else this.direction = createVector(4, 0);
 
     if (keyIsDown(32)) {
-      let bullet = new Projectile(
-        this.gp,
+      let fireball = new Projectile(
         this.worldX,
         this.worldY,
         this.speed,
@@ -98,7 +93,7 @@ class Player extends Entity {
         this.row * GamePanel.originalTileSize,
         this.totalCol * GamePanel.originalTileSize,
       );
-      projectiles.push(bullet);
+      projectiles.push(fireball);
     }
   }
   public draw() {

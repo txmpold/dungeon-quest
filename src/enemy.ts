@@ -3,7 +3,6 @@ class Enemy extends Entity {
   protected health: number;
 
   constructor(
-    gp: GamePanel,
     worldX: number,
     worldY: number,
     speed: p5.Vector,
@@ -13,7 +12,7 @@ class Enemy extends Entity {
     totalCol: number,
     health: number,
   ) {
-    super(gp, worldX, worldY, speed, image, row, col, totalCol);
+    super(worldX, worldY, speed, image, row, col, totalCol);
     this.health = health;
   }
 

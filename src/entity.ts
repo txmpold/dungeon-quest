@@ -1,18 +1,15 @@
 class Entity {
-  public gp: GamePanel;
   public worldX: number;
   public worldY: number;
   public speed: p5.Vector;
   public image: p5.Image;
   public collisionOn: boolean = false;
-
   //animation
   protected row: number; // antal rader character.png?
   protected col: number;
   protected totalCol: number;
 
   constructor(
-    gp: GamePanel,
     worldX: number,
     worldY: number,
     speed: p5.Vector,
@@ -22,7 +19,6 @@ class Entity {
     col: number,
     totalCol: number,
   ) {
-    this.gp = gp;
     this.worldX = worldX;
     this.worldY = worldY;
     this.speed = speed;
@@ -69,3 +65,19 @@ class Entity {
     pop();
   }
 }
+
+// class MyMath {
+//   public static random(): number {
+//     return 0;
+//   }
+//   public static abs(value: number): number {
+//     if (value < 0) return value * -1;
+//     return value;
+//   }
+// }
+
+// const math = new MyMath();
+// math.random();
+
+// MyMath.random();
+// MyMath.abs(-24);

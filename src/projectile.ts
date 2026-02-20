@@ -1,7 +1,6 @@
 /// <reference path="entity.ts" />
 class Projectile extends Entity {
   constructor(
-    gp: GamePanel,
     worldX: number,
     worldY: number,
     speed: p5.Vector,
@@ -10,8 +9,7 @@ class Projectile extends Entity {
     col: number,
     totalCol: number,
   ) {
-    super(gp, worldX, worldY, speed, images.weapon, row, col, totalCol);
-    this.gp = gp;
+    super(worldX, worldY, speed, images.weapon, row, col, totalCol);
     this.worldX = worldX;
     this.worldY = worldY;
     this.speed = speed;

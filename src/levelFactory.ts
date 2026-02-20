@@ -5,16 +5,29 @@ class LevelFactory {
   public levelOneGrid: number[][];
   /*   public collisionTiles: number[] = []; */
 
-  constructor(
-    tiles: p5.Image[],
-    x: number,
-    y: number,
-    levelOneGrid: number[][],
-  ) {
+  constructor(tiles: p5.Image[], x: number, y: number) {
     this.tiles = tiles;
     this.x = x;
     this.y = y;
-    this.levelOneGrid = levelOneGrid;
+    this.levelOneGrid = this.loadMap(levels[1]);
+  }
+
+  public generateLevel(levelIndex: number): Level {
+    const levelGrid = this.loadMap(levels[levelIndex]);
+    const entities: Entity[] = [];
+    // 1. Loopa över gridden och skapa entiteterna
+    // 2. Skapa level och skicka in entiteterna
+    const level = new Level(entities);
+    return level;
+  }
+
+  private loadMap(newMap: string[]): number[][] {
+    return newMap.map((line) =>
+      line
+        .trim()
+        .split(/\s+/)
+        .map((value) => Number(value)),
+    );
   }
 
   public draw(player: Player) {
