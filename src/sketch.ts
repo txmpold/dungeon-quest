@@ -50,10 +50,8 @@ function preload() {
   };
 
   levels = [
-    [],
     loadStrings("assets/levels/alex-lvl-one.txt"), // Level 1
-    loadStrings("assets/levels/alex-lvl-one.txt"), // Level 2
-    loadStrings("assets/levels/alex-lvl-one.txt"), // Level 3
+    loadStrings("assets/levels/level2-floor.txt"), // Level 2
   ];
 }
 
