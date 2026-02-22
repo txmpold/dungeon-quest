@@ -17,6 +17,14 @@ let images: {
     floor: p5.Image;
     water: p5.Image;
     wall: p5.Image;
+    wallTop: p5.Image;
+    wallDown: p5.Image;
+    wallLeft: p5.Image;
+    wallRight: p5.Image;
+    wallTopLeftCorner: p5.Image;
+    wallTopRightCorner: p5.Image;
+    wallDownRightCorner: p5.Image;
+    wallDownLeftCorner: p5.Image;
   };
 };
 
@@ -46,11 +54,19 @@ function preload() {
       floor: loadImage("assets/tiles/floor.png"),
       wall: loadImage("assets/tiles/wall.png"),
       water: loadImage("assets/tiles/water.png"),
+      wallTop: loadImage("assets/tiles/wall-top.png"),
+      wallDown: loadImage("assets/tiles/wall-down.png"),
+      wallLeft: loadImage("assets/tiles/wall-left.png"),
+      wallRight: loadImage("assets/tiles/wall-right.png"),
+      wallTopLeftCorner: loadImage("assets/tiles/wall-top-left-corner.png"),
+      wallTopRightCorner: loadImage("assets/tiles/wall-top-right-corner.png"),
+      wallDownRightCorner: loadImage("assets/tiles/wall-down-right-corner.png"),
+      wallDownLeftCorner: loadImage("assets/tiles/wall-down-left-corner.png"),
     },
   };
 
   levels = [
-    loadStrings("assets/levels/alex-lvl-one.txt"), // Level 1
+    // loadStrings("assets/levels/alex-lvl-one.txt"), // Level 1
     loadStrings("assets/levels/level2-floor.txt"), // Level 2
   ];
 }
