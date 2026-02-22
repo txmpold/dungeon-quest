@@ -76,11 +76,13 @@ class Player extends Entity {
 
   public playerAttack() {
     if (keyIsDown(32)) {
+      soundEffects.shoot.play();
       let fireball = new Projectile(
         this.worldX,
         this.worldY,
         this.direction.copy().mult(0.4),
         images.weapon,
+        soundEffects.shoot,
         1, // <----- ????
         0,
         this.totalCol,
