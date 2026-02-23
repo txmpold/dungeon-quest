@@ -1,7 +1,7 @@
 /// <reference path="enemy.ts" />
 class BlueEnemy extends Enemy {
   constructor() {
-    const worldX = 100;
+    const worldX = A0;
     const worldY = 0;
     const speed = createVector(0, 0);
     const row = 1;

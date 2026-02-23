@@ -23,8 +23,8 @@ let images: {
     wallRight: p5.Image;
     wallTopLeftCorner: p5.Image;
     wallTopRightCorner: p5.Image;
-    wallDownRightCorner: p5.Image;
     wallDownLeftCorner: p5.Image;
+    wallDownRightCorner: p5.Image;
   };
 };
 
@@ -38,36 +38,36 @@ let levels: string[][];
  */
 function preload() {
   music = {
-    mystery: loadSound("assets/music/mystery.mp3"),
+    mystery: loadSound('assets/music/mystery.mp3'),
   };
   soundEffects = {
-    shoot: loadSound("assets/soundEffects/laserShoot.mp3"),
+    shoot: loadSound('assets/soundEffects/laserShoot.mp3'),
   };
   images = {
     // tile: loadImage("assets/images/tile.png"),
-    map: loadImage("assets/images/josefineLevelimg.png"),
-    character: loadImage("assets/images/character.png"),
-    slime: loadImage("assets/images/slims.png"),
-    boss: loadImage("assets/images/boss.png"),
-    weapon: loadImage("assets/images/fireball.png"),
+    map: loadImage('assets/images/josefineLevelimg.png'),
+    character: loadImage('assets/images/character.png'),
+    slime: loadImage('assets/images/slims.png'),
+    boss: loadImage('assets/images/boss.png'),
+    weapon: loadImage('assets/images/fireball.png'),
     tiles: {
-      floor: loadImage("assets/tiles/floor.png"),
-      wall: loadImage("assets/tiles/wall.png"),
-      water: loadImage("assets/tiles/water.png"),
-      wallTop: loadImage("assets/tiles/wall-top.png"),
-      wallDown: loadImage("assets/tiles/wall-down.png"),
-      wallLeft: loadImage("assets/tiles/wall-left.png"),
-      wallRight: loadImage("assets/tiles/wall-right.png"),
-      wallTopLeftCorner: loadImage("assets/tiles/wall-top-left-corner.png"),
-      wallTopRightCorner: loadImage("assets/tiles/wall-top-right-corner.png"),
-      wallDownRightCorner: loadImage("assets/tiles/wall-down-right-corner.png"),
-      wallDownLeftCorner: loadImage("assets/tiles/wall-down-left-corner.png"),
+      floor: loadImage('assets/tiles/floor.png'),
+      wall: loadImage('assets/tiles/wall.png'),
+      water: loadImage('assets/tiles/water.png'),
+      wallTop: loadImage('assets/tiles/wall-top.png'),
+      wallDown: loadImage('assets/tiles/wall-down.png'),
+      wallLeft: loadImage('assets/tiles/wall-left.png'),
+      wallRight: loadImage('assets/tiles/wall-right.png'),
+      wallTopLeftCorner: loadImage('assets/tiles/wall-top-left-corner.png'),
+      wallTopRightCorner: loadImage('assets/tiles/wall-top-right-corner.png'),
+      wallDownLeftCorner: loadImage('assets/tiles/wall-down-left-corner.png'),
+      wallDownRightCorner: loadImage('assets/tiles/wall-down-right-corner.png'),
     },
   };
 
   levels = [
-    // loadStrings("assets/levels/alex-lvl-one.txt"), // Level 1
-    loadStrings("assets/levels/level2-floor.txt"), // Level 2
+    // loadStrings("assets/levels/level1.txt"), // Level 1
+    loadStrings('assets/levels/level2.txt'), // Level 2
   ];
 }
 
