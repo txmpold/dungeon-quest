@@ -55,19 +55,6 @@ function preload() {
     boss: loadImage('assets/images/boss.png'),
     weapon: loadImage('assets/images/fireball.png'),
     tiles: {
-<<<<<<< HEAD
-      floor: loadImage('assets/tiles/floor.png'),
-      wall: loadImage('assets/tiles/wall.png'),
-      water: loadImage('assets/tiles/water.png'),
-      wallTop: loadImage('assets/tiles/wall-top.png'),
-      wallDown: loadImage('assets/tiles/wall-down.png'),
-      wallLeft: loadImage('assets/tiles/wall-left.png'),
-      wallRight: loadImage('assets/tiles/wall-right.png'),
-      wallTopLeftCorner: loadImage('assets/tiles/wall-top-left-corner.png'),
-      wallTopRightCorner: loadImage('assets/tiles/wall-top-right-corner.png'),
-      wallDownLeftCorner: loadImage('assets/tiles/wall-down-left-corner.png'),
-      wallDownRightCorner: loadImage('assets/tiles/wall-down-right-corner.png'),
-=======
       floor: loadImage("assets/tiles/floor.png"),
       wall: loadImage("assets/tiles/wall.png"),
       water: loadImage("assets/tiles/water.png"),
@@ -80,18 +67,12 @@ function preload() {
       wallDownRightCorner: loadImage("assets/tiles/wall-down-right-corner.png"),
       wallDownLeftCorner: loadImage("assets/tiles/wall-down-left-corner.png"),
       // wallCornerSpec: loadImage("assets/tiles/wall-corner-spec.png"),
->>>>>>> a9d5527ff0223c8956ac80eda4356782c7c72da9
     },
   };
 
   levels = [
-<<<<<<< HEAD
-    // loadStrings("assets/levels/level1.txt"), // Level 1
-    loadStrings('assets/levels/level2.txt'), // Level 2
-=======
     loadStrings("assets/levels/level1.txt"), // Level 1
     // loadStrings("assets/levels/level2.txt"), // Level 2
->>>>>>> a9d5527ff0223c8956ac80eda4356782c7c72da9
   ];
 }
 
