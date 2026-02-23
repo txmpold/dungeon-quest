@@ -29,6 +29,10 @@ class LevelFactory {
         entityNumber === 'E' ||
         entityNumber === 'F' ||
         entityNumber === 'G'
+        entityNumber === "." ||
+        entityNumber === "g" ||
+        entityNumber === "b" ||
+        entityNumber === "t"
       ) {
         entities.push(new Floor(worldX, worldY));
       }
@@ -82,6 +86,14 @@ class LevelFactory {
       }
       if (entityNumber === 'G') {
         entities.push(new RedEnemy(worldX, worldY, 5, level));
+      if (entityNumber === "g") {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.ghost));
+      }
+      if (entityNumber === "b") {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.barrel));
+      }
+      if (entityNumber === "t") {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.treasure));
       }
 
       worldCol++;
