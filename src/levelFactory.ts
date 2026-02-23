@@ -30,7 +30,7 @@ class LevelFactory {
       if (entityNumber === '2') {
         entities.push(new Obstacle(worldX, worldY, images.tiles.wall));
       }
-      if (entityNumber === 'W') {
+      if (entityNumber === '3') {
         entities.push(new Obstacle(worldX, worldY, images.tiles.water));
       }
       if (entityNumber === '5') {
@@ -64,21 +64,10 @@ class LevelFactory {
           new Obstacle(worldX, worldY, images.tiles.wallDownLeftCorner),
         );
       }
-<<<<<<< HEAD
       if (entityNumber === 'D') {
         entities.push(
           new Obstacle(worldX, worldY, images.tiles.wallDownRightCorner),
         );
-=======
-      // if (entityNumber === 13) {
-      //   entities.push(
-      //     new Obstacle(worldX, worldY, images.tiles.wallCornerSpec),
-      //   );
-      // }
-      if (entityNumber === 4) {
-        entities.push(new Floor(worldX, worldY));
-        player = new Player(worldX, worldY, 5, level);
->>>>>>> a9d5527ff0223c8956ac80eda4356782c7c72da9
       }
 
       worldCol++;
