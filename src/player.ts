@@ -89,6 +89,7 @@ class Player extends Entity {
     if (keyIsDown(32)) {
       soundEffects.shoot.play();
       let fireball = new Projectile(
+        this.gp,
         this.worldX,
         this.worldY,
         this.direction.copy().mult(0.4),

@@ -1,7 +1,7 @@
 /// <reference path="entity.ts" />
 
 class Floor extends Entity {
-  constructor(worldX: number, worldY: number) {
-    super(worldX, worldY, images.tiles.floor);
+  constructor(gp: GamePanel, worldX: number, worldY: number) {
+    super(gp, worldX, worldY, images.tiles.floor);
   }
 }
