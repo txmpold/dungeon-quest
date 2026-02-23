@@ -30,7 +30,7 @@ class LevelFactory {
       if (entityNumber === '2') {
         entities.push(new Obstacle(worldX, worldY, images.tiles.wall));
       }
-      if (entityNumber === '3') {
+      if (entityNumber === 'W') {
         entities.push(new Obstacle(worldX, worldY, images.tiles.water));
       }
       if (entityNumber === '5') {
