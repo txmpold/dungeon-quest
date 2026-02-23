@@ -2,12 +2,18 @@ class LevelFactory {
   public tiles: p5.Image[] = [];
   public x: number = 0;
   public y: number = 0;
-  /*   public collisionTiles: number[] = []; */
+  public collisionTiles: number[] = [];
 
-  constructor(tiles: p5.Image[], x: number, y: number) {
+  constructor(
+    tiles: p5.Image[],
+    x: number,
+    y: number,
+    collisionTiles: number[] = [],
+  ) {
     this.tiles = tiles;
     this.x = x;
     this.y = y;
+    this.collisionTiles = collisionTiles;
   }
 
   public generateLevel(index: number): Level {
@@ -16,7 +22,6 @@ class LevelFactory {
     let worldRow = 0;
     let player: Player | undefined;
     const level = new Level(entities);
-    /* const player = level.entities.find((e) => e instanceof Player) as Player; */
     const levelGrid = this.loadMap(levels[index]);
 
     while (worldCol < levelGrid[0].length && worldRow < levelGrid.length) {
@@ -38,7 +43,7 @@ class LevelFactory {
       }
       if (entityNumber === "4") {
         entities.push(new Floor(worldX, worldY));
-        player = new Player(worldX, worldY, 5, level);
+        player = new Player(gp, worldX, worldY, 5, level);
       }
       if (entityNumber === "6") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.wallDown));
@@ -91,5 +96,9 @@ class LevelFactory {
       (line) => line.trim().split(/\s+/),
       // .map((value) => value)),
     );
+  }
+
+  public isTileSolid(tileNum: number): boolean {
+    return this.collisionTiles.indexOf(tileNum) !== -1;
   }
 }

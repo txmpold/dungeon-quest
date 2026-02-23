@@ -1,10 +1,12 @@
 class Level {
+  public gp: GamePanel;
   public entities: Entity[];
   private isLevelCompleted: boolean;
   private isGameOver: boolean;
 
-  constructor(entities: Entity[]) {
+  constructor(gp: GamePanel, entities: Entity[]) {
     // Vad ska skapas direkt när leveln skapas?
+    this.gp = gp;
     this.entities = entities;
     this.isLevelCompleted = false;
     this.isGameOver = false;

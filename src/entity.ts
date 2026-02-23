@@ -1,4 +1,5 @@
 class Entity {
+  public gp: GamePanel;
   public worldX: number;
   public worldY: number;
   public speed: p5.Vector;
@@ -10,6 +11,7 @@ class Entity {
   protected totalCol: number;
 
   constructor(
+    gp: GamePanel,
     worldX: number,
     worldY: number,
     image: p5.Image,
@@ -19,6 +21,7 @@ class Entity {
     col: number = 0,
     totalCol: number = 1,
   ) {
+    this.gp = gp;
     this.worldX = worldX;
     this.worldY = worldY;
     this.speed = speed;
