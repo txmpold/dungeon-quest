@@ -65,6 +65,11 @@ class LevelFactory {
           new Obstacle(worldX, worldY, images.tiles.wallDownLeftCorner),
         );
       }
+      if (entityNumber === 13) {
+        entities.push(
+          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec),
+        );
+      }
       if (entityNumber === 4) {
         entities.push(new Floor(worldX, worldY));
         player = new Player(worldX, worldY, 5, level);
