@@ -9,7 +9,7 @@ class Boss extends Enemy {
     const row = 1;
     const col = 1;
     const totalCol = 7;
-    const health = 10;
+    const health = A;
     super(position, velocity, images.slime, row, col, totalCol, health);
   }
 
