@@ -1,6 +1,10 @@
 class Player extends Entity {
   public screenX: number;
   public screenY: number;
+  public solidAreaX: number = 8;
+  public solidAreaY: number = 16;
+  public solidAreaH: number = 32;
+  public solidAreaW: number = 32;
   protected health: number;
   /* protected weaponInventory: p5.Image[];
   public attackCoolDown: number; */
@@ -8,13 +12,20 @@ class Player extends Entity {
   private playerPos = createVector(0, 0);
   private level: Level;
 
-  constructor(worldX: number, worldY: number, health: number, level: Level) /* 
+  constructor(
+    gp: GamePanel,
+    worldX: number,
+    worldY: number,
+    health: number,
+    level: Level,
+  ) /* 
     weaponInventory: p5.Image[],
     attackCoolDown: number, */ {
     const row = 0;
     const col = 0;
     const totalCol = 6;
     super(
+      gp,
       worldX,
       worldY,
       images.character,

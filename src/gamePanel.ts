@@ -15,6 +15,7 @@ class GamePanel {
   static readonly worldHeight = GamePanel.tileSize * GamePanel.maxScreenRow;
 
   public cChecker: CollisionChecker;
+
   constructor(public levelFactory: LevelFactory) {
     this.cChecker = new CollisionChecker(this, this.levelFactory);
   }

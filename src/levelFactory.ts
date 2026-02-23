@@ -16,12 +16,12 @@ class LevelFactory {
     this.collisionTiles = collisionTiles;
   }
 
-  public generateLevel(index: number): Level {
+  public generateLevel(index: number, gp: GamePanel): Level {
     let entities: Entity[] = [];
     let worldCol = 0;
     let worldRow = 0;
     let player: Player | undefined;
-    const level = new Level(entities);
+    const level = new Level(gp, entities);
     const levelGrid = this.loadMap(levels[index]);
 
     while (worldCol < levelGrid[0].length && worldRow < levelGrid.length) {
