@@ -24,7 +24,12 @@ class LevelFactory {
       let worldY = worldRow * GamePanel.tileSize;
 
       const entityNumber = levelGrid[worldRow][worldCol];
-      if (entityNumber === ".") {
+      if (
+        entityNumber === "." ||
+        entityNumber === "g" ||
+        entityNumber === "b" ||
+        entityNumber === "t"
+      ) {
         entities.push(new Floor(worldX, worldY));
       }
       if (entityNumber === "2") {
@@ -68,6 +73,15 @@ class LevelFactory {
         entities.push(
           new Obstacle(worldX, worldY, images.tiles.wallDownRightCorner),
         );
+      }
+      if (entityNumber === "g") {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.ghost));
+      }
+      if (entityNumber === "b") {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.barrel));
+      }
+      if (entityNumber === "t") {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.treasure));
       }
 
       worldCol++;
