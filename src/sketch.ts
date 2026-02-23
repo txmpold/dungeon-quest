@@ -3,7 +3,33 @@ let game: Game;
 let music: {
   mystery: p5.SoundFile;
 };
-let mapImage: p5.Image;
+let soundEffects: {
+  shoot: p5.SoundFile;
+};
+let images: {
+  // tile: p5.Image;
+  map: p5.Image;
+  character: p5.Image;
+  slime: p5.Image;
+  boss: p5.Image;
+  weapon: p5.Image;
+  tiles: {
+    floor: p5.Image;
+    water: p5.Image;
+    wall: p5.Image;
+    wallTop: p5.Image;
+    wallDown: p5.Image;
+    wallLeft: p5.Image;
+    wallRight: p5.Image;
+    wallTopLeftCorner: p5.Image;
+    wallTopRightCorner: p5.Image;
+    wallDownRightCorner: p5.Image;
+    wallDownLeftCorner: p5.Image;
+  };
+};
+
+let tiles: p5.Image[];
+let levels: string[][];
 
 /**
  * Built in preload function in P5
@@ -12,9 +38,37 @@ let mapImage: p5.Image;
  */
 function preload() {
   music = {
-    mystery: loadSound('assets/music/mystery.mp3'),
+    mystery: loadSound("assets/music/mystery.mp3"),
   };
-  mapImage = loadImage('assets/images/josefineLevelimg.png');
+  soundEffects = {
+    shoot: loadSound("assets/soundEffects/laserShoot.mp3"),
+  };
+  images = {
+    // tile: loadImage("assets/images/tile.png"),
+    map: loadImage("assets/images/josefineLevelimg.png"),
+    character: loadImage("assets/images/character.png"),
+    slime: loadImage("assets/images/slims.png"),
+    boss: loadImage("assets/images/boss.png"),
+    weapon: loadImage("assets/images/fireball.png"),
+    tiles: {
+      floor: loadImage("assets/tiles/floor.png"),
+      wall: loadImage("assets/tiles/wall.png"),
+      water: loadImage("assets/tiles/water.png"),
+      wallTop: loadImage("assets/tiles/wall-top.png"),
+      wallDown: loadImage("assets/tiles/wall-down.png"),
+      wallLeft: loadImage("assets/tiles/wall-left.png"),
+      wallRight: loadImage("assets/tiles/wall-right.png"),
+      wallTopLeftCorner: loadImage("assets/tiles/wall-top-left-corner.png"),
+      wallTopRightCorner: loadImage("assets/tiles/wall-top-right-corner.png"),
+      wallDownRightCorner: loadImage("assets/tiles/wall-down-right-corner.png"),
+      wallDownLeftCorner: loadImage("assets/tiles/wall-down-left-corner.png"),
+    },
+  };
+
+  levels = [
+    // loadStrings("assets/levels/alex-lvl-one.txt"), // Level 1
+    loadStrings("assets/levels/level2-floor.txt"), // Level 2
+  ];
 }
 
 /**
@@ -24,9 +78,10 @@ function preload() {
  * in the draw function belows
  */
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(GamePanel.screenWidth, GamePanel.screenHeight);
   frameRate(60);
   music.mystery.setVolume(0.8);
+  soundEffects.shoot.setVolume(0.4);
 
   game = new Game();
 }
@@ -45,7 +100,7 @@ function draw() {
  *  Built in windowResize listener function in P5
  */
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  resizeCanvas(GamePanel.screenWidth, GamePanel.screenHeight);
 }
 (window as any).preload = preload;
 (window as any).setup = setup;

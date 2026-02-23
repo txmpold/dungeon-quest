@@ -1,26 +1,97 @@
-/// <reference path="./levelMaps/josefineLevel.ts" />
-
 class LevelFactory {
-  private levelData: any;
-  private mapImage: p5.Image;
-  // private tileSize: number = 16;
-  // private tileColumns: number = 8;
+  public tiles: p5.Image[] = [];
+  public x: number = 0;
+  public y: number = 0;
+  /*   public collisionTiles: number[] = []; */
 
-  constructor() {
-    this.levelData = josefineLevel;
-    this.mapImage = mapImage;
+  constructor(tiles: p5.Image[], x: number, y: number) {
+    this.tiles = tiles;
+    this.x = x;
+    this.y = y;
   }
 
-  public update() {}
+  public generateLevel(index: number): Level {
+    let entities: Entity[] = [];
+    let worldCol = 0;
+    let worldRow = 0;
+    let player: Player | undefined;
+    const level = new Level(entities);
+    /* const player = level.entities.find((e) => e instanceof Player) as Player; */
+    const levelGrid = this.loadMap(levels[index]);
 
-  public draw() {
-    background(0);
+    while (worldCol < levelGrid[0].length && worldRow < levelGrid.length) {
+      let worldX = worldCol * GamePanel.tileSize;
+      let worldY = worldRow * GamePanel.tileSize;
 
-    const mapWidth = this.mapImage.width;
-    const mapHeight = this.mapImage.height;
+      const entityNumber = levelGrid[worldRow][worldCol];
+      if (entityNumber === 1) {
+        entities.push(new Floor(worldX, worldY));
+      }
+      if (entityNumber === 2) {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.wall));
+      }
+      if (entityNumber === 3) {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.water));
+      }
+      if (entityNumber === 5) {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.wallTop));
+      }
+      if (entityNumber === 6) {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.wallDown));
+      }
+      if (entityNumber === 7) {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.wallLeft));
+      }
+      if (entityNumber === 8) {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.wallRight));
+      }
+      if (entityNumber === 9) {
+        entities.push(
+          new Obstacle(worldX, worldY, images.tiles.wallTopLeftCorner),
+        );
+      }
+      if (entityNumber === 10) {
+        entities.push(
+          new Obstacle(worldX, worldY, images.tiles.wallTopRightCorner),
+        );
+      }
+      if (entityNumber === 11) {
+        entities.push(
+          new Obstacle(worldX, worldY, images.tiles.wallDownRightCorner),
+        );
+      }
+      if (entityNumber === 12) {
+        entities.push(
+          new Obstacle(worldX, worldY, images.tiles.wallDownLeftCorner),
+        );
+      }
+      if (entityNumber === 4) {
+        entities.push(new Floor(worldX, worldY));
+        player = new Player(worldX, worldY, 5, level);
+      }
 
-    const x = width / 2 - mapWidth / 2;
-    const y = height / 2 - mapHeight / 2;
-    image(this.mapImage, x, y);
+      worldCol++;
+
+      if (worldCol === levelGrid[0].length) {
+        worldCol = 0;
+        worldRow++;
+      }
+    }
+
+    if (!player) {
+      throw new Error("Missing player in data");
+    }
+    entities.push(player);
+
+    return level;
+  }
+
+  private loadMap(newMap: string[]): number[][] {
+    return newMap.map((line) =>
+      line
+        .trim()
+        .split(/\s+/)
+        .map((value) => Number(value)),
+    );
   }
 }
