@@ -69,7 +69,9 @@ class LevelFactory {
           new Obstacle(worldX, worldY, images.tiles.wallDownRightCorner),
         );
       }
+
       worldCol++;
+
       if (worldCol === levelGrid[0].length) {
         worldCol = 0;
         worldRow++;
