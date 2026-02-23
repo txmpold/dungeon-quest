@@ -24,11 +24,8 @@ let images: {
     wallTopLeftCorner: p5.Image;
     wallTopRightCorner: p5.Image;
     wallDownLeftCorner: p5.Image;
-<<<<<<< HEAD
     wallDownRightCorner: p5.Image;
-=======
     // wallCornerSpec: p5.Image;
->>>>>>> a9d5527ff0223c8956ac80eda4356782c7c72da9
   };
 };
 
@@ -72,7 +69,7 @@ function preload() {
 
   levels = [
     loadStrings("assets/levels/level1.txt"), // Level 1
-    // loadStrings("assets/levels/level2.txt"), // Level 2
+    loadStrings("assets/levels/level2.txt"), // Level 2
   ];
 }
 
