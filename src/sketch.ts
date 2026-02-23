@@ -25,7 +25,7 @@ let images: {
     wallTopRightCorner: p5.Image;
     wallDownRightCorner: p5.Image;
     wallDownLeftCorner: p5.Image;
-    wallCornerSpec: p5.Image;
+    // wallCornerSpec: p5.Image;
   };
 };
 
@@ -63,7 +63,7 @@ function preload() {
       wallTopRightCorner: loadImage("assets/tiles/wall-top-right-corner.png"),
       wallDownRightCorner: loadImage("assets/tiles/wall-down-right-corner.png"),
       wallDownLeftCorner: loadImage("assets/tiles/wall-down-left-corner.png"),
-      wallCornerSpec: loadImage("assets/tiles/wall-corner-spec.png"),
+      // wallCornerSpec: loadImage("assets/tiles/wall-corner-spec.png"),
     },
   };
 
