@@ -27,13 +27,43 @@ class LevelFactory {
       if (entityNumber === 1) {
         entities.push(new Floor(worldX, worldY));
       }
-
       if (entityNumber === 2) {
         entities.push(new Obstacle(worldX, worldY, images.tiles.wall));
       }
-
       if (entityNumber === 3) {
         entities.push(new Obstacle(worldX, worldY, images.tiles.water));
+      }
+      if (entityNumber === 5) {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.wallTop));
+      }
+      if (entityNumber === 6) {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.wallDown));
+      }
+      if (entityNumber === 7) {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.wallLeft));
+      }
+      if (entityNumber === 8) {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.wallRight));
+      }
+      if (entityNumber === 9) {
+        entities.push(
+          new Obstacle(worldX, worldY, images.tiles.wallTopLeftCorner),
+        );
+      }
+      if (entityNumber === 10) {
+        entities.push(
+          new Obstacle(worldX, worldY, images.tiles.wallTopRightCorner),
+        );
+      }
+      if (entityNumber === 11) {
+        entities.push(
+          new Obstacle(worldX, worldY, images.tiles.wallDownRightCorner),
+        );
+      }
+      if (entityNumber === 12) {
+        entities.push(
+          new Obstacle(worldX, worldY, images.tiles.wallDownLeftCorner),
+        );
       }
       if (entityNumber === 4) {
         entities.push(new Floor(worldX, worldY));
@@ -49,7 +79,7 @@ class LevelFactory {
     }
 
     if (!player) {
-      throw new Error('Missing player in data');
+      throw new Error("Missing player in data");
     }
     entities.push(player);
 
