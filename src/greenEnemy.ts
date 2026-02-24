@@ -2,7 +2,7 @@
 class GreenEnemy extends Enemy {
   protected health: number;
   // private direction: p5.Vector;
-  // private greenPos = createVector(0, 0);
+  private greenPos = createVector(0, 0);
   private level: Level;
 
   constructor(worldX: number, worldY: number, health: number, level: Level) {
