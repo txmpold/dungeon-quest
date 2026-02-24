@@ -23,6 +23,7 @@ class Level {
   public draw() {
     push();
     background(0);
+    /* image(images.map, 0, 0); */
 
     for (let entity of this.entities) {
       if (entity instanceof Player) {
