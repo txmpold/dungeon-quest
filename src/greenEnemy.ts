@@ -2,7 +2,6 @@
 class GreenEnemy extends Enemy {
   protected health: number;
   // private direction: p5.Vector;
-  private greenPos = createVector(0, 0);
   private level: Level;
 
   constructor(worldX: number, worldY: number, health: number, level: Level) {
@@ -27,9 +26,7 @@ class GreenEnemy extends Enemy {
   public update() {
     super.update();
   }
-  public updatePos() {
-    this.greenPos.add(this.speed);
-  }
+  public updatePos() {}
 
   public move() {
     this.speed.set(2, 0);
