@@ -25,6 +25,9 @@ let images: {
     wallTopRightCorner: p5.Image;
     wallDownLeftCorner: p5.Image;
     wallDownRightCorner: p5.Image;
+    ghost: p5.Image;
+    barrel: p5.Image;
+    treasure: p5.Image;
   };
 };
 
@@ -62,12 +65,15 @@ function preload() {
       wallTopRightCorner: loadImage('assets/tiles/wall-top-right-corner.png'),
       wallDownLeftCorner: loadImage('assets/tiles/wall-down-left-corner.png'),
       wallDownRightCorner: loadImage('assets/tiles/wall-down-right-corner.png'),
+      ghost: loadImage('assets/tiles/ghost.png'),
+      barrel: loadImage('assets/tiles/barrel.png'),
+      treasure: loadImage('assets/tiles/treasure.png'),
     },
   };
 
   levels = [
-    // loadStrings('assets/levels/level1.txt'), // Level 1
-    loadStrings('assets/levels/level2.txt'), // Level 2
+    loadStrings('assets/levels/level1.txt'), // Level 1
+    // loadStrings('assets/levels/level2.txt'), // Level 2
   ];
 }
 

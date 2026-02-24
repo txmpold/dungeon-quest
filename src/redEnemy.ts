@@ -1,32 +1,13 @@
 /// <reference path="enemy.ts" />
 class RedEnemy extends Enemy {
-  protected health: number;
-  private level: Level;
-
-  constructor(worldX: number, worldY: number, health: number, level: Level) {
+  constructor(worldX: number, worldY: number, health: number) {
     const row = 2;
     const col = 0;
     const totalCol = 8;
-    super(
-      worldX,
-      worldY,
-      createVector(0, 0),
-      images.slime,
-      row,
-      col,
-      totalCol,
-      health,
-    );
-    this.health = health;
-    this.level = level;
+    super(worldX, worldY, images.slime, row, col, totalCol, health);
   }
   public update() {
     super.update();
   }
-
-  public updatePos() {}
-
-  public shootProjectile() {}
-
-  public fly() {}
+  private shootProjectile() {}
 }

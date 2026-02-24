@@ -5,13 +5,13 @@ class Enemy extends Entity {
   constructor(
     worldX: number,
     worldY: number,
-    speed: p5.Vector,
     image: p5.Image,
     row: number,
     col: number,
     totalCol: number,
     health: number,
   ) {
+    const speed = createVector(0, 0);
     super(worldX, worldY, image, speed, row, col, totalCol);
     this.health = health;
   }
@@ -23,5 +23,6 @@ class Enemy extends Entity {
   public move() {
     this.speed.set(random(width), random(height));
     this.row = 0;
+    // this.totalCol = 3;
   }
 }
