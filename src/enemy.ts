@@ -13,7 +13,7 @@ class Enemy extends Entity {
     health: number,
   ) {
     const speed = createVector(0, 0);
-    super(worldX, worldY, image, speed, row, col, totalCol);
+    super(gp, worldX, worldY, image, speed, row, col, totalCol);
     this.health = health;
   }
 

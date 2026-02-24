@@ -39,29 +39,29 @@ class LevelFactory {
         entityNumber === "Y" ||
         entityNumber === "Z"
       ) {
-        entities.push(new Floor(worldX, worldY));
+        entities.push(new Floor(gp, worldX, worldY));
       }
       if (entityNumber === "2") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.wall));
+        entities.push(new Obstacle(gp, worldX, worldY, images.tiles.wall));
       }
       if (entityNumber === "W") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.water));
+        entities.push(new Obstacle(gp, worldX, worldY, images.tiles.water));
       }
       if (entityNumber === "5") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.wallTop));
+        entities.push(new Obstacle(gp, worldX, worldY, images.tiles.wallTop));
       }
       if (entityNumber === "4") {
-        entities.push(new Floor(worldX, worldY));
-        player = new Player(worldX, worldY, 5, level);
+        entities.push(new Floor(gp, worldX, worldY));
+        player = new Player(gp, worldX, worldY, 5, level);
       }
       if (entityNumber === "6") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.wallDown));
+        entities.push(new Obstacle(gp, worldX, worldY, images.tiles.wallDown));
       }
       if (entityNumber === "7") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.wallLeft));
+        entities.push(new Obstacle(gp, worldX, worldY, images.tiles.wallLeft));
       }
       if (entityNumber === "8") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.wallRight));
+        entities.push(new Obstacle(gp, worldX, worldY, images.tiles.wallRight));
       }
       if (entityNumber === "A") {
         entities.push(
@@ -84,19 +84,19 @@ class LevelFactory {
         );
       }
       if (entityNumber === "g") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.ghost));
+        entities.push(new Obstacle(gp, worldX, worldY, images.tiles.ghost));
       }
       if (entityNumber === "b") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.barrel));
+        entities.push(new Obstacle(gp, worldX, worldY, images.tiles.barrel));
       }
       if (entityNumber === "t") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.treasure));
+        entities.push(new Obstacle(gp, worldX, worldY, images.tiles.treasure));
       }
       if (entityNumber === "X") {
-        entities.push(new GreenEnemy(worldX, worldY, 3));
+        entities.push(new GreenEnemy(gp, worldX, worldY, 3));
       }
       if (entityNumber === "Y") {
-        entities.push(new BlueEnemy(worldX, worldY, 4));
+        entities.push(new BlueEnemy(gp, worldX, worldY, 4));
       }
       if (entityNumber === "Z") {
         entities.push(new RedEnemy(worldX, worldY, 5));
