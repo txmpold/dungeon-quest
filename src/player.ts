@@ -8,12 +8,8 @@ class Player extends Entity {
   private playerPos = createVector(0, 0);
   private level: Level;
 
-  constructor(
-    worldX: number,
-    worldY: number,
-    health: number,
-    level: Level,
-  ) /*weaponInventory: p5.Image[],
+  constructor(worldX: number, worldY: number, health: number, level: Level) /* 
+    weaponInventory: p5.Image[],
     attackCoolDown: number, */ {
     const row = 0;
     const col = 0;
