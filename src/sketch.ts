@@ -25,6 +25,9 @@ let images: {
     wallTopRightCorner: p5.Image;
     wallDownLeftCorner: p5.Image;
     wallDownRightCorner: p5.Image;
+    ghost: p5.Image;
+    barrel: p5.Image;
+    treasure: p5.Image;
   };
 };
 

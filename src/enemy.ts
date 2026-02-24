@@ -6,14 +6,14 @@ class Enemy extends Entity {
     gp: GamePanel,
     worldX: number,
     worldY: number,
-    speed: p5.Vector,
     image: p5.Image,
     row: number,
     col: number,
     totalCol: number,
     health: number,
   ) {
-    super(gp, worldX, worldY, image, speed, row, col, totalCol);
+    const speed = createVector(0, 0);
+    super(worldX, worldY, image, speed, row, col, totalCol);
     this.health = health;
   }
 
