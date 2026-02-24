@@ -1,11 +1,16 @@
-class startMenu {
+class StartMenu {
   private game: Game;
-  private showControls: boolean;
+  private startButton: Button;
+  private showControls: Button;
 
-  constructor(game: Game, showControls: boolean) {
+  constructor(game: new Game) {
     this.game = new Game();
-    this.showControls = showControls;
+    this.startButton = new Button("Start Game", onclick,  );
+    this.showControls = new Button("Show Controls", ;
   }
+
+
+
   public update() {}
   public draw() {}
   public drawControls() {}
