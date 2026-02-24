@@ -14,7 +14,8 @@ private buttonTextPos: p5.Vector
     }
 
     draw() {
-        text(this.label, this.buttonTextPos.x + 10, this.buttonTextPos.y + 20);
+        text(this.label, this.buttonTextPos.x, this.buttonTextPos.y, this.buttonPos.x this.buttonPos.y);
+        fill("lightgray");
         textSize(16);
         textAlign(LEFT, TOP);
         rect(this.buttonPos.x, this.buttonPos.y, this.size.x, this.size.y);
