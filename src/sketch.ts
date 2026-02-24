@@ -28,6 +28,10 @@ let images: {
     ghost: p5.Image;
     barrel: p5.Image;
     treasure: p5.Image;
+    candelabra: p5.Image;
+    box1: p5.Image;
+    box2: p5.Image;
+    box3: p5.Image;
   };
 };
 
@@ -68,12 +72,16 @@ function preload() {
       ghost: loadImage("assets/tiles/ghost.png"),
       barrel: loadImage("assets/tiles/barrel.png"),
       treasure: loadImage("assets/tiles/treasure.png"),
+      candelabra: loadImage("assets/tiles/candelabra.png"),
+      box1: loadImage("assets/tiles/box1.png"),
+      box2: loadImage("assets/tiles/box2.png"),
+      box3: loadImage("assets/tiles/box3.png"),
     },
   };
 
   levels = [
-    loadStrings("assets/levels/level1.txt"), // Level 1
-    // loadStrings('assets/levels/level2.txt'), // Level 2
+    // loadStrings("assets/levels/level1.txt"), // Level 1
+    loadStrings("assets/levels/level2.txt"), // Level 2
   ];
 }
 
