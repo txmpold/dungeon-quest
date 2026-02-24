@@ -66,6 +66,9 @@ function preload() {
       wallTopRightCorner: loadImage("assets/tiles/wall-top-right-corner.png"),
       wallDownLeftCorner: loadImage("assets/tiles/wall-down-left-corner.png"),
       wallDownRightCorner: loadImage("assets/tiles/wall-down-right-corner.png"),
+      ghost: loadImage("assets/tiles/ghost.png"),
+      barrel: loadImage("assets/tiles/barrel.png"),
+      treasure: loadImage("assets/tiles/treasure.png"),
     },
   };
 
