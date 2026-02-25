@@ -7,6 +7,9 @@ let music: {
 let soundEffects: {
   shoot: p5.SoundFile;
 };
+let fonts: {
+  font: p5.Font;
+}
 let images: {
   // tile: p5.Image;
   map: p5.Image;
@@ -30,6 +33,12 @@ let images: {
     barrel: p5.Image;
     treasure: p5.Image;
   };
+  menuImages: {
+    background: p5.Image;
+    button: p5.Image;
+    logo: p5.Image;
+    swordcursor: p5.Image;
+  }
 };
 
 let tiles: p5.Image[];
@@ -46,6 +55,9 @@ function preload() {
   };
   soundEffects = {
     shoot: loadSound('assets/soundEffects/laserShoot.mp3'),
+  };
+  fonts = {
+  font: loadFont("assets/fonts/PixelifySans-VariableFont_wght.ttf"),
   };
   images = {
     // tile: loadImage("assets/images/tile.png"),
@@ -70,12 +82,19 @@ function preload() {
       barrel: loadImage('assets/tiles/barrel.png'),
       treasure: loadImage('assets/tiles/treasure.png'),
     },
+    menuImages: {
+      background: loadImage("assets/images/menubackground.png"),
+      button: loadImage("assets/images/button.png"),
+      logo: loadImage("assets/images/logo.png"),
+      swordcursor: loadImage("assets/images/swordcursor.png")
+    }
   };
 
   levels = [
     loadStrings('assets/levels/level1.txt'), // Level 1
     // loadStrings('assets/levels/level2.txt'), // Level 2
   ];
+
 }
 
 /**
@@ -86,6 +105,7 @@ function preload() {
  */
 function setup() {
   createCanvas(GamePanel.screenWidth, GamePanel.screenHeight);
+
   frameRate(60);
   music.mystery.setVolume(0.8);
   soundEffects.shoot.setVolume(0.4);
