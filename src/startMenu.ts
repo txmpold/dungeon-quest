@@ -4,7 +4,7 @@ class StartMenu {
   public level: Level;
   private startButton: Button;
   private showControls: Button;
-
+  
   constructor(game: Game) {
     this.game = game;
     this.startButton = new Button("Start Game", () => this.game.startGame(), false, createVector(150, 50), createVector(100, 100));
@@ -12,13 +12,14 @@ class StartMenu {
     this.levelFactory = new LevelFactory(tiles, 0, 0);
     this.level = this.levelFactory.generateLevel(0);
   }
-
+  
   public update() {
     this.startButton.update();
     this.showControls.update();
   }
-
+  
   public draw() {
+    image(images.menuImages.background, 0, 0, GamePanel.screenWidth, GamePanel.screenHeight)
     push();
     this.startButton.draw();
     this.showControls.draw();
