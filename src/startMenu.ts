@@ -7,8 +7,8 @@ class StartMenu {
 
   constructor(game: Game) {
     this.game = game;
-    this.startButton = new Button("Start Game", () => this.game.gameIsStarted = true, false, createVector(150, 50), createVector(100, 100), createVector(100, 100));
-    this.showControls = new Button("Show Controls", () => this.drawControls(), false, createVector(150, 50), createVector(100, 200), createVector(100, 200));
+    this.startButton = new Button("Start Game", () => this.game.startGame(), false, createVector(150, 50), createVector(100, 100));
+    this.showControls = new Button("Show Controls", () => this.drawControls(), false, createVector(150, 50), createVector(100, 200));
     this.levelFactory = new LevelFactory(tiles, 0, 0);
     this.level = this.levelFactory.generateLevel(0);
   }

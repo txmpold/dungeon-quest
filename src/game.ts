@@ -4,31 +4,31 @@ class Game {
   private startMenu: StartMenu;
   public gameIsStarted: boolean = false;
 
-  constructor(levelFactory: LevelFactory, level: Level) {
+  constructor() {
+    this.levelFactory = new LevelFactory(tiles, 0, 0);
+    this.level = new Level([])
     this.startMenu = new StartMenu(this);
-    this.levelFactory = levelFactory;
-    this.level = level;
-  }
-
-  public update() {
-    if (this.gameIsStarted === true) {
-      this.startGame();
-    } else {
-      this.startMenu.update();
-    }
   }
   
+  public startGame() {
+    this.gameIsStarted = true;
+    this.level = this.levelFactory.generateLevel(0);
+  }
+  
+  
   public draw() {
-    if (this.gameIsStarted === false) {
+    if (this.gameIsStarted === true) {
+      this.level.draw()
+    } else {
       this.startMenu.draw();
     }
   }
 
-  public startGame() {
-    this.levelFactory = new LevelFactory(tiles, 0, 0);
-    this.level = this.levelFactory.generateLevel(0);
-    this.level.update()
-    this.level.draw();
+  public update() {
+    if (this.gameIsStarted === true) {
+      this.level.update()
+    } else {
+      this.startMenu.update();
+    }
   }
-  
 }

@@ -39,6 +39,8 @@ class Level {
     pop();
   }
   public drawTreasure() {}
-  public checkCollisions() {}
+  public checkCollisions() {
+    
+  }
   public updateGame() {}
 }
