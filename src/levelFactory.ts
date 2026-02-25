@@ -31,7 +31,8 @@ class LevelFactory {
         entityNumber === 't' ||
         entityNumber === 'X' ||
         entityNumber === 'Y' ||
-        entityNumber === 'Z'
+        entityNumber === 'Z' ||
+        entityNumber === 'V' 
       ) {
         entities.push(new Floor(worldX, worldY));
       }
@@ -94,6 +95,9 @@ class LevelFactory {
       }
       if (entityNumber === 'Z') {
         entities.push(new RedEnemy(worldX, worldY, 5));
+      }
+      if (entityNumber === 'V') {
+        entities.push(new Boss(worldX, worldY, 10));
       }
 
       worldCol++;
