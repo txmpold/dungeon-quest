@@ -1,5 +1,6 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game;
+let button: Button;
 let music: {
   mystery: p5.SoundFile;
 };
