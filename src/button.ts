@@ -26,15 +26,16 @@ class Button {
 
     public draw() {
         push();
-        fill("lightgray");
-        if (this.buttonIsHovered) {
-            fill("orange");
-        }
-        
-        rect(this.buttonPos.x, this.buttonPos.y, this.size.x, this.size.y);
+        cursor("assets/images/swordcursor.png")
         fill("black");
+        if (this.buttonIsHovered) {
+            fill("white");
+        }
+        image(images.menuImages.button, this.buttonPos.x, this.buttonPos.y, this.size.x, this.size.y)
+        textFont(fonts.font)
+        textSize(15)
         textAlign(LEFT, TOP);
-        text(this.label, this.buttonPos.x + this.size.x / 2 - textWidth(this.label) / 2, this.buttonPos.y + this.size.y / 2 - textSize() / 2);
+        text(this.label, this.buttonPos.x + this.size.x / 2 - textWidth(this.label) / 2, this.buttonPos.y + this.size.y / 2 - textSize() / 1.3);
         pop();
     }
 
