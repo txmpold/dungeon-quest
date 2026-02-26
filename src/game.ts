@@ -16,8 +16,10 @@ class Game {
   }
 
   public draw() {
+    cursor("assets/images/swordcursor.png");
     background(0);
     if (this.gameIsStarted === true) {
+      noCursor();
       this.level.draw();
     } else {
       this.startMenu.draw();

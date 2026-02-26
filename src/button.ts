@@ -34,7 +34,6 @@ class Button {
 
   public draw() {
     push();
-    cursor("assets/images/swordcursor.png");
     fill("black");
     if (this.buttonIsHovered) {
       fill("white");
