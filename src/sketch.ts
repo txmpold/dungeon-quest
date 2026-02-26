@@ -12,7 +12,12 @@ let images: {
   character: p5.Image;
   slime: p5.Image;
   boss: p5.Image;
-  weapon: p5.Image;
+  weapons: {
+    fireball_right: p5.Image;
+    fireball_left: p5.Image;
+    fireball_up: p5.Image;
+    fireball_down: p5.Image;
+  };
   tiles: {
     floor: p5.Image;
     water: p5.Image;
@@ -49,11 +54,16 @@ function preload() {
   };
   images = {
     // tile: loadImage("assets/images/tile.png"),
-    map: loadImage('assets/images/josefineLevelimg.png'),
-    character: loadImage('assets/images/character.png'),
-    slime: loadImage('assets/images/slims.png'),
-    boss: loadImage('assets/images/boss_.png'),
-    weapon: loadImage('assets/images/fireball.png'),
+    map: loadImage("assets/images/josefineLevelimg.png"),
+    character: loadImage("assets/images/character.png"),
+    slime: loadImage("assets/images/slims.png"),
+    boss: loadImage("assets/images/boss_.png"),
+    weapons: {
+      fireball_right: loadImage("assets/images/fireball_right.png"),
+      fireball_left: loadImage("assets/images/fireball_left.png"),
+      fireball_up: loadImage("assets/images/fireball_up.png"),
+      fireball_down: loadImage("assets/images/fireball_down.png"),
+    },
     tiles: {
       floor: loadImage("assets/tiles/floor.png"),
       wall: loadImage("assets/tiles/wall.png"),
