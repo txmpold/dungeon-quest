@@ -1,9 +1,5 @@
 /// <reference path="enemy.ts" />
 class GreenEnemy extends Enemy {
-  // private patrolX: number;
-  // private patrolY: number;
-  // private speed: number = 2;
-
   constructor(worldX: number, worldY: number, health: number, levelContext: ILevelContext) {
     const row = 0;
     const col = 0;
@@ -15,6 +11,18 @@ class GreenEnemy extends Enemy {
 
   //den gröna monstret ska jaga spelaren
   protected engage(){
+    if (!this.levelContext.player) return;
+    let distX = abs(this.levelContext.player.worldX - this.worldX);
+    let distY = abs(this.levelContext.player.worldY - this.worldY); 
+
+    let chaseLimit = 0.4;
+    if (distX < GamePanel.worldWidth * chaseLimit && distY < GamePanel.worldHeight * chaseLimit){
+      console.log("meow");
+      
+    }
+    
+    this.levelContext.player?.worldY;
+
   }
   // public chase(){}
 }
