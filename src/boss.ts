@@ -1,12 +1,17 @@
-/// <reference path="enemy.ts" />
+/* /// <reference path="enemy.ts" />
 
 // const size = 32; --> was ist das?
 class Boss extends Enemy {
-  constructor(worldX: number, worldY: number, health:number) {
-    const row = 0;
-    const col = 0;
+  constructor() {
+    const position = createVector(300, 0);
+    const velocity = createVector(0, 0);
+    const worldX = 0;
+    const worldY = 0;
+    const row = 1;
+    const col = 1;
     const totalCol = 7;
-    super(worldX, worldY, images.boss, row, col, totalCol, health);
+    const health = 0;
+    super(worldX, worldY, velocity, images.slime, row, col, totalCol, health);
   }
 
   public update() {
@@ -14,5 +19,4 @@ class Boss extends Enemy {
   }
 
   public shootProjectile() {}
-
-}
+} */

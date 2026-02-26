@@ -9,5 +9,6 @@ class RedEnemy extends Enemy {
   public update() {
     super.update();
   }
+  public onCollision(other: Entity): void {}
   private shootProjectile() {}
 }

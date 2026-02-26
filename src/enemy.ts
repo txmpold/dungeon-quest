@@ -1,5 +1,5 @@
 /// <reference path="entity.ts" />
-class Enemy extends Entity {
+abstract class Enemy extends Entity {
   protected health: number;
 
   constructor(

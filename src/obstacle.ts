@@ -5,5 +5,5 @@ class Obstacle extends Entity {
   }
 
   public update() {}
-  public onCollision() {}
+  public onCollision(other: Entity): void {}
 }
