@@ -6,19 +6,19 @@ class Game {
 
   constructor() {
     this.levelFactory = new LevelFactory(tiles, 0, 0);
-    this.level = new Level([])
+    this.level = new Level([]);
     this.startMenu = new StartMenu(this);
   }
-  
+
   public startGame() {
     this.gameIsStarted = true;
     this.level = this.levelFactory.generateLevel(0);
   }
-  
-  
+
   public draw() {
+    background(0);
     if (this.gameIsStarted === true) {
-      this.level.draw()
+      this.level.draw();
     } else {
       this.startMenu.draw();
     }
@@ -26,7 +26,7 @@ class Game {
 
   public update() {
     if (this.gameIsStarted === true) {
-      this.level.update()
+      this.level.update();
     } else {
       this.startMenu.update();
     }

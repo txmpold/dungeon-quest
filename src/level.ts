@@ -53,9 +53,6 @@ class Level {
     pop();
   }
   public drawTreasure() {}
-  public checkCollisions() {
-    
-  }
 
   public updateGame() {}
 }

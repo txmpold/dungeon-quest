@@ -38,6 +38,7 @@ let images: {
     button: p5.Image;
     logo: p5.Image;
     swordcursor: p5.Image;
+    controls: p5.Image;
   }
 };
 
@@ -87,7 +88,8 @@ function preload() {
       background: loadImage("assets/images/menubackground.png"),
       button: loadImage("assets/images/button.png"),
       logo: loadImage("assets/images/logo.png"),
-      swordcursor: loadImage("assets/images/swordcursor.png")
+      swordcursor: loadImage("assets/images/swordcursor.png"),
+      controls: loadImage("assets/images/controls.png")
     }
   };
 

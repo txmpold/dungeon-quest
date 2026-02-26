@@ -39,26 +39,32 @@ class StartMenu {
   }
 
   public draw() {
+    image(
+      images.menuImages.background,
+      0,
+      0,
+      GamePanel.screenWidth,
+      GamePanel.screenHeight,
+    );
+    image(images.menuImages.logo, GamePanel.worldWidth / 2 - 150, 60, 300, 145);
     if (this.controlsOnScreen === true) {
       this.drawControls();
     } else {
-      image(
-        images.menuImages.background,
-        0,
-        0,
-        GamePanel.screenWidth,
-        GamePanel.screenHeight,
-      );
-      image(images.menuImages.logo, GamePanel.worldWidth / 2 - 150, 60, 300, 145);
-      push();
       this.startButton.draw();
       this.showControls.draw();
     }
   }
+
   public drawControls() {
-    push();
     image(
-      images.menuImages.button, GamePanel.worldWidth / 2 - GamePanel.worldWidth / 2 + 25, GamePanel.worldHeight / 2 - GamePanel.worldHeight / 2 + 25, GamePanel.worldWidth - 50, GamePanel.worldHeight - 50)
-    pop();
+      images.menuImages.controls,
+      GamePanel.worldWidth / 2 - GamePanel.worldWidth / 2 + 125,
+      GamePanel.worldHeight / 2 - GamePanel.worldHeight / 2 + 100,
+      GamePanel.worldWidth - 250,
+      GamePanel.worldHeight - 200,
+    );
+    if (keyIsDown(ESCAPE)) {
+      this.controlsOnScreen = false;
+    }
   }
 }

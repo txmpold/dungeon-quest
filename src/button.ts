@@ -35,7 +35,7 @@ class Button {
         textFont(fonts.font)
         textSize(15)
         textAlign(LEFT, TOP);
-        text(this.label, this.buttonPos.x + this.size.x / 2 - textWidth(this.label) / 2, this.buttonPos.y + this.size.y / 2 - textSize() / 1.3);
+        text(this.label, this.buttonPos.x + this.size.x / 2 - textWidth(this.label) / 2, this.buttonPos.y + this.size.y / 2 - textSize() / 1.6);
         pop();
     }
 
