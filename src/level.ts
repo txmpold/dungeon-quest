@@ -1,12 +1,10 @@
 class Level {
-  public gp: GamePanel;
   public entities: Entity[];
   private isLevelCompleted: boolean;
   private isGameOver: boolean;
 
-  constructor(gp: GamePanel, entities: Entity[]) {
+  constructor(entities: Entity[]) {
     // Vad ska skapas direkt när leveln skapas?
-    this.gp = gp;
     this.entities = entities;
     this.isLevelCompleted = false;
     this.isGameOver = false;
@@ -14,11 +12,25 @@ class Level {
 
   public update() {
     this.updateEntities();
+    this.checkCollisions();
   }
 
   private updateEntities() {
     for (let entity of this.entities) {
       entity.update();
+    }
+  }
+
+  private checkCollisions() {
+    for (let j = 0; j < this.entities.length; j++) {
+      for (let i = j + 1; i < this.entities.length; i++) {
+        const e1 = this.entities[j];
+        const e2 = this.entities[i];
+        if (e1.isCollidingWith(e2) && e2.isCollidingWith(e1)) {
+          e1.onCollision(e2);
+          e2.onCollision(e1);
+        }
+      }
     }
   }
 
@@ -41,6 +53,6 @@ class Level {
     pop();
   }
   public drawTreasure() {}
-  public checkCollisions() {}
+
   public updateGame() {}
 }

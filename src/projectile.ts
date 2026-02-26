@@ -1,7 +1,6 @@
 /// <reference path="entity.ts" />
 class Projectile extends Entity {
   constructor(
-    gp: GamePanel,
     worldX: number,
     worldY: number,
     direction: p5.Vector,
@@ -11,14 +10,17 @@ class Projectile extends Entity {
     col: number,
     totalCol: number,
   ) {
-    super(gp, worldX, worldY, image, direction, row, col, totalCol);
+    super(worldX, worldY, image, direction, row, col, totalCol);
   }
 
   public update() {
     super.update();
   }
 
-  public onCollision() {}
+  public onCollision(other: Entity) {
+    if (other instanceof Obstacle) {
+    }
+  }
 
   draw() {
     push();

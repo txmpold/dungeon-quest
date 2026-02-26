@@ -1,9 +1,8 @@
 /// <reference path="entity.ts" />
-class Enemy extends Entity {
+abstract class Enemy extends Entity {
   protected health: number;
 
   constructor(
-    gp: GamePanel,
     worldX: number,
     worldY: number,
     image: p5.Image,
@@ -13,7 +12,7 @@ class Enemy extends Entity {
     health: number,
   ) {
     const speed = createVector(0, 0);
-    super(gp, worldX, worldY, image, speed, row, col, totalCol);
+    super(worldX, worldY, image, speed, row, col, totalCol);
     this.health = health;
   }
 

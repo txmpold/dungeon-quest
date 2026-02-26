@@ -1,31 +1,19 @@
 class Player extends Entity {
   public screenX: number;
   public screenY: number;
-  public solidAreaX: number = 8;
-  public solidAreaY: number = 16;
-  public solidAreaH: number = 32;
-  public solidAreaW: number = 32;
   protected health: number;
   /* protected weaponInventory: p5.Image[];
   public attackCoolDown: number; */
   protected direction: p5.Vector;
   private playerPos = createVector(0, 0);
   private level: Level;
-
-  constructor(
-    gp: GamePanel,
-    worldX: number,
-    worldY: number,
-    health: number,
-    level: Level,
-  ) /* 
+  constructor(worldX: number, worldY: number, health: number, level: Level) /* 
     weaponInventory: p5.Image[],
     attackCoolDown: number, */ {
     const row = 0;
     const col = 0;
     const totalCol = 6;
     super(
-      gp,
       worldX,
       worldY,
       images.character,
@@ -41,8 +29,24 @@ class Player extends Entity {
     this.screenX = GamePanel.screenWidth / 2 - GamePanel.tileSize / 2;
     this.screenY = GamePanel.screenHeight / 2 - GamePanel.tileSize / 2;
     this.playerPos = createVector(this.screenX, this.screenY);
+    this.solidAreaX = 8;
+    this.solidAreaY = 16;
+    this.solidAreaW = 32;
+    this.solidAreaH = 32;
   }
-
+  public onCollision(other: Entity): void {
+    if (other instanceof Obstacle) {
+      this.worldX -= this.speed.x * deltaTime; /* 
+      if (other.isCollidingWith(this)) {
+        this.worldX += this.speed.x * deltaTime;
+      } */
+      this.worldY -= this.speed.y * deltaTime;
+      /* if (this.isCollidingWith(other)) {
+        this.worldY += this.speed.y * deltaTime;
+      } */
+      this.speed.set(0, 0);
+    }
+  }
   public getWeapon() {}
   public getHealth() {}
   public checkDamage() {}
@@ -89,7 +93,6 @@ class Player extends Entity {
     if (keyIsDown(32)) {
       soundEffects.shoot.play();
       let fireball = new Projectile(
-        this.gp,
         this.worldX,
         this.worldY,
         this.direction.copy().mult(0.4),

@@ -1,17 +1,18 @@
-class Entity {
-  public gp: GamePanel;
+abstract class Entity {
   public worldX: number;
   public worldY: number;
   public speed: p5.Vector;
   public image: p5.Image;
-  public collisionOn: boolean = false;
+  public solidAreaX = 0;
+  public solidAreaY = 0;
+  public solidAreaW = GamePanel.tileSize;
+  public solidAreaH = GamePanel.tileSize;
   //animation
   protected row: number; // animationen
   protected col: number;
   protected totalCol: number;
 
   constructor(
-    gp: GamePanel,
     worldX: number,
     worldY: number,
     image: p5.Image,
@@ -21,7 +22,6 @@ class Entity {
     col: number = 0,
     totalCol: number = 1,
   ) {
-    this.gp = gp;
     this.worldX = worldX;
     this.worldY = worldY;
     this.speed = speed;
@@ -67,6 +67,21 @@ class Entity {
     );
     pop();
   }
+
+  public isCollidingWith(other: Entity): boolean {
+    return (
+      this.worldX + this.solidAreaX <
+        other.worldX + other.solidAreaX + other.solidAreaW &&
+      this.worldX + this.solidAreaW + this.solidAreaW >
+        other.worldX + other.solidAreaX &&
+      this.worldY + this.solidAreaY <
+        other.worldY + other.solidAreaY + other.solidAreaH &&
+      this.worldY + this.solidAreaH + this.solidAreaH >
+        other.worldY + other.solidAreaY
+    );
+  }
+
+  public abstract onCollision(other: Entity): void;
 }
 
 // class MyMath {
