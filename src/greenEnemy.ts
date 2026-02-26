@@ -17,12 +17,12 @@ class GreenEnemy extends Enemy {
 
     let chaseLimit = 0.4;
     if (distX < GamePanel.worldWidth * chaseLimit && distY < GamePanel.worldHeight * chaseLimit){
-      console.log("meow");
-      
+      // console.log("meow");
+      this.worldX = lerp(this.worldX, this.levelContext.player.worldX, 0.01);
+      this.worldY = lerp(this.worldY, this.levelContext.player.worldY, 0.01);
+
     }
-    
-    this.levelContext.player?.worldY;
+
 
   }
-  // public chase(){}
 }
