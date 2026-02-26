@@ -9,7 +9,7 @@ let soundEffects: {
 };
 let fonts: {
   font: p5.Font;
-}
+};
 let images: {
   // tile: p5.Image;
   map: p5.Image;
@@ -38,8 +38,10 @@ let images: {
     button: p5.Image;
     logo: p5.Image;
     swordcursor: p5.Image;
-    controls: p5.Image;
-  }
+    controlsbg: p5.Image;
+    arrowkeys: p5.Image;
+    spacebar: p5.Image;
+  };
 };
 
 /* let isCollision: p5.Image[]; kanske behöver */
@@ -59,15 +61,15 @@ function preload() {
     shoot: loadSound("assets/soundEffects/laserShoot.mp3"),
   };
   fonts = {
-  font: loadFont("assets/fonts/PixelifySans-VariableFont_wght.ttf"),
+    font: loadFont("assets/fonts/PixelifySans-VariableFont_wght.ttf"),
   };
   images = {
     // tile: loadImage("assets/images/tile.png"),
-    map: loadImage('assets/images/josefineLevelimg.png'),
-    character: loadImage('assets/images/character.png'),
-    slime: loadImage('assets/images/slims.png'),
-    boss: loadImage('assets/images/boss_.png'),
-    weapon: loadImage('assets/images/fireball.png'),
+    map: loadImage("assets/images/josefineLevelimg.png"),
+    character: loadImage("assets/images/character.png"),
+    slime: loadImage("assets/images/slims.png"),
+    boss: loadImage("assets/images/boss_.png"),
+    weapon: loadImage("assets/images/fireball.png"),
     tiles: {
       floor: loadImage("assets/tiles/floor.png"),
       wall: loadImage("assets/tiles/wall.png"),
@@ -89,8 +91,10 @@ function preload() {
       button: loadImage("assets/images/button.png"),
       logo: loadImage("assets/images/logo.png"),
       swordcursor: loadImage("assets/images/swordcursor.png"),
-      controls: loadImage("assets/images/controls.png")
-    }
+      controlsbg: loadImage("assets/images/controls_bg.png"),
+      arrowkeys: loadImage("assets/images/arrowkeys.png"),
+      spacebar: loadImage("assets/images/spacebar.png"),
+    },
   };
 
   levels = [
