@@ -49,11 +49,11 @@ function preload() {
   };
   images = {
     // tile: loadImage("assets/images/tile.png"),
-    map: loadImage("assets/images/josefineLevelimg.png"),
-    character: loadImage("assets/images/character.png"),
-    slime: loadImage("assets/images/slims.png"),
-    boss: loadImage("assets/images/boss.png"),
-    weapon: loadImage("assets/images/fireball.png"),
+    map: loadImage('assets/images/josefineLevelimg.png'),
+    character: loadImage('assets/images/character.png'),
+    slime: loadImage('assets/images/slims.png'),
+    boss: loadImage('assets/images/boss_.png'),
+    weapon: loadImage('assets/images/fireball.png'),
     tiles: {
       floor: loadImage("assets/tiles/floor.png"),
       wall: loadImage("assets/tiles/wall.png"),

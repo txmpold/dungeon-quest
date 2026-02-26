@@ -1,6 +1,6 @@
 /* /// <reference path="enemy.ts" />
 
-const size = 32;
+// const size = 32; --> was ist das?
 class Boss extends Enemy {
   constructor() {
     const position = createVector(300, 0);
@@ -17,5 +17,6 @@ class Boss extends Enemy {
   public update() {
     super.update();
   }
+
   public shootProjectile() {}
 } */
