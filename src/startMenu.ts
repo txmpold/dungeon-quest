@@ -4,6 +4,7 @@ class StartMenu {
   public level: Level;
   private startButton: Button;
   private showControls: Button;
+  private closeControls: Button;
   private controlsOnScreen: boolean = false;
 
   constructor(game: Game) {
@@ -11,7 +12,6 @@ class StartMenu {
     this.startButton = new Button(
       "Start Game",
       () => this.game.startGame(),
-      false,
       createVector(200, 60),
       createVector(
         GamePanel.worldWidth / 2 - 100,
@@ -21,11 +21,19 @@ class StartMenu {
     this.showControls = new Button(
       "Controls",
       () => (this.controlsOnScreen = true),
-      false,
       createVector(200, 60),
       createVector(
         GamePanel.worldWidth / 2 - 100,
         GamePanel.worldHeight / 2 + 40,
+      ),
+    );
+    this.closeControls = new Button(
+      "Close",
+      () => (this.controlsOnScreen = false),
+      createVector(200, 60),
+      createVector(
+        GamePanel.worldWidth / 2 - 100,
+        GamePanel.worldHeight / 2 + 170,
       ),
     );
     this.controlsOnScreen = this.controlsOnScreen;
@@ -36,6 +44,9 @@ class StartMenu {
   public update() {
     this.startButton.update();
     this.showControls.update();
+    if (this.controlsOnScreen === true) {
+      this.closeControls.update();
+    }
   }
 
   public draw() {
@@ -49,6 +60,7 @@ class StartMenu {
     image(images.menuImages.logo, GamePanel.worldWidth / 2 - 150, 60, 300, 145);
     if (this.controlsOnScreen === true) {
       this.drawControls();
+      this.closeControls.draw();
     } else {
       this.startButton.draw();
       this.showControls.draw();
@@ -57,14 +69,29 @@ class StartMenu {
 
   public drawControls() {
     image(
-      images.menuImages.controls,
-      GamePanel.worldWidth / 2 - GamePanel.worldWidth / 2 + 125,
-      GamePanel.worldHeight / 2 - GamePanel.worldHeight / 2 + 100,
-      GamePanel.worldWidth - 250,
+      images.menuImages.controlsbg,
+      GamePanel.worldWidth / 2 - GamePanel.worldWidth / 2 + 100,
+      GamePanel.worldHeight / 2 - GamePanel.worldHeight / 2 + 50,
+      GamePanel.worldWidth - 200,
       GamePanel.worldHeight - 200,
     );
-    if (keyIsDown(ESCAPE)) {
-      this.controlsOnScreen = false;
-    }
+    textFont(fonts.font);
+    textSize(18);
+    text("Use the arrow keys to move around", 300, 140);
+    image(
+      images.menuImages.arrowkeys,
+      GamePanel.worldWidth / 2 - 220,
+      GamePanel.worldHeight / 2 - GamePanel.worldHeight / 2 + 120,
+      150,
+      100,
+    );
+    text("Use spacebar to attack", 180, 280);
+    image(
+      images.menuImages.spacebar,
+      GamePanel.worldWidth / 2 - 70,
+      GamePanel.worldHeight / 2 - GamePanel.worldHeight / 2 + 310,
+      300,
+      45,
+    );
   }
 }
