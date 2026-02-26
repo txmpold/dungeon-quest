@@ -72,11 +72,11 @@ abstract class Entity {
     return (
       this.worldX + this.solidAreaX <
         other.worldX + other.solidAreaX + other.solidAreaW &&
-      this.worldX + this.solidAreaW + this.solidAreaW >
+      this.worldX + this.solidAreaX + this.solidAreaW >
         other.worldX + other.solidAreaX &&
       this.worldY + this.solidAreaY <
         other.worldY + other.solidAreaY + other.solidAreaH &&
-      this.worldY + this.solidAreaH + this.solidAreaH >
+      this.worldY + this.solidAreaY + this.solidAreaH >
         other.worldY + other.solidAreaY
     );
   }
