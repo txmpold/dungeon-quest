@@ -9,5 +9,9 @@ class BlueEnemy extends Enemy {
   public update() {
     super.update();
   }
-  private shootProjectile() {}
+
+  public move(){}
+   //den blå monstret ska kunna gå ett steg och skjuta åt alla håll, har ett fast rörelsemönster 
+  public shootProjectile() {}
+
 }

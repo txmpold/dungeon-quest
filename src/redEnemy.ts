@@ -9,5 +9,9 @@ class RedEnemy extends Enemy {
   public update() {
     super.update();
   }
-  private shootProjectile() {}
+
+   //den blå monstret ska kunna flygga, dessa kan ta sig över väggar och vatten som finns i rummen
+   public shootProjectile() {}
+   public fly(){}
+
 }
