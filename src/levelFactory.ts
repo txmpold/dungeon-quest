@@ -98,7 +98,46 @@ class LevelFactory {
           new Obstacle(worldX, worldY, images.tiles.wallDownRightCorner),
         );
       }
-      if (entityNumber === 'g') {
+      if (entityNumber === "F") {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.wallShadow));
+      }
+      if (entityNumber === "H") {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.wallBottom));
+      }
+      if (entityNumber === "E") {
+        entities.push(
+          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec),
+        );
+      }
+      if (entityNumber === "I") {
+        entities.push(
+          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec2),
+        );
+      }
+      if (entityNumber === "J") {
+        entities.push(
+          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec3),
+        );
+      }
+      if (entityNumber === "K") {
+        entities.push(
+          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec4),
+        );
+      }
+      if (entityNumber === "L") {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.floorCircle));
+      }
+      if (entityNumber === "M") {
+        entities.push(
+          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec5),
+        );
+      }
+       if (entityNumber === "N") {
+        entities.push(
+          new Obstacle(worldX, worldY, images.tiles.floorStone),
+        );
+      }
+      if (entityNumber === "g") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.ghost));
       }
       if (entityNumber === "b") {
@@ -107,7 +146,19 @@ class LevelFactory {
       if (entityNumber === "t") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.treasure));
       }
-      if (entityNumber === 'X') {
+      if (entityNumber === "c") {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.candelabra));
+      }
+      if (entityNumber === "d") {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.box1));
+      }
+      if (entityNumber === "e") {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.box2));
+      }
+      if (entityNumber === "f") {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.box3));
+      }
+      if (entityNumber === "X") {
         entities.push(new GreenEnemy(worldX, worldY, 3));
       }
       if (entityNumber === "Y") {
