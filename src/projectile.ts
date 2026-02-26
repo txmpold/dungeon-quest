@@ -17,7 +17,10 @@ class Projectile extends Entity {
     super.update();
   }
 
-  public onCollision() {}
+  public onCollision(other: Entity) {
+    if (other instanceof Obstacle) {
+    }
+  }
 
   draw() {
     push();

@@ -12,11 +12,25 @@ class Level {
 
   public update() {
     this.updateEntities();
+    this.checkCollisions();
   }
 
   private updateEntities() {
     for (let entity of this.entities) {
       entity.update();
+    }
+  }
+
+  private checkCollisions() {
+    for (let j = 0; j < this.entities.length; j++) {
+      for (let i = j + 1; i < this.entities.length; i++) {
+        const e1 = this.entities[j];
+        const e2 = this.entities[i];
+        if (e1.isCollidingWith(e2) && e2.isCollidingWith(e1)) {
+          e1.onCollision(e2);
+          e2.onCollision(e1);
+        }
+      }
     }
   }
 
@@ -39,6 +53,6 @@ class Level {
     pop();
   }
   public drawTreasure() {}
-  public checkCollisions() {}
+
   public updateGame() {}
 }
