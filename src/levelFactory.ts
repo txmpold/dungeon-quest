@@ -56,6 +56,7 @@ class LevelFactory {
       if (entityNumber === "4") {
         entities.push(new Floor(worldX, worldY));
         player = new Player(worldX, worldY, 5, level);
+        level.player = player;
       }
       if (entityNumber === "6") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.wallDown));
@@ -96,16 +97,16 @@ class LevelFactory {
         entities.push(new Obstacle(worldX, worldY, images.tiles.treasure));
       }
       if (entityNumber === "X") {
-        entities.push(new GreenEnemy(worldX, worldY, 3));
+        entities.push(new GreenEnemy(worldX, worldY, 3, level));
       }
       if (entityNumber === "Y") {
-        entities.push(new BlueEnemy(worldX, worldY, 4));
+        entities.push(new BlueEnemy(worldX, worldY, 4, level));
       }
       if (entityNumber === "Z") {
-        entities.push(new RedEnemy(worldX, worldY, 5));
+        entities.push(new RedEnemy(worldX, worldY, 5, level));
       }
       if (entityNumber === 'V') {
-        entities.push(new Boss(worldX, worldY, 10));
+        entities.push(new Boss(worldX, worldY, 10, level));
       }
 
       worldCol++;

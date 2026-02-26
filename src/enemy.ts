@@ -1,6 +1,7 @@
 /// <reference path="entity.ts" />
 abstract class Enemy extends Entity {
   protected health: number;
+  protected levelContext: ILevelContext;
 
   constructor(
     worldX: number,
@@ -10,19 +11,18 @@ abstract class Enemy extends Entity {
     col: number,
     totalCol: number,
     health: number,
+    levelContext: ILevelContext,
   ) {
     const speed = createVector(0, 0);
     super(worldX, worldY, image, speed, row, col, totalCol);
     this.health = health;
+    this.levelContext = levelContext;
   }
 
   public update() {
+    this.engage();
     super.update();
   }
 
-  public move() {
-    this.speed.set(random(width), random(height));
-    this.row = 0;
-    // this.totalCol = 3;
-  }
+  protected abstract engage(): void;
 }
