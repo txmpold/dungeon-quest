@@ -1,6 +1,7 @@
 abstract class Entity {
   public worldX: number;
   public worldY: number;
+  public zIndex: number;
   public speed: p5.Vector;
   public image: p5.Image;
   public solidAreaX = 0;
@@ -21,6 +22,7 @@ abstract class Entity {
     row: number = 0,
     col: number = 0,
     totalCol: number = 1,
+    zIndex = 0,
   ) {
     this.worldX = worldX;
     this.worldY = worldY;
@@ -29,6 +31,7 @@ abstract class Entity {
     this.row = row;
     this.col = col;
     this.totalCol = totalCol;
+    this.zIndex = zIndex;
   }
 
   public update() {

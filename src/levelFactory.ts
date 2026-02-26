@@ -6,6 +6,7 @@ class LevelFactory {
   public levelGrid: string[][] = [];
   public collisionTiles: number[] = [];
 
+
   constructor(
     tiles: p5.Image[],
     x: number,
@@ -22,7 +23,6 @@ class LevelFactory {
     let entities: Entity[] = [];
     let worldCol = 0;
     let worldRow = 0;
-    let player: Player | undefined;
     const level = new Level(entities);
     this.levelGrid = this.loadMap(levels[index]);
     const levelGrid = this.levelGrid;
@@ -67,7 +67,9 @@ class LevelFactory {
       }
       if (entityNumber === "4") {
         entities.push(new Floor(worldX, worldY));
-        player = new Player(worldX, worldY, 5, level);
+        const player = new Player(worldX, worldY, 5, level);
+        level.player = player;
+        entities.push(player);
       }
       if (entityNumber === "6") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.wallDown));
@@ -159,16 +161,16 @@ class LevelFactory {
         entities.push(new Obstacle(worldX, worldY, images.tiles.box3));
       }
       if (entityNumber === "X") {
-        entities.push(new GreenEnemy(worldX, worldY, 3));
+        entities.push(new GreenEnemy(worldX, worldY, 3, level));
       }
       if (entityNumber === "Y") {
-        entities.push(new BlueEnemy(worldX, worldY, 4));
+        entities.push(new BlueEnemy(worldX, worldY, 4, level));
       }
       if (entityNumber === "Z") {
-        entities.push(new RedEnemy(worldX, worldY, 5));
+        entities.push(new RedEnemy(worldX, worldY, 5, level));
       }
-      if (entityNumber === "V") {
-        entities.push(new Boss(worldX, worldY, 10));
+      if (entityNumber === 'V') {
+        entities.push(new Boss(worldX, worldY, 10, level));
       }
 
       worldCol++;
@@ -179,10 +181,7 @@ class LevelFactory {
       }
     }
 
-    if (!player) {
-      throw new Error("Missing player in data");
-    }
-    entities.push(player);
+    entities.sort((a,b) => a.zIndex - b.zIndex);
 
     return level;
   }
