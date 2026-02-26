@@ -8,21 +8,24 @@ class GreenEnemy extends Enemy {
    
   }
   public onCollision(other: Entity): void {}
-
-  //den gröna monstret ska jaga spelaren
   protected engage(){
+    this.chasePlayerWhenNearby();
+  }
+
+  private chasePlayerWhenNearby(){
     if (!this.levelContext.player) return;
+    //måste alltid vara ett postivt tal
     let distX = abs(this.levelContext.player.worldX - this.worldX);
     let distY = abs(this.levelContext.player.worldY - this.worldY); 
 
-    let chaseLimit = 0.4;
+    let chaseLimit = 0.6;  //procentuellt av skärmens yta
+    let chaseSpeed = 0.08;
+    this.speed.set(0,0);
     if (distX < GamePanel.worldWidth * chaseLimit && distY < GamePanel.worldHeight * chaseLimit){
-      // console.log("meow");
-      this.worldX = lerp(this.worldX, this.levelContext.player.worldX, 0.01);
-      this.worldY = lerp(this.worldY, this.levelContext.player.worldY, 0.01);
-
+      let enemyPos = createVector(this.worldX, this.worldY);
+      let playerPos = createVector(this.levelContext.player.worldX, this.levelContext.player.worldY);
+      let direction = p5.Vector.sub(playerPos,enemyPos).normalize();
+      this.speed.set(direction.mult(chaseSpeed));
     }
-
-
   }
 }
