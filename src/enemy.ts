@@ -14,7 +14,7 @@ abstract class Enemy extends Entity {
     levelContext: ILevelContext,
   ) {
     const speed = createVector(0, 0);
-    super(worldX, worldY, image, speed, row, col, totalCol);
+    super(worldX, worldY, image, speed, row, col, totalCol, 10);
     this.health = health;
     this.levelContext = levelContext;
   }
