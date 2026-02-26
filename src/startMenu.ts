@@ -21,6 +21,7 @@ class StartMenu {
   }
   
   public draw() {
+    push()
     image(images.menuImages.background, 0, 0, GamePanel.screenWidth, GamePanel.screenHeight)
     image(this.gameLogo, GamePanel.worldWidth / 2 - 150 , 60, 300, 145)
     push();
