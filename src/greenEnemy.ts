@@ -11,6 +11,7 @@ class GreenEnemy extends Enemy {
     super(worldX, worldY, images.slime, row, col, totalCol, health);
    
   }
+  public onCollision(other: Entity): void {}
 
   public update() {
     super.update();

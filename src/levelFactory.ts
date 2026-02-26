@@ -1,13 +1,21 @@
 class LevelFactory {
   public tiles: p5.Image[] = [];
+  /* public isCollision: p5.Image[] = [];  kanske behöver*/
   public x: number = 0;
   public y: number = 0;
-  /*   public collisionTiles: number[] = []; */
+  public levelGrid: string[][] = [];
+  public collisionTiles: number[] = [];
 
-  constructor(tiles: p5.Image[], x: number, y: number) {
+  constructor(
+    tiles: p5.Image[],
+    x: number,
+    y: number,
+    collisionTiles: number[] = [],
+  ) {
     this.tiles = tiles;
     this.x = x;
     this.y = y;
+    this.collisionTiles = collisionTiles;
   }
 
   public generateLevel(index: number): Level {
@@ -16,8 +24,8 @@ class LevelFactory {
     let worldRow = 0;
     let player: Player | undefined;
     const level = new Level(entities);
-    /* const player = level.entities.find((e) => e instanceof Player) as Player; */
-    const levelGrid = this.loadMap(levels[index]);
+    this.levelGrid = this.loadMap(levels[index]);
+    const levelGrid = this.levelGrid;
 
     while (worldCol < levelGrid[0].length && worldRow < levelGrid.length) {
       let worldX = worldCol * GamePanel.tileSize;
@@ -31,69 +39,73 @@ class LevelFactory {
         entityNumber === 't' ||
         entityNumber === 'X' ||
         entityNumber === 'Y' ||
-        entityNumber === 'Z'
+        entityNumber === 'Z' ||
+        entityNumber === 'V' 
       ) {
         entities.push(new Floor(worldX, worldY));
       }
-      if (entityNumber === '2') {
+      if (entityNumber === "2") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.wall));
       }
-      if (entityNumber === 'W') {
+      if (entityNumber === "W") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.water));
       }
-      if (entityNumber === '5') {
+      if (entityNumber === "5") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.wallTop));
       }
-      if (entityNumber === '4') {
+      if (entityNumber === "4") {
         entities.push(new Floor(worldX, worldY));
         player = new Player(worldX, worldY, 5, level);
       }
-      if (entityNumber === '6') {
+      if (entityNumber === "6") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.wallDown));
       }
-      if (entityNumber === '7') {
+      if (entityNumber === "7") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.wallLeft));
       }
-      if (entityNumber === '8') {
+      if (entityNumber === "8") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.wallRight));
       }
-      if (entityNumber === 'A') {
+      if (entityNumber === "A") {
         entities.push(
           new Obstacle(worldX, worldY, images.tiles.wallTopLeftCorner),
         );
       }
-      if (entityNumber === 'B') {
+      if (entityNumber === "B") {
         entities.push(
           new Obstacle(worldX, worldY, images.tiles.wallTopRightCorner),
         );
       }
-      if (entityNumber === 'C') {
+      if (entityNumber === "C") {
         entities.push(
           new Obstacle(worldX, worldY, images.tiles.wallDownLeftCorner),
         );
       }
-      if (entityNumber === 'D') {
+      if (entityNumber === "D") {
         entities.push(
           new Obstacle(worldX, worldY, images.tiles.wallDownRightCorner),
         );
       }
-      if (entityNumber === 'g') {
+      if (entityNumber === "g") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.ghost));
       }
-      if (entityNumber === 'b') {
+      if (entityNumber === "b") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.barrel));
       }
-      if (entityNumber === 't') {
+      if (entityNumber === "t") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.treasure));
       }
-      if (entityNumber === 'X') {
+      if (entityNumber === "X") {
         entities.push(new GreenEnemy(worldX, worldY, 3));
       }
-      if (entityNumber === 'Y') {
+      if (entityNumber === "Y") {
         entities.push(new BlueEnemy(worldX, worldY, 4));
       }
-      if (entityNumber === 'Z') {
+      if (entityNumber === "Z") {
         entities.push(new RedEnemy(worldX, worldY, 5));
+      }
+      if (entityNumber === 'V') {
+        entities.push(new Boss(worldX, worldY, 10));
       }
 
       worldCol++;
@@ -105,7 +117,7 @@ class LevelFactory {
     }
 
     if (!player) {
-      throw new Error('Missing player in data');
+      throw new Error("Missing player in data");
     }
     entities.push(player);
 
@@ -117,5 +129,9 @@ class LevelFactory {
       (line) => line.trim().split(/\s+/),
       // .map((value) => value)),
     );
+  }
+
+  public isTileSolid(tileNum: number): boolean {
+    return this.collisionTiles.indexOf(tileNum) !== -1;
   }
 }

@@ -7,7 +7,6 @@ class Player extends Entity {
   protected direction: p5.Vector;
   private playerPos = createVector(0, 0);
   private level: Level;
-
   constructor(worldX: number, worldY: number, health: number, level: Level) /* 
     weaponInventory: p5.Image[],
     attackCoolDown: number, */ {
@@ -30,8 +29,24 @@ class Player extends Entity {
     this.screenX = GamePanel.screenWidth / 2 - GamePanel.tileSize / 2;
     this.screenY = GamePanel.screenHeight / 2 - GamePanel.tileSize / 2;
     this.playerPos = createVector(this.screenX, this.screenY);
+    this.solidAreaX = 8;
+    this.solidAreaY = 16;
+    this.solidAreaW = 32;
+    this.solidAreaH = 32;
   }
-
+  public onCollision(other: Entity): void {
+    if (other instanceof Obstacle) {
+      this.worldX -= this.speed.x * deltaTime; /* 
+      if (other.isCollidingWith(this)) {
+        this.worldX += this.speed.x * deltaTime;
+      } */
+      this.worldY -= this.speed.y * deltaTime;
+      /* if (this.isCollidingWith(other)) {
+        this.worldY += this.speed.y * deltaTime;
+      } */
+      this.speed.set(0, 0);
+    }
+  }
   public getWeapon() {}
   public getHealth() {}
   public checkDamage() {}

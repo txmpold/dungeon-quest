@@ -14,4 +14,5 @@ class RedEnemy extends Enemy {
    public shootProjectile() {}
    public fly(){}
 
+  public onCollision(other: Entity): void {}
 }
