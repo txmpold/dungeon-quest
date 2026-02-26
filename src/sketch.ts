@@ -44,6 +44,7 @@ let images: {
   };
 };
 
+/* let isCollision: p5.Image[]; kanske behöver */
 let tiles: p5.Image[];
 let levels: string[][];
 
@@ -101,6 +102,8 @@ function preload() {
     loadStrings("assets/levels/level2.txt"), // Level 2
     loadStrings("assets/levels/level1.txt"), // Level 1
   ];
+
+  /* isCollision = [loadImage("assets/tiles/water.png")]; kanske behöver */
 }
 
 /**

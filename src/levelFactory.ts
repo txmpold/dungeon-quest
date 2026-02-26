@@ -1,13 +1,21 @@
 class LevelFactory {
   public tiles: p5.Image[] = [];
+  /* public isCollision: p5.Image[] = [];  kanske behöver*/
   public x: number = 0;
   public y: number = 0;
-  /*   public collisionTiles: number[] = []; */
+  public levelGrid: string[][] = [];
+  public collisionTiles: number[] = [];
 
-  constructor(tiles: p5.Image[], x: number, y: number) {
+  constructor(
+    tiles: p5.Image[],
+    x: number,
+    y: number,
+    collisionTiles: number[] = [],
+  ) {
     this.tiles = tiles;
     this.x = x;
     this.y = y;
+    this.collisionTiles = collisionTiles;
   }
 
   public generateLevel(index: number): Level {
@@ -16,8 +24,8 @@ class LevelFactory {
     let worldRow = 0;
     let player: Player | undefined;
     const level = new Level(entities);
-    /* const player = level.entities.find((e) => e instanceof Player) as Player; */
-    const levelGrid = this.loadMap(levels[index]);
+    this.levelGrid = this.loadMap(levels[index]);
+    const levelGrid = this.levelGrid;
 
     while (worldCol < levelGrid[0].length && worldRow < levelGrid.length) {
       let worldX = worldCol * GamePanel.tileSize;
@@ -90,46 +98,7 @@ class LevelFactory {
           new Obstacle(worldX, worldY, images.tiles.wallDownRightCorner),
         );
       }
-      if (entityNumber === "F") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.wallShadow));
-      }
-      if (entityNumber === "H") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.wallBottom));
-      }
-      if (entityNumber === "E") {
-        entities.push(
-          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec),
-        );
-      }
-      if (entityNumber === "I") {
-        entities.push(
-          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec2),
-        );
-      }
-      if (entityNumber === "J") {
-        entities.push(
-          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec3),
-        );
-      }
-      if (entityNumber === "K") {
-        entities.push(
-          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec4),
-        );
-      }
-      if (entityNumber === "L") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.floorCircle));
-      }
-      if (entityNumber === "M") {
-        entities.push(
-          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec5),
-        );
-      }
-       if (entityNumber === "N") {
-        entities.push(
-          new Obstacle(worldX, worldY, images.tiles.floorStone),
-        );
-      }
-      if (entityNumber === "g") {
+      if (entityNumber === 'g') {
         entities.push(new Obstacle(worldX, worldY, images.tiles.ghost));
       }
       if (entityNumber === "b") {
@@ -138,19 +107,7 @@ class LevelFactory {
       if (entityNumber === "t") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.treasure));
       }
-      if (entityNumber === "c") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.candelabra));
-      }
-      if (entityNumber === "d") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.box1));
-      }
-      if (entityNumber === "e") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.box2));
-      }
-      if (entityNumber === "f") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.box3));
-      }
-      if (entityNumber === "X") {
+      if (entityNumber === 'X') {
         entities.push(new GreenEnemy(worldX, worldY, 3));
       }
       if (entityNumber === "Y") {
@@ -184,5 +141,9 @@ class LevelFactory {
       (line) => line.trim().split(/\s+/),
       // .map((value) => value)),
     );
+  }
+
+  public isTileSolid(tileNum: number): boolean {
+    return this.collisionTiles.indexOf(tileNum) !== -1;
   }
 }
