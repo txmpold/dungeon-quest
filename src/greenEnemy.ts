@@ -16,8 +16,7 @@ class GreenEnemy extends Enemy {
     super.update();
   }
 
-  public move(){}
-   
   //den gröna monstret ska jaga spelaren
+  public move(){}
   // public chase(){}
 }
