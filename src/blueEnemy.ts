@@ -10,8 +10,10 @@ class BlueEnemy extends Enemy {
     super.update();
   }
 
+  //den blå monstret ska kunna gå ett steg och skjuta åt alla håll, har ett fast rörelsemönster 
   public move(){}
-   //den blå monstret ska kunna gå ett steg och skjuta åt alla håll, har ett fast rörelsemönster 
   public shootProjectile() {}
+
+  public onCollision(other: Entity): void {}
 
 }
