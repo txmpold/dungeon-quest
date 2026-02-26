@@ -50,6 +50,7 @@ class StartMenu {
   }
 
   public draw() {
+    music.menuMusic.play();
     image(
       images.menuImages.background,
       0,

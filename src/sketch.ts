@@ -2,7 +2,7 @@
 let game: Game;
 let button: Button;
 let music: {
-  mystery: p5.SoundFile;
+  menuMusic: p5.SoundFile;
 };
 let soundEffects: {
   shoot: p5.SoundFile;
@@ -55,7 +55,7 @@ let levels: string[][];
  */
 function preload() {
   music = {
-    mystery: loadSound("assets/music/mystery.mp3"),
+    menuMusic: loadSound("assets/music/menu-music.mp3"),
   };
   soundEffects = {
     shoot: loadSound("assets/soundEffects/laserShoot.mp3"),
@@ -115,7 +115,8 @@ function setup() {
   createCanvas(GamePanel.screenWidth, GamePanel.screenHeight);
 
   frameRate(60);
-  music.mystery.setVolume(0.8);
+  music.menuMusic.play();
+  music.menuMusic.setVolume(0.5);
   soundEffects.shoot.setVolume(0.4);
 
   game = new Game();
