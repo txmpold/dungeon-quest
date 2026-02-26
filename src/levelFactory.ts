@@ -6,7 +6,6 @@ class LevelFactory {
   public levelGrid: string[][] = [];
   public collisionTiles: number[] = [];
 
-
   constructor(
     tiles: p5.Image[],
     x: number,
@@ -34,6 +33,7 @@ class LevelFactory {
       const entityNumber = levelGrid[worldRow][worldCol];
       if (
         entityNumber === "." ||
+        entityNumber === "4" ||
         entityNumber === "g" ||
         entityNumber === "b" ||
         entityNumber === "t" ||
@@ -54,7 +54,7 @@ class LevelFactory {
         entityNumber === "Z" ||
         entityNumber === "V"
       ) {
-        entities.push(new Floor(worldX, worldY));
+        entities.push(new Floor(worldX, worldY, images.tiles.floor));
       }
       if (entityNumber === "2") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.wall));
@@ -65,8 +65,10 @@ class LevelFactory {
       if (entityNumber === "5") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.wallTop));
       }
+      if (entityNumber === ".") {
+        entities.push(new Floor(worldX, worldY, images.tiles.floor));
+      }
       if (entityNumber === "4") {
-        entities.push(new Floor(worldX, worldY));
         const player = new Player(worldX, worldY, 5, level);
         level.player = player;
         entities.push(player);
@@ -127,16 +129,14 @@ class LevelFactory {
         );
       }
       if (entityNumber === "L") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.floorCircle));
+        entities.push(new Floor(worldX, worldY, images.tiles.floorCircle));
+      }
+      if (entityNumber === "N") {
+        entities.push(new Floor(worldX, worldY, images.tiles.floorStone));
       }
       if (entityNumber === "M") {
         entities.push(
           new Obstacle(worldX, worldY, images.tiles.wallCornerSpec5),
-        );
-      }
-       if (entityNumber === "N") {
-        entities.push(
-          new Obstacle(worldX, worldY, images.tiles.floorStone),
         );
       }
       if (entityNumber === "g") {
@@ -169,7 +169,7 @@ class LevelFactory {
       if (entityNumber === "Z") {
         entities.push(new RedEnemy(worldX, worldY, 5, level));
       }
-      if (entityNumber === 'V') {
+      if (entityNumber === "V") {
         entities.push(new Boss(worldX, worldY, 10, level));
       }
 
@@ -181,7 +181,7 @@ class LevelFactory {
       }
     }
 
-    entities.sort((a,b) => a.zIndex - b.zIndex);
+    entities.sort((a, b) => a.zIndex - b.zIndex);
 
     return level;
   }
