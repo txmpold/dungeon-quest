@@ -64,7 +64,7 @@ function preload() {
     map: loadImage('assets/images/josefineLevelimg.png'),
     character: loadImage('assets/images/character.png'),
     slime: loadImage('assets/images/slims.png'),
-    boss: loadImage('assets/images/boss.png'),
+    boss: loadImage('assets/images/boss_.png'),
     weapon: loadImage('assets/images/fireball.png'),
     tiles: {
       floor: loadImage('assets/tiles/floor.png'),
