@@ -1,10 +1,14 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game;
+let button: Button;
 let music: {
   mystery: p5.SoundFile;
 };
 let soundEffects: {
   shoot: p5.SoundFile;
+};
+let fonts: {
+  font: p5.Font;
 };
 let images: {
   // tile: p5.Image;
@@ -34,6 +38,15 @@ let images: {
     barrel: p5.Image;
     treasure: p5.Image;
   };
+  menuImages: {
+    background: p5.Image;
+    button: p5.Image;
+    logo: p5.Image;
+    swordcursor: p5.Image;
+    controlsbg: p5.Image;
+    arrowkeys: p5.Image;
+    spacebar: p5.Image;
+  };
 };
 
 /* let isCollision: p5.Image[]; kanske behöver */
@@ -51,6 +64,9 @@ function preload() {
   };
   soundEffects = {
     shoot: loadSound("assets/soundEffects/laserShoot.mp3"),
+  };
+  fonts = {
+    font: loadFont("assets/fonts/PixelifySans-VariableFont_wght.ttf"),
   };
   images = {
     // tile: loadImage("assets/images/tile.png"),
@@ -80,6 +96,15 @@ function preload() {
       barrel: loadImage("assets/tiles/barrel.png"),
       treasure: loadImage("assets/tiles/treasure.png"),
     },
+    menuImages: {
+      background: loadImage("assets/images/menubackground.png"),
+      button: loadImage("assets/images/button.png"),
+      logo: loadImage("assets/images/logo.png"),
+      swordcursor: loadImage("assets/images/swordcursor.png"),
+      controlsbg: loadImage("assets/images/controls_bg.png"),
+      arrowkeys: loadImage("assets/images/arrowkeys.png"),
+      spacebar: loadImage("assets/images/spacebar.png"),
+    },
   };
 
   levels = [
@@ -98,6 +123,7 @@ function preload() {
  */
 function setup() {
   createCanvas(GamePanel.screenWidth, GamePanel.screenHeight);
+
   frameRate(60);
   music.mystery.setVolume(0.8);
   soundEffects.shoot.setVolume(0.4);
