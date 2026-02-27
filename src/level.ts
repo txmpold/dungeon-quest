@@ -1,5 +1,6 @@
 interface ILevelContext{
   player?: Player;
+  entities: Entity[];
 }
 
 class Level implements ILevelContext {
