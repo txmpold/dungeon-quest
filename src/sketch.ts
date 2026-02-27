@@ -32,6 +32,19 @@ let images: {
     ghost: p5.Image;
     barrel: p5.Image;
     treasure: p5.Image;
+    candelabra: p5.Image;
+    box1: p5.Image;
+    box2: p5.Image;
+    box3: p5.Image;
+    wallShadow: p5.Image;
+    floorStone: p5.Image;
+    wallBottom: p5.Image;
+    wallCornerSpec: p5.Image;
+    wallCornerSpec2: p5.Image;
+    wallCornerSpec3: p5.Image;
+    wallCornerSpec4: p5.Image;
+    wallCornerSpec5: p5.Image;
+    floorCircle: p5.Image;
   };
   menuImages: {
     background: p5.Image;
@@ -85,6 +98,19 @@ function preload() {
       ghost: loadImage("assets/tiles/ghost.png"),
       barrel: loadImage("assets/tiles/barrel.png"),
       treasure: loadImage("assets/tiles/treasure.png"),
+      candelabra: loadImage("assets/tiles/candelabra.png"),
+      box1: loadImage("assets/tiles/box1.png"),
+      box2: loadImage("assets/tiles/box2.png"),
+      box3: loadImage("assets/tiles/box3.png"),
+      wallShadow: loadImage("assets/tiles/wall-shadow.png"),
+      floorStone: loadImage("assets/tiles/floor-stone.png"),
+      wallBottom: loadImage("assets/tiles/wall-bottom.png"),
+      wallCornerSpec: loadImage("assets/tiles/wall-corner-spec.png"),
+      wallCornerSpec2: loadImage("assets/tiles/wall-corner-spec2.png"),
+      wallCornerSpec3: loadImage("assets/tiles/wall-corner-spec3.png"),
+      wallCornerSpec4: loadImage("assets/tiles/wall-corner-spec4.png"),
+      wallCornerSpec5: loadImage("assets/tiles/wall-corner-spec5.png"),
+      floorCircle: loadImage("assets/tiles/floor-circle.png"),
     },
     menuImages: {
       background: loadImage("assets/images/menubackground.png"),
@@ -99,7 +125,7 @@ function preload() {
 
   levels = [
     loadStrings("assets/levels/level1.txt"), // Level 1
-    // loadStrings('assets/levels/level2.txt'), // Level 2
+    // loadStrings("assets/levels/level2.txt"), // Level 2
   ];
 
   /* isCollision = [loadImage("assets/tiles/water.png")]; kanske behöver */

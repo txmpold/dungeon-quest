@@ -6,7 +6,6 @@ class LevelFactory {
   public levelGrid: string[][] = [];
   public collisionTiles: number[] = [];
 
-
   constructor(
     tiles: p5.Image[],
     x: number,
@@ -33,16 +32,29 @@ class LevelFactory {
 
       const entityNumber = levelGrid[worldRow][worldCol];
       if (
-        entityNumber === '.' ||
-        entityNumber === 'g' ||
-        entityNumber === 'b' ||
-        entityNumber === 't' ||
-        entityNumber === 'X' ||
-        entityNumber === 'Y' ||
-        entityNumber === 'Z' ||
-        entityNumber === 'V' 
+        entityNumber === "." ||
+        entityNumber === "4" ||
+        entityNumber === "g" ||
+        entityNumber === "b" ||
+        entityNumber === "t" ||
+        entityNumber === "c" ||
+        entityNumber === "d" ||
+        entityNumber === "e" ||
+        entityNumber === "f" ||
+        entityNumber === "X" ||
+        entityNumber === "E" ||
+        entityNumber === "H" ||
+        entityNumber === "I" ||
+        entityNumber === "J" ||
+        entityNumber === "K" ||
+        entityNumber === "L" ||
+        entityNumber === "M" ||
+        entityNumber === "N" ||
+        entityNumber === "Y" ||
+        entityNumber === "Z" ||
+        entityNumber === "V"
       ) {
-        entities.push(new Floor(worldX, worldY));
+        entities.push(new Floor(worldX, worldY, images.tiles.floor));
       }
       if (entityNumber === "2") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.wall));
@@ -53,8 +65,10 @@ class LevelFactory {
       if (entityNumber === "5") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.wallTop));
       }
+      if (entityNumber === ".") {
+        entities.push(new Floor(worldX, worldY, images.tiles.floor));
+      }
       if (entityNumber === "4") {
-        entities.push(new Floor(worldX, worldY));
         const player = new Player(worldX, worldY, 5, level);
         level.player = player;
         entities.push(player);
@@ -88,6 +102,43 @@ class LevelFactory {
           new Obstacle(worldX, worldY, images.tiles.wallDownRightCorner),
         );
       }
+      if (entityNumber === "F") {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.wallShadow));
+      }
+      if (entityNumber === "H") {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.wallBottom));
+      }
+      if (entityNumber === "E") {
+        entities.push(
+          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec),
+        );
+      }
+      if (entityNumber === "I") {
+        entities.push(
+          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec2),
+        );
+      }
+      if (entityNumber === "J") {
+        entities.push(
+          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec3),
+        );
+      }
+      if (entityNumber === "K") {
+        entities.push(
+          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec4),
+        );
+      }
+      if (entityNumber === "L") {
+        entities.push(new Floor(worldX, worldY, images.tiles.floorCircle));
+      }
+      if (entityNumber === "N") {
+        entities.push(new Floor(worldX, worldY, images.tiles.floorStone));
+      }
+      if (entityNumber === "M") {
+        entities.push(
+          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec5),
+        );
+      }
       if (entityNumber === "g") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.ghost));
       }
@@ -96,6 +147,18 @@ class LevelFactory {
       }
       if (entityNumber === "t") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.treasure));
+      }
+      if (entityNumber === "c") {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.candelabra));
+      }
+      if (entityNumber === "d") {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.box1));
+      }
+      if (entityNumber === "e") {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.box2));
+      }
+      if (entityNumber === "f") {
+        entities.push(new Obstacle(worldX, worldY, images.tiles.box3));
       }
       if (entityNumber === "X") {
         entities.push(new GreenEnemy(worldX, worldY, 3, level));
@@ -106,7 +169,7 @@ class LevelFactory {
       if (entityNumber === "Z") {
         entities.push(new RedEnemy(worldX, worldY, 5, level));
       }
-      if (entityNumber === 'V') {
+      if (entityNumber === "V") {
         entities.push(new Boss(worldX, worldY, 10, level));
       }
 
@@ -118,7 +181,7 @@ class LevelFactory {
       }
     }
 
-    entities.sort((a,b) => a.zIndex - b.zIndex);
+    entities.sort((a, b) => a.zIndex - b.zIndex);
 
     return level;
   }
