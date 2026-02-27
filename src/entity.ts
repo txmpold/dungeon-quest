@@ -43,7 +43,12 @@ abstract class Entity {
     // Flytta X
     this.worldX += this.speed.x * deltaTime;
     for (const obstacle of entities) {
-      if (obstacle === this) continue;
+      if (
+        obstacle === this ||
+        obstacle instanceof Projectile ||
+        obstacle instanceof Enemy
+      )
+        continue;
       if (this.isCollidingWith(obstacle) && obstacle.isCollidingWith(this)) {
         this.worldX -= this.speed.x * deltaTime;
         this.onCollision(obstacle);
@@ -54,7 +59,13 @@ abstract class Entity {
     // Flytta Y
     this.worldY += this.speed.y * deltaTime;
     for (const obstacle of entities) {
-      if (obstacle === this) continue;
+      if (
+        obstacle === this ||
+        obstacle instanceof Projectile ||
+        obstacle instanceof Enemy
+      )
+        continue;
+
       if (this.isCollidingWith(obstacle) && obstacle.isCollidingWith(this)) {
         this.worldY -= this.speed.y * deltaTime;
         break;

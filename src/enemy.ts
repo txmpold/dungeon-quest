@@ -19,7 +19,7 @@ abstract class Enemy extends Entity {
     this.levelContext = levelContext;
   }
 
-  public move(obstacle: Obstacle) {
+  public move() {
     this.speed.set(random(width), random(height));
     this.row = 0;
     // this.totalCol = 3;

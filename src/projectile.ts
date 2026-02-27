@@ -13,10 +13,6 @@ class Projectile extends Entity {
     super(worldX, worldY, image, direction, row, col, totalCol);
   }
 
-  public update() {
-    super.update();
-  }
-
   public onCollision(other: Entity) {
     if (other instanceof Obstacle) {
     }
