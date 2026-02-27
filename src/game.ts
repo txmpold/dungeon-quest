@@ -1,21 +1,36 @@
 class Game {
   public levelFactory: LevelFactory;
   public level: Level;
-  // private startMenu: Menu;
+  private startMenu: StartMenu;
+  public gameIsStarted: boolean = false;
 
   constructor() {
-    // this.startMenu = new Menu();
     this.levelFactory = new LevelFactory(tiles, 0, 0);
+    this.level = new Level([]);
+    this.startMenu = new StartMenu(this);
+  }
+
+  public startGame() {
+    this.gameIsStarted = true;
     this.level = this.levelFactory.generateLevel(0);
   }
 
-  public update() {
-    this.level.update();
+  public draw() {
+    cursor("assets/images/swordcursor.png");
+    background(0);
+    if (this.gameIsStarted === true) {
+      noCursor();
+      this.level.draw();
+    } else {
+      this.startMenu.draw();
+    }
   }
 
-  public draw() {
-    background("white");
-    this.level.draw();
-    // this.levelFactory.draw();
+  public update() {
+    if (this.gameIsStarted === true) {
+      this.level.update();
+    } else {
+      this.startMenu.update();
+    }
   }
 }

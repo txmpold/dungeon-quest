@@ -21,6 +21,7 @@ class Player extends Entity {
       row,
       col,
       totalCol,
+      20,
     );
     /* this.attackCoolDown = attackCoolDown; */
     this.health = health;
