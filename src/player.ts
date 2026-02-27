@@ -86,17 +86,32 @@ class Player extends Entity {
       this.speed.y = -0.25;
       this.row = 2;
       this.direction.set(0, -1);
+      console.log(this.direction);
     }
   }
 
   public playerAttack() {
+    let x = this.direction.x;
+    let y = this.direction.y;
     if (keyIsDown(32)) {
       soundEffects.shoot.play();
+
+      let fireballImage = images.weapons.fireball_right;
+      if (y < 0) {
+        fireballImage = images.weapons.fireball_up;
+      } else if (y > 0) {
+        fireballImage = images.weapons.fireball_down;
+      } else if (x < 0) {
+        fireballImage = images.weapons.fireball_left;
+      } else if (x > 0) {
+        fireballImage = images.weapons.fireball_right;
+      }
+
       let fireball = new Projectile(
         this.worldX,
         this.worldY,
         this.direction.copy().mult(0.4),
-        images.weapon,
+        fireballImage,
         soundEffects.shoot,
         1, // <----- ????
         0,
