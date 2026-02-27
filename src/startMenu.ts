@@ -50,7 +50,9 @@ class StartMenu {
   }
 
   public draw() {
-    music.menuMusic.play();
+    if (!music.menuMusic.isPlaying()) {
+      music.menuMusic.loop();
+    }
     image(
       images.menuImages.background,
       0,
