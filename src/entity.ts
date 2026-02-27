@@ -31,14 +31,32 @@ abstract class Entity {
     this.totalCol = totalCol;
   }
 
-  public update() {
-    this.entityAnimation();
+  public update(entities: Entity[]) {
+    this.entityAnimation(entities);
   }
 
-  protected entityAnimation() {
+  protected entityAnimation(entities: Entity[]) {
     //deltaTime enheter per sekund
+    // Flytta X
     this.worldX += this.speed.x * deltaTime;
+    for (const obstacle of entities) {
+      if (obstacle === this) continue;
+      if (this.isCollidingWith(obstacle) && obstacle.isCollidingWith(this)) {
+        this.worldX -= this.speed.x * deltaTime;
+        this.onCollision(obstacle);
+        break;
+      }
+    }
+
+    // Flytta Y
     this.worldY += this.speed.y * deltaTime;
+    for (const obstacle of entities) {
+      if (obstacle === this) continue;
+      if (this.isCollidingWith(obstacle) && obstacle.isCollidingWith(this)) {
+        this.worldY -= this.speed.y * deltaTime;
+        break;
+      }
+    }
 
     if (this.speed.x !== 0 || this.speed.y !== 0) {
       if (frameCount % 10 === 0) {

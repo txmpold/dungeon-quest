@@ -6,9 +6,7 @@ class BlueEnemy extends Enemy {
     const totalCol = 8;
     super(worldX, worldY, images.slime, row, col, totalCol, health);
   }
-  public update() {
-    super.update();
-  }
+
   public onCollision(other: Entity): void {}
   private shootProjectile() {}
 }

@@ -72,10 +72,10 @@ class Player extends Entity {
   public getHealth() {}
   public checkDamage() {}
 
-  public update() {
+  public update(entities: Entity[]) {
     this.move();
     this.playerAttack();
-    super.update();
+    super.update(entities);
   }
 
   public updatePlayerPos() {

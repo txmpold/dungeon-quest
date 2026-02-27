@@ -16,10 +16,6 @@ abstract class Enemy extends Entity {
     this.health = health;
   }
 
-  public update() {
-    super.update();
-  }
-
   public move() {
     this.speed.set(random(width), random(height));
     this.row = 0;
