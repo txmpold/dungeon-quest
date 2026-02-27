@@ -128,10 +128,9 @@ class Player extends Entity {
       } else if (x > 0) {
         fireballImage = images.weapons.fireball_right;
       }
-
       let fireball = new Projectile(
-        this.worldX,
-        this.worldY,
+        this.worldX + this.solidAreaX + this.solidAreaW,
+        this.worldY + this.solidAreaY + this.solidAreaH,
         this.direction.copy().mult(0.4),
         fireballImage,
         soundEffects.shoot,
@@ -139,6 +138,7 @@ class Player extends Entity {
         0,
         this.totalCol,
       );
+
       this.level.entities.push(fireball);
     }
   }
