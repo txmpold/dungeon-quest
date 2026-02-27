@@ -54,14 +54,6 @@ abstract class Entity {
         this.onCollision(obstacle);
         break;
       }
-      if (obstacle instanceof Projectile) {
-        if (obstacle.isCollidingWith(this)) {
-        }
-
-        if (obstacle instanceof Projectile) {
-          if (obstacle.isCollidingWith(this)) continue;
-        }
-      }
     }
 
     // Flytta Y
@@ -76,11 +68,8 @@ abstract class Entity {
 
       if (this.isCollidingWith(obstacle) && obstacle.isCollidingWith(this)) {
         this.worldY -= this.speed.y * deltaTime;
+        this.onCollision(obstacle);
         break;
-      }
-
-      if (obstacle instanceof Projectile) {
-        if (obstacle.isCollidingWith(this)) continue;
       }
     }
 
