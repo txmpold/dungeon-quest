@@ -87,7 +87,6 @@ class Player extends Entity {
       this.speed.y = -0.25;
       this.row = 2;
       this.direction.set(0, -1);
-      console.log(this.direction);
     }
   }
 

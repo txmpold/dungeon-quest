@@ -1,13 +1,13 @@
 class Game {
   public levelFactory: LevelFactory;
   public level: Level;
-  private startMenu: StartMenu;
+  private scene: Scene;
   public gameIsStarted: boolean = false;
 
   constructor() {
     this.levelFactory = new LevelFactory(tiles, 0, 0);
     this.level = new Level([]);
-    this.startMenu = new StartMenu(this);
+    this.scene = new Scene(this, "startMenu");
   }
 
   public startGame() {
@@ -22,7 +22,7 @@ class Game {
       noCursor();
       this.level.draw();
     } else {
-      this.startMenu.draw();
+      this.scene.draw();
     }
   }
 
@@ -30,7 +30,7 @@ class Game {
     if (this.gameIsStarted === true) {
       this.level.update();
     } else {
-      this.startMenu.update();
+      this.scene.update();
     }
   }
 }
