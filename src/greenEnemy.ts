@@ -10,18 +10,8 @@ class GreenEnemy extends Enemy {
     const row = 0;
     const col = 0;
     const totalCol = 8;
-    super(
-      worldX,
-      worldY,
-      images.slime,
-      row,
-      col,
-      totalCol,
-      health,
-      levelContext,
-    );
+    super(worldX, worldY, images.slime, row, col, totalCol, 3, levelContext);
   }
-  public onCollision(other: Entity): void {}
 
   public update(entities: Entity[]) {
     this.chasePlayerWhenNearby();
