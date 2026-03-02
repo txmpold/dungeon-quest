@@ -7,6 +7,7 @@ class Player extends Entity {
   protected direction: p5.Vector;
   private playerPos = createVector(0, 0);
   private level: Level;
+  private damageCooldown: number = 0;
   constructor(worldX: number, worldY: number, health: number, level: Level) /* 
     weaponInventory: p5.Image[],
     attackCoolDown: number, */ {
@@ -77,6 +78,29 @@ class Player extends Entity {
     this.move();
     this.playerAttack();
     super.update(entities);
+    this.checkEnemyCollision(entities);
+    this.isPlayerDead();
+  }
+
+  private isPlayerDead() {
+    if (this.health <= 0) {
+      game.gameIsStarted = false;
+      this.level.isGameOver = true;
+      console.log("you died!");
+    }
+  }
+
+  private checkEnemyCollision(entities: Entity[]) {
+    for (const entity of entities) {
+      if (entity instanceof Enemy && this.isCollidingWith(entity)) {
+        if (this.damageCooldown <= 0) {
+          this.health -= 1;
+          this.damageCooldown = 4000;
+          console.log("ouch! Health: " + this.health);
+        }
+      }
+    }
+    this.damageCooldown -= deltaTime * 6;
   }
 
   public updatePlayerPos() {
