@@ -1,13 +1,17 @@
 class Game {
   public levelFactory: LevelFactory;
   public level: Level;
-  private scene: Scene;
+  private currentScene: Scene;
   public gameIsStarted: boolean = false;
 
   constructor() {
     this.levelFactory = new LevelFactory(tiles, 0, 0);
     this.level = new Level([]);
-    this.scene = new Scene(this, "startMenu");
+    this.currentScene = new StartMenu();
+  }
+
+  public changeScene(scene: Scene) {
+    this.currentScene = scene;
   }
 
   public startGame() {
@@ -16,13 +20,12 @@ class Game {
   }
 
   public draw() {
-    cursor("assets/images/swordcursor.png");
     background(0);
     if (this.gameIsStarted === true) {
       noCursor();
       this.level.draw();
     } else {
-      this.scene.draw();
+      this.currentScene.draw();
     }
   }
 
@@ -30,7 +33,7 @@ class Game {
     if (this.gameIsStarted === true) {
       this.level.update();
     } else {
-      this.scene.update();
+      this.currentScene.update();
     }
   }
 }
