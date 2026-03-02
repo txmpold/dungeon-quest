@@ -9,16 +9,7 @@ class BlueEnemy extends Enemy {
     const row = 1;
     const col = 0;
     const totalCol = 8;
-    super(
-      worldX,
-      worldY,
-      images.slime,
-      row,
-      col,
-      totalCol,
-      health,
-      levelContext,
-    );
+    super(worldX, worldY, images.slime, row, col, totalCol, 5, levelContext);
   }
 
   //den blå monstret ska kunna gå ett steg och skjuta åt alla håll, har ett fast rörelsemönster
