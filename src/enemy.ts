@@ -1,7 +1,6 @@
 /// <reference path="entity.ts" />
 abstract class Enemy extends Entity {
   public health: number;
-  public maxHealth: number;
   public isKilled = false;
   protected levelContext: ILevelContext;
 
@@ -18,7 +17,6 @@ abstract class Enemy extends Entity {
     const speed = createVector(0, 0);
     super(worldX, worldY, image, speed, row, col, totalCol, 10);
     this.health = health;
-    this.maxHealth = health;
     this.levelContext = levelContext;
   }
 
