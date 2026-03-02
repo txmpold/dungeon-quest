@@ -1,73 +1,75 @@
 /// <reference path="enemy.ts" />
 class BlueEnemy extends Enemy {
-  private coolDown: number = 0;
+  private shootCooldown = 0;
+  private directions = [
+    { x:-1, y:0, img: images.weapons.fireball_left },  //left 
+    { x:0, y: -1, img: images.weapons.fireball_up }, //up
+    { x:1, y: 0, img: images.weapons.fireball_right }, //right
+    { x:0, y: 1, img: images.weapons.fireball_down } //down
+  ];
+
   constructor(worldX: number, worldY: number, health: number, levelContext:ILevelContext) {
     const row = 1;
     const col = 0;
     const totalCol = 8;
     super(worldX, worldY, images.slime, row, col, totalCol, health,levelContext);
   }
-
+  public onCollision(other: Entity): void {}
 
   //den blå monstret ska kunna gå ett steg och skjuta åt alla håll, har ett fast rörelsemönster 
-  protected engage(){
-    if (this.coolDown > 0){
-      this.coolDown--;
+  protected engage(){ 
+    if (this.shootCooldown > 0){
+      this.shootCooldown -= deltaTime;
+      if (this.shootCooldown > 200) { //labba med detta
+        this.speed.set(0,0); // stanna
+      }
+      return;
     }
     this.shootProjectile();
-    this.coolDown = 120;   //60fprs
+    this.shootCooldown = random(1_500, 2_500);  //labba med detta
+    this.move();// starta
   }
-  public shootProjectile() {
-    //1. leta efter spelaren, beräkna avståndet
-    //2. Om spelaren är nära skjut åt all håll 
-    if (!this.levelContext.player) return;
+
+  private move(){
+    // this.speed.set(0,0);
+    const walkSpeed = 0.05; // labba med detta
+    for (let dir of this.directions) {
+      let speed = createVector(dir.x, dir.y).mult(walkSpeed);
+      return speed;
+    }
+  }
+
+  private playerIsNearby() {
+    if (!this.levelContext.player) return false;
     let distX = abs(this.levelContext.player.worldX - this.worldX);
     let distY = abs(this.levelContext.player.worldY - this.worldY);
 
-    let shootLimit = 0.6;  //procentuellt av skärmens yta
-    let shootSpeed = 0.08;
-    this.speed.set(0,0);
-    if (distX < GamePanel.worldWidth * shootLimit && distY < GamePanel.worldHeight * shootLimit){
-      let enemyPos = createVector(this.worldX, this.worldY);
-      let playerPos = createVector(this.levelContext.player.worldX, this.levelContext.player.worldY);
-
-      let directions = [
-        {x:-1, y:0},  //left 
-        {x:0, y: -1}, //up
-        {x:1, y: 0}, //right
-        {x:0, y: 1} //down
-      ];
-      // console.log(directions);
-
-     for (let dir of directions){
-      let speed = createVector(dir.x, dir.y).normalize();
-      speed.mult(shootSpeed);
-      
-      let fireballImage = images.weapons.fireball_right;
-      if ( dir.y < 0) {
-        fireballImage = images.weapons.fireball_up;
-      } else if (dir.y > 0) {
-        fireballImage = images.weapons.fireball_down;
-      } else if (dir.x < 0) {
-        fireballImage = images.weapons.fireball_left;
-      } else if (dir.x > 0) {
-        fireballImage = images.weapons.fireball_right;
-      }
+    let shootLimit = 0.4;  //procentuellt av skärmens yta
+    return distX < GamePanel.worldWidth * shootLimit && distY < GamePanel.worldHeight * shootLimit;
+  }
+  
+  private shootProjectile() {
+    //1. leta efter spelaren, beräkna avståndet
+    //2. Om spelaren är nära skjut åt all håll 
+    if (!this.levelContext.player) return;
+    if (!this.playerIsNearby()) return;
+    
+    let shootSpeed = 0.2; //labba med detta
+  
+    for (let dir of this.directions) {
+      let speed = createVector(dir.x, dir.y).mult(shootSpeed)
 
       let fireball = new Projectile(
         this.worldX,
         this.worldY,
         speed,
-        fireballImage,
+        dir.img,
         soundEffects.shoot,
-        1, // <----- ????
+        1,
         0,
         this.totalCol,
       );
       this.levelContext.entities.push(fireball);
       }
-    }
   }
-  public onCollision(other: Entity): void {}
-
 }
