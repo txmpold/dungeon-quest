@@ -50,6 +50,7 @@ class LevelFactory {
         entityNumber === "L" ||
         entityNumber === "M" ||
         entityNumber === "N" ||
+        entityNumber === "p" ||
         entityNumber === "Y" ||
         entityNumber === "Z" ||
         entityNumber === "V"
@@ -140,13 +141,33 @@ class LevelFactory {
         );
       }
       if (entityNumber === "g") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.ghost));
+        entities.push(
+          new AnimatedProp(
+            worldX,
+            worldY,
+            images.tiles.animatedProps,
+            12,
+            1,
+            5,
+            60,
+          ),
+        );
       }
       if (entityNumber === "b") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.barrel));
       }
       if (entityNumber === "t") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.treasure));
+        entities.push(
+          new AnimatedProp(
+            worldX,
+            worldY,
+            images.tiles.animatedProps,
+            6,
+            1,
+            3,
+            130,
+          ),
+        );
       }
       if (entityNumber === "c") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.candelabra));
@@ -171,6 +192,19 @@ class LevelFactory {
       }
       if (entityNumber === "V") {
         entities.push(new Boss(worldX, worldY, 10, level));
+      }
+      if (entityNumber === "p") {
+        entities.push(
+          new AnimatedProp(
+            worldX,
+            worldY,
+            images.tiles.animatedProps,
+            1,
+            1,
+            3,
+            40,
+          ),
+        );
       }
 
       worldCol++;

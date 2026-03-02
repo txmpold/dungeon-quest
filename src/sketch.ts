@@ -50,6 +50,7 @@ let images: {
     wallCornerSpec4: p5.Image;
     wallCornerSpec5: p5.Image;
     floorCircle: p5.Image;
+    animatedProps: p5.Image;
   };
   menuImages: {
     background: p5.Image;
@@ -121,6 +122,7 @@ function preload() {
       wallCornerSpec4: loadImage("assets/tiles/wall-corner-spec4.png"),
       wallCornerSpec5: loadImage("assets/tiles/wall-corner-spec5.png"),
       floorCircle: loadImage("assets/tiles/floor-circle.png"),
+      animatedProps: loadImage("assets/tiles/animatedProps.png"),
     },
     menuImages: {
       background: loadImage("assets/images/menubackground.png"),
