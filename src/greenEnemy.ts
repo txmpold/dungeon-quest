@@ -1,11 +1,25 @@
 /// <reference path="enemy.ts" />
 class GreenEnemy extends Enemy {
   protected engage(): void {}
-  constructor(worldX: number, worldY: number, levelContext: ILevelContext) {
+  constructor(
+    worldX: number,
+    worldY: number,
+    health: number,
+    levelContext: ILevelContext,
+  ) {
     const row = 0;
     const col = 0;
     const totalCol = 8;
-    super(worldX, worldY, images.slime, row, col, totalCol, 3, levelContext);
+    super(
+      worldX,
+      worldY,
+      images.slime,
+      row,
+      col,
+      totalCol,
+      health,
+      levelContext,
+    );
   }
 
   public update(entities: Entity[]) {
