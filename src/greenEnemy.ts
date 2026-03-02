@@ -21,7 +21,6 @@ class GreenEnemy extends Enemy {
       levelContext,
     );
   }
-  public onCollision(other: Entity): void {}
 
   public update(entities: Entity[]) {
     this.chasePlayerWhenNearby();
