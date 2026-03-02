@@ -21,9 +21,12 @@ class Projectile extends Entity {
   }
 
   public onCollision(other: Entity) {
+    this.isRemoved = true;
     if (other instanceof Obstacle) {
-      this.isRemoved = true;
       console.log("im colliding with an obstacle");
+    }
+    if (other instanceof Enemy) {
+      other.takeDamage(1);
     }
   }
 
