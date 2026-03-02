@@ -2,10 +2,11 @@
 let game: Game;
 let button: Button;
 let music: {
-  mystery: p5.SoundFile;
+  menuMusic: p5.SoundFile;
 };
 let soundEffects: {
   shoot: p5.SoundFile;
+  menuButtonSound: p5.SoundFile;
 };
 let fonts: {
   font: p5.Font;
@@ -73,10 +74,11 @@ let levels: string[][];
  */
 function preload() {
   music = {
-    mystery: loadSound("assets/music/mystery.mp3"),
+    menuMusic: loadSound("assets/music/menu-music.mp3"),
   };
   soundEffects = {
     shoot: loadSound("assets/soundEffects/laserShoot.mp3"),
+    menuButtonSound: loadSound("assets/soundEffects/menu-button-sound.mp3"),
   };
   fonts = {
     font: loadFont("assets/fonts/PixelifySans-VariableFont_wght.ttf"),
@@ -152,10 +154,31 @@ function setup() {
   cursor("assets/images/swordcursor.png");
 
   frameRate(60);
-  music.mystery.setVolume(0.8);
+  music.menuMusic.setVolume(0.3);
   soundEffects.shoot.setVolume(0.4);
+  soundEffects.menuButtonSound.setVolume(0.4);
 
   game = new Game();
+}
+
+function mouseMoved() {
+  startMusic();
+}
+
+function keyPressed() {
+  startMusic();
+}
+
+function touchStarted() {
+  startMusic();
+}
+
+function startMusic() {
+  userStartAudio();
+
+  if (!music.menuMusic.isPlaying()) {
+    music.menuMusic.loop();
+  }
 }
 
 /**

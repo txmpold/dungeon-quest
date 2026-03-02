@@ -51,6 +51,9 @@ class StartMenu extends Scene {
   }
 
   public draw() {
+    if (!music.menuMusic.isPlaying()) {
+      music.menuMusic.loop();
+    }
     image(
       images.menuImages.background,
       0,
