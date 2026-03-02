@@ -54,6 +54,8 @@ let images: {
     wallCornerSpec4: p5.Image;
     wallCornerSpec5: p5.Image;
     floorCircle: p5.Image;
+    animatedProps: p5.Image;
+    moreProps: p5.Image;
   };
   menuImages: {
     background: p5.Image;
@@ -129,6 +131,8 @@ function preload() {
       wallCornerSpec4: loadImage("assets/tiles/wall-corner-spec4.png"),
       wallCornerSpec5: loadImage("assets/tiles/wall-corner-spec5.png"),
       floorCircle: loadImage("assets/tiles/floor-circle.png"),
+      animatedProps: loadImage("assets/tiles/animatedProps.png"),
+      moreProps: loadImage("assets/tiles/more-props.png"),
     },
     menuImages: {
       background: loadImage("assets/images/menubackground.png"),
@@ -155,6 +159,8 @@ function preload() {
  * and save it as a global variable so it can be used
  * in the draw function belows
  */
+let musicOff = false;
+
 function setup() {
   createCanvas(GamePanel.screenWidth, GamePanel.screenHeight);
   cursor("assets/images/swordcursor.png");
@@ -162,27 +168,15 @@ function setup() {
   frameRate(60);
   music.menuMusic.setVolume(0.1);
   soundEffects.shoot.setVolume(0.4);
-  soundEffects.menuButtonSound.setVolume(0.4);
+  soundEffects.menuButtonSound.setVolume(0.3);
 
   game = new Game();
-}
-
-function mouseMoved() {
-  startMusic();
-}
-
-function keyPressed() {
-  startMusic();
-}
-
-function touchStarted() {
-  startMusic();
 }
 
 function startMusic() {
   userStartAudio();
 
-  if (!music.menuMusic.isPlaying()) {
+  if (!musicOff && !music.menuMusic.isPlaying()) {
     music.menuMusic.loop();
   }
 }
@@ -193,6 +187,7 @@ function startMusic() {
  * you created in the setup function above
  */
 function draw() {
+  startMusic();
   game.update();
   game.draw();
 }

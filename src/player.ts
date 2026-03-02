@@ -30,10 +30,10 @@ class Player extends Entity {
     this.screenX = GamePanel.screenWidth / 2 - GamePanel.tileSize / 2;
     this.screenY = GamePanel.screenHeight / 2 - GamePanel.tileSize / 2;
     this.playerPos = createVector(this.screenX, this.screenY);
-    this.solidAreaX = 8;
-    this.solidAreaY = 16;
-    this.solidAreaW = 32;
-    this.solidAreaH = 32;
+    this.hitBoxX = 8;
+    this.hitBoxY = 16;
+    this.hitBoxW = 32;
+    this.hitBoxH = 32;
   }
 
   public onCollision(other: Entity): void {}
@@ -138,6 +138,12 @@ class Player extends Entity {
       );
 
       this.level.entities.push(fireball);
+      fireball.setHitBox(
+        GamePanel.tileSize * 0.27,
+        GamePanel.tileSize * 0.4,
+        GamePanel.tileSize * 0.5,
+        GamePanel.tileSize * 0.7,
+      );
 
       if (x === 0 && y === 0) {
         fireball.speed.set(0.4, 0);
