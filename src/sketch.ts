@@ -7,6 +7,8 @@ let music: {
 let soundEffects: {
   shoot: p5.SoundFile;
   menuButtonSound: p5.SoundFile;
+  explosion: p5.SoundFile;
+  fireball: p5.SoundFile;
 };
 let fonts: {
   font: p5.Font;
@@ -17,6 +19,7 @@ let images: {
   character: p5.Image;
   slime: p5.Image;
   boss: p5.Image;
+  heart: p5.Image;
   weapons: {
     fireball_right: p5.Image;
     fireball_left: p5.Image;
@@ -81,6 +84,8 @@ function preload() {
   soundEffects = {
     shoot: loadSound("assets/soundEffects/laserShoot.mp3"),
     menuButtonSound: loadSound("assets/soundEffects/menu-button-sound.mp3"),
+    explosion: loadSound("assets/soundEffects/explosion.mp3"),
+    fireball: loadSound("assets/soundEffects/fireball.mp3"),
   };
   fonts = {
     font: loadFont("assets/fonts/PixelifySans-VariableFont_wght.ttf"),
@@ -91,6 +96,7 @@ function preload() {
     character: loadImage("assets/images/character.png"),
     slime: loadImage("assets/images/slims.png"),
     boss: loadImage("assets/images/boss_.png"),
+    heart: loadImage("assets/images/heart.png"),
     weapons: {
       fireball_right: loadImage("assets/images/fireball_right.png"),
       fireball_left: loadImage("assets/images/fireball_left.png"),

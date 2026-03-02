@@ -12,7 +12,6 @@ class Projectile extends Entity {
     worldY: number,
     direction: p5.Vector,
     image: p5.Image,
-    soundEffects: p5.SoundFile,
     row: number,
     col: number,
     totalCol: number,
@@ -21,9 +20,12 @@ class Projectile extends Entity {
   }
 
   public onCollision(other: Entity) {
+    this.isRemoved = true;
     if (other instanceof Obstacle) {
-      this.isRemoved = true;
       console.log("im colliding with an obstacle");
+    }
+    if (other instanceof Enemy) {
+      other.takeDamage(1);
     }
   }
 

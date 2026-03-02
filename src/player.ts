@@ -115,7 +115,7 @@ class Player extends Entity {
     let x = this.direction.x;
     let y = this.direction.y;
     if (keyIsDown(32)) {
-      soundEffects.shoot.play();
+      soundEffects.fireball.play(0, 1, 5);
 
       let fireballImage = images.weapons.fireball_right;
       if (y < 0) {
@@ -130,9 +130,8 @@ class Player extends Entity {
       let fireball = new Projectile(
         this.worldX,
         this.worldY,
-        this.direction.copy().mult(0.4),
+        this.direction.copy().mult(0.35),
         fireballImage,
-        soundEffects.shoot,
         1, // <----- ????
         0,
         this.totalCol,
