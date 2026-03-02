@@ -1,7 +1,11 @@
 /// <reference path="entity.ts" />
 class Projectile extends Entity {
+  public isRemoved = false;
   public update(entities: Entity[]) {
     super.update(entities);
+    if (this.speed.x === 0 && this.speed.y === 0) {
+      this.isRemoved = true;
+    }
   }
   constructor(
     worldX: number,
@@ -18,6 +22,8 @@ class Projectile extends Entity {
 
   public onCollision(other: Entity) {
     if (other instanceof Obstacle) {
+      this.isRemoved = true;
+      console.log("im colliding with an obstacle");
     }
   }
 

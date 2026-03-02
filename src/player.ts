@@ -140,6 +140,10 @@ class Player extends Entity {
       );
 
       this.level.entities.push(fireball);
+
+      if (x === 0 && y === 0) {
+        fireball.speed.set(0.4, 0);
+      }
     }
   }
 }
