@@ -17,6 +17,7 @@ let images: {
   character: p5.Image;
   slime: p5.Image;
   boss: p5.Image;
+  heart: p5.Image;
   weapons: {
     fireball_right: p5.Image;
     fireball_left: p5.Image;
@@ -89,6 +90,7 @@ function preload() {
     character: loadImage("assets/images/character.png"),
     slime: loadImage("assets/images/slims.png"),
     boss: loadImage("assets/images/boss_.png"),
+    heart: loadImage("assets/images/heart.png"),
     weapons: {
       fireball_right: loadImage("assets/images/fireball_right.png"),
       fireball_left: loadImage("assets/images/fireball_left.png"),
