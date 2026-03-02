@@ -86,7 +86,6 @@ class Player extends Entity {
     if (this.health <= 0) {
       game.gameIsStarted = false;
       this.level.isGameOver = true;
-      console.log("you died!");
     }
   }
 
@@ -96,7 +95,6 @@ class Player extends Entity {
         if (this.damageCooldown <= 0) {
           this.health -= 1;
           this.damageCooldown = 4000;
-          console.log("ouch! Health: " + this.health);
         }
       }
     }
