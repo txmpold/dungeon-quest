@@ -35,27 +35,48 @@ class Player extends Entity {
     this.solidAreaW = 32;
     this.solidAreaH = 32;
   }
-  public onCollision(other: Entity): void {
-    if (other instanceof Obstacle) {
-      this.worldX -= this.speed.x * deltaTime; /* 
-      if (other.isCollidingWith(this)) {
-        this.worldX += this.speed.x * deltaTime;
-      } */
-      this.worldY -= this.speed.y * deltaTime;
-      /* if (this.isCollidingWith(other)) {
-        this.worldY += this.speed.y * deltaTime;
-      } */
-      this.speed.set(0, 0);
+
+  public onCollision(other: Entity): void {}
+
+  public resolveObstaclesCollisions(obstacles: Obstacle[]) {
+    if (obstacles.length === 0) return;
+    this.worldX -= this.speed.x * deltaTime;
+    let isAllCollisionsResolved = true;
+    for (let obstacle of obstacles) {
+      if (this.isCollidingWith(obstacle)) {
+        isAllCollisionsResolved = false;
+        break;
+      }
+    }
+    if (isAllCollisionsResolved) {
+      return;
+    } else {
+      this.worldX += this.speed.x * deltaTime;
+    }
+
+    this.worldY -= this.speed.y * deltaTime;
+    isAllCollisionsResolved = true;
+    for (let obstacle of obstacles) {
+      if (this.isCollidingWith(obstacle)) {
+        isAllCollisionsResolved = false;
+        break;
+      }
+    }
+    if (isAllCollisionsResolved) {
+      return;
+    } else {
+      this.worldX -= this.speed.x * deltaTime;
     }
   }
+
   public getWeapon() {}
   public getHealth() {}
   public checkDamage() {}
 
-  public update() {
+  public update(entities: Entity[]) {
     this.move();
     this.playerAttack();
-    super.update();
+    super.update(entities);
   }
 
   public updatePlayerPos() {
@@ -106,7 +127,6 @@ class Player extends Entity {
       } else if (x > 0) {
         fireballImage = images.weapons.fireball_right;
       }
-
       let fireball = new Projectile(
         this.worldX,
         this.worldY,
@@ -117,7 +137,12 @@ class Player extends Entity {
         0,
         this.totalCol,
       );
+
       this.level.entities.push(fireball);
+
+      if (x === 0 && y === 0) {
+        fireball.speed.set(0.4, 0);
+      }
     }
   }
 }

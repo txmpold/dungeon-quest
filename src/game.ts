@@ -32,6 +32,9 @@ class Game {
   public update() {
     if (this.gameIsStarted === true) {
       this.level.update();
+      this.level.entities = this.level.entities.filter(
+        (entity) => !(entity instanceof Projectile) || !entity.isRemoved,
+      );
     } else {
       this.currentScene.update();
     }

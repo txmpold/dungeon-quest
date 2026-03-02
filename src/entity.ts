@@ -34,14 +34,46 @@ abstract class Entity {
     this.zIndex = zIndex;
   }
 
-  public update() {
-    this.entityAnimation();
+  public update(entities: Entity[]) {
+    this.entityAnimation(entities);
   }
 
-  protected entityAnimation() {
+  protected entityAnimation(entities: Entity[]) {
     //deltaTime enheter per sekund
+    // Flytta X
     this.worldX += this.speed.x * deltaTime;
+    for (const obstacle of entities) {
+      if (
+        obstacle === this ||
+        (this instanceof Projectile && obstacle instanceof Player) ||
+        obstacle instanceof Projectile ||
+        obstacle instanceof Enemy
+      )
+        continue;
+      if (this.isCollidingWith(obstacle) && obstacle.isCollidingWith(this)) {
+        this.worldX -= this.speed.x * deltaTime;
+        this.onCollision(obstacle);
+        break;
+      }
+    }
+
+    // Flytta Y
     this.worldY += this.speed.y * deltaTime;
+    for (const obstacle of entities) {
+      if (
+        obstacle === this ||
+        (this instanceof Projectile && obstacle instanceof Player) ||
+        obstacle instanceof Projectile ||
+        obstacle instanceof Enemy
+      )
+        continue;
+
+      if (this.isCollidingWith(obstacle) && obstacle.isCollidingWith(this)) {
+        this.worldY -= this.speed.y * deltaTime;
+        this.onCollision(obstacle);
+        break;
+      }
+    }
 
     if (this.speed.x !== 0 || this.speed.y !== 0) {
       if (frameCount % 10 === 0) {
@@ -53,6 +85,12 @@ abstract class Entity {
     } else {
       this.col = 0;
     }
+
+    /* for (const player of entities) {
+      if (player instanceof Player && this.isCollidingWith(player)) {
+        this.speed.set(4, 0);
+      }
+    } */
   }
 
   public draw() {
@@ -75,11 +113,11 @@ abstract class Entity {
     return (
       this.worldX + this.solidAreaX <
         other.worldX + other.solidAreaX + other.solidAreaW &&
-      this.worldX + this.solidAreaW + this.solidAreaW >
+      this.worldX + this.solidAreaX + this.solidAreaW >
         other.worldX + other.solidAreaX &&
       this.worldY + this.solidAreaY <
         other.worldY + other.solidAreaY + other.solidAreaH &&
-      this.worldY + this.solidAreaH + this.solidAreaH >
+      this.worldY + this.solidAreaY + this.solidAreaH >
         other.worldY + other.solidAreaY
     );
   }
