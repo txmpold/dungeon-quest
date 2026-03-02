@@ -30,32 +30,53 @@ class Player extends Entity {
     this.screenX = GamePanel.screenWidth / 2 - GamePanel.tileSize / 2;
     this.screenY = GamePanel.screenHeight / 2 - GamePanel.tileSize / 2;
     this.playerPos = createVector(this.screenX, this.screenY);
-    this.solidAreaX = 8;
-    this.solidAreaY = 16;
-    this.solidAreaW = 32;
-    this.solidAreaH = 32;
+    this.hitBoxX = 8;
+    this.hitBoxY = 16;
+    this.hitBoxW = 32;
+    this.hitBoxH = 32;
   }
-  public onCollision(other: Entity): void {
-    if (other instanceof Obstacle) {
-      this.worldX -= this.speed.x * deltaTime; /* 
-      if (other.isCollidingWith(this)) {
-        this.worldX += this.speed.x * deltaTime;
-      } */
-      this.worldY -= this.speed.y * deltaTime;
-      /* if (this.isCollidingWith(other)) {
-        this.worldY += this.speed.y * deltaTime;
-      } */
-      this.speed.set(0, 0);
+
+  public onCollision(other: Entity): void {}
+
+  public resolveObstaclesCollisions(obstacles: Obstacle[]) {
+    if (obstacles.length === 0) return;
+    this.worldX -= this.speed.x * deltaTime;
+    let isAllCollisionsResolved = true;
+    for (let obstacle of obstacles) {
+      if (this.isCollidingWith(obstacle)) {
+        isAllCollisionsResolved = false;
+        break;
+      }
+    }
+    if (isAllCollisionsResolved) {
+      return;
+    } else {
+      this.worldX += this.speed.x * deltaTime;
+    }
+
+    this.worldY -= this.speed.y * deltaTime;
+    isAllCollisionsResolved = true;
+    for (let obstacle of obstacles) {
+      if (this.isCollidingWith(obstacle)) {
+        isAllCollisionsResolved = false;
+        break;
+      }
+    }
+    if (isAllCollisionsResolved) {
+      return;
+    } else {
+      this.worldX -= this.speed.x * deltaTime;
     }
   }
+
   public getWeapon() {}
   public getHealth() {}
   public checkDamage() {}
 
-  public update() {
+  public update(entities: Entity[]) {
     this.move();
     this.playerAttack();
-    super.update();
+    super.update(entities);
   }
 
   public updatePlayerPos() {
@@ -87,7 +108,6 @@ class Player extends Entity {
       this.speed.y = -0.25;
       this.row = 2;
       this.direction.set(0, -1);
-      console.log(this.direction);
     }
   }
 
@@ -95,7 +115,7 @@ class Player extends Entity {
     let x = this.direction.x;
     let y = this.direction.y;
     if (keyIsDown(32)) {
-      soundEffects.shoot.play();
+      soundEffects.fireball.play(0, 1, 5);
 
       let fireballImage = images.weapons.fireball_right;
       if (y < 0) {
@@ -107,18 +127,27 @@ class Player extends Entity {
       } else if (x > 0) {
         fireballImage = images.weapons.fireball_right;
       }
-
       let fireball = new Projectile(
         this.worldX,
         this.worldY,
-        this.direction.copy().mult(0.4),
+        this.direction.copy().mult(0.35),
         fireballImage,
-        soundEffects.shoot,
         1, // <----- ????
         0,
         this.totalCol,
       );
+
       this.level.entities.push(fireball);
+      fireball.setHitBox(
+        GamePanel.tileSize * 0.27,
+        GamePanel.tileSize * 0.4,
+        GamePanel.tileSize * 0.5,
+        GamePanel.tileSize * 0.7,
+      );
+
+      if (x === 0 && y === 0) {
+        fireball.speed.set(0.4, 0);
+      }
     }
   }
 }

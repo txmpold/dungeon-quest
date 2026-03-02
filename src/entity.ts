@@ -4,10 +4,10 @@ abstract class Entity {
   public zIndex: number;
   public speed: p5.Vector;
   public image: p5.Image;
-  public solidAreaX = 0;
-  public solidAreaY = 0;
-  public solidAreaW = GamePanel.tileSize;
-  public solidAreaH = GamePanel.tileSize;
+  public hitBoxX = 0;
+  public hitBoxY = 0;
+  public hitBoxW = GamePanel.tileSize;
+  public hitBoxH = GamePanel.tileSize;
   //animation
   protected row: number; // animationen
   protected col: number;
@@ -34,14 +34,57 @@ abstract class Entity {
     this.zIndex = zIndex;
   }
 
-  public update() {
-    this.entityAnimation();
+  public setHitBox(
+    hitBoxX = 0,
+    hitBoxY = 0,
+    hitBoxW = GamePanel.tileSize,
+    hitBoxH = GamePanel.tileSize,
+  ) {
+    this.hitBoxX = hitBoxX;
+    this.hitBoxY = hitBoxY;
+    this.hitBoxW = hitBoxW;
+    this.hitBoxH = hitBoxH;
   }
 
-  protected entityAnimation() {
+  public update(entities: Entity[]) {
+    this.entityAnimation(entities);
+  }
+
+  protected entityAnimation(entities: Entity[]) {
     //deltaTime enheter per sekund
+    // Flytta X
     this.worldX += this.speed.x * deltaTime;
+    for (const obstacle of entities) {
+      if (
+        obstacle === this ||
+        (this instanceof Projectile && obstacle instanceof Player) ||
+        obstacle instanceof Projectile
+      )
+        continue;
+      if (this.isCollidingWith(obstacle) && obstacle.isCollidingWith(this)) {
+        this.worldX -= this.speed.x * deltaTime;
+        this.onCollision(obstacle);
+        break;
+      }
+    }
+
+    // Flytta Y
     this.worldY += this.speed.y * deltaTime;
+    for (const obstacle of entities) {
+      if (
+        obstacle === this ||
+        (this instanceof Projectile && obstacle instanceof Player) ||
+        obstacle instanceof Projectile ||
+        obstacle instanceof Enemy
+      )
+        continue;
+
+      if (this.isCollidingWith(obstacle) && obstacle.isCollidingWith(this)) {
+        this.worldY -= this.speed.y * deltaTime;
+        this.onCollision(obstacle);
+        break;
+      }
+    }
 
     if (this.speed.x !== 0 || this.speed.y !== 0) {
       if (frameCount % 10 === 0) {
@@ -53,6 +96,12 @@ abstract class Entity {
     } else {
       this.col = 0;
     }
+
+    /* for (const player of entities) {
+      if (player instanceof Player && this.isCollidingWith(player)) {
+        this.speed.set(4, 0);
+      }
+    } */
   }
 
   public draw() {
@@ -73,14 +122,13 @@ abstract class Entity {
 
   public isCollidingWith(other: Entity): boolean {
     return (
-      this.worldX + this.solidAreaX <
-        other.worldX + other.solidAreaX + other.solidAreaW &&
-      this.worldX + this.solidAreaW + this.solidAreaW >
-        other.worldX + other.solidAreaX &&
-      this.worldY + this.solidAreaY <
-        other.worldY + other.solidAreaY + other.solidAreaH &&
-      this.worldY + this.solidAreaH + this.solidAreaH >
-        other.worldY + other.solidAreaY
+      this.worldX + this.hitBoxX <
+        other.worldX + other.hitBoxX + other.hitBoxW &&
+      this.worldX + this.hitBoxX + this.hitBoxW >
+        other.worldX + other.hitBoxX &&
+      this.worldY + this.hitBoxY <
+        other.worldY + other.hitBoxY + other.hitBoxH &&
+      this.worldY + this.hitBoxY + this.hitBoxH > other.worldY + other.hitBoxY
     );
   }
 

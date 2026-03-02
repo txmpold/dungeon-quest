@@ -2,6 +2,7 @@ class Button {
   private label: string;
   private onClick: () => void;
   private buttonIsHovered: boolean = false;
+  private wasHovering: boolean = false;
   private size: p5.Vector;
   private buttonPos: p5.Vector;
 
@@ -18,17 +19,21 @@ class Button {
   }
 
   public update() {
-    this.buttonIsHovered = false;
-    if (
+    let hoveringNow =
       mouseX > this.buttonPos.x &&
       mouseX < this.buttonPos.x + this.size.x &&
       mouseY > this.buttonPos.y &&
-      mouseY < this.buttonPos.y + this.size.y
-    ) {
-      this.buttonIsHovered = true;
-      if (mouseIsPressed) {
-        this.onClick();
-      }
+      mouseY < this.buttonPos.y + this.size.y;
+
+    if (hoveringNow && !this.wasHovering) {
+      soundEffects.menuButtonSound.play();
+    }
+
+    this.buttonIsHovered = hoveringNow;
+    this.wasHovering = hoveringNow;
+
+    if (this.buttonIsHovered && mouseIsPressed) {
+      this.onClick();
     }
   }
 
