@@ -8,6 +8,7 @@ let soundEffects: {
   shoot: p5.SoundFile;
   menuButtonSound: p5.SoundFile;
   explosion: p5.SoundFile;
+  fireball: p5.SoundFile;
 };
 let fonts: {
   font: p5.Font;
@@ -82,6 +83,7 @@ function preload() {
     shoot: loadSound("assets/soundEffects/laserShoot.mp3"),
     menuButtonSound: loadSound("assets/soundEffects/menu-button-sound.mp3"),
     explosion: loadSound("assets/soundEffects/explosion.mp3"),
+    fireball: loadSound("assets/soundEffects/fireball.mp3"),
   };
   fonts = {
     font: loadFont("assets/fonts/PixelifySans-VariableFont_wght.ttf"),

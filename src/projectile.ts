@@ -12,7 +12,6 @@ class Projectile extends Entity {
     worldY: number,
     direction: p5.Vector,
     image: p5.Image,
-    soundEffects: p5.SoundFile,
     row: number,
     col: number,
     totalCol: number,
