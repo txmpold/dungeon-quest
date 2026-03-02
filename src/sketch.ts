@@ -154,7 +154,7 @@ function setup() {
   cursor("assets/images/swordcursor.png");
 
   frameRate(60);
-  music.menuMusic.setVolume(0.3);
+  music.menuMusic.setVolume(0.1);
   soundEffects.shoot.setVolume(0.4);
   soundEffects.menuButtonSound.setVolume(0.4);
 
