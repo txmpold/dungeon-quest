@@ -4,10 +4,10 @@ abstract class Entity {
   public zIndex: number;
   public speed: p5.Vector;
   public image: p5.Image;
-  public solidAreaX = 0;
-  public solidAreaY = 0;
-  public solidAreaW = GamePanel.tileSize;
-  public solidAreaH = GamePanel.tileSize;
+  public hitBoxX = 0;
+  public hitBoxY = 0;
+  public hitBoxW = GamePanel.tileSize;
+  public hitBoxH = GamePanel.tileSize;
   //animation
   protected row: number; // animationen
   protected col: number;
@@ -34,6 +34,18 @@ abstract class Entity {
     this.zIndex = zIndex;
   }
 
+  public setHitBox(
+    hitBoxX = 0,
+    hitBoxY = 0,
+    hitBoxW = GamePanel.tileSize,
+    hitBoxH = GamePanel.tileSize,
+  ) {
+    this.hitBoxX = hitBoxX;
+    this.hitBoxY = hitBoxY;
+    this.hitBoxW = hitBoxW;
+    this.hitBoxH = hitBoxH;
+  }
+
   public update(entities: Entity[]) {
     this.entityAnimation(entities);
   }
@@ -46,8 +58,7 @@ abstract class Entity {
       if (
         obstacle === this ||
         (this instanceof Projectile && obstacle instanceof Player) ||
-        obstacle instanceof Projectile ||
-        obstacle instanceof Enemy
+        obstacle instanceof Projectile
       )
         continue;
       if (this.isCollidingWith(obstacle) && obstacle.isCollidingWith(this)) {
@@ -111,14 +122,13 @@ abstract class Entity {
 
   public isCollidingWith(other: Entity): boolean {
     return (
-      this.worldX + this.solidAreaX <
-        other.worldX + other.solidAreaX + other.solidAreaW &&
-      this.worldX + this.solidAreaX + this.solidAreaW >
-        other.worldX + other.solidAreaX &&
-      this.worldY + this.solidAreaY <
-        other.worldY + other.solidAreaY + other.solidAreaH &&
-      this.worldY + this.solidAreaY + this.solidAreaH >
-        other.worldY + other.solidAreaY
+      this.worldX + this.hitBoxX <
+        other.worldX + other.hitBoxX + other.hitBoxW &&
+      this.worldX + this.hitBoxX + this.hitBoxW >
+        other.worldX + other.hitBoxX &&
+      this.worldY + this.hitBoxY <
+        other.worldY + other.hitBoxY + other.hitBoxH &&
+      this.worldY + this.hitBoxY + this.hitBoxH > other.worldY + other.hitBoxY
     );
   }
 
