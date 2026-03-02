@@ -1,19 +1,10 @@
-class Scene {
-  private game: Game;
-  private type: string;
+abstract class Scene {
+  protected type: string;
 
-  constructor(game: Game, type: string) {
-    this.game = game;
+  constructor(type: string) {
     this.type = type;
   }
 
-  update() {}
-
-  draw() {
-    if (this.type === "startMenu") {
-      let startMenu = new StartMenu();
-      startMenu.update();
-      startMenu.draw();
-    }
-  }
+  abstract update(): void;
+  abstract draw(): void;
 }
