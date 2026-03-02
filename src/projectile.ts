@@ -1,5 +1,8 @@
 /// <reference path="entity.ts" />
 class Projectile extends Entity {
+  public update(entities: Entity[]) {
+    super.update(entities);
+  }
   constructor(
     worldX: number,
     worldY: number,

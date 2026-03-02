@@ -129,8 +129,8 @@ class Player extends Entity {
         fireballImage = images.weapons.fireball_right;
       }
       let fireball = new Projectile(
-        this.worldX + this.solidAreaX + this.solidAreaW,
-        this.worldY + this.solidAreaY + this.solidAreaH,
+        this.worldX,
+        this.worldY,
         this.direction.copy().mult(0.4),
         fireballImage,
         soundEffects.shoot,

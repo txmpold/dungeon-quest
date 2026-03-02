@@ -45,6 +45,7 @@ abstract class Entity {
     for (const obstacle of entities) {
       if (
         obstacle === this ||
+        (this instanceof Projectile && obstacle instanceof Player) ||
         obstacle instanceof Projectile ||
         obstacle instanceof Enemy
       )
@@ -61,6 +62,7 @@ abstract class Entity {
     for (const obstacle of entities) {
       if (
         obstacle === this ||
+        (this instanceof Projectile && obstacle instanceof Player) ||
         obstacle instanceof Projectile ||
         obstacle instanceof Enemy
       )
@@ -83,6 +85,12 @@ abstract class Entity {
     } else {
       this.col = 0;
     }
+
+    /* for (const player of entities) {
+      if (player instanceof Player && this.isCollidingWith(player)) {
+        this.speed.set(4, 0);
+      }
+    } */
   }
 
   public draw() {
