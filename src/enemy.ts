@@ -1,6 +1,7 @@
 /// <reference path="entity.ts" />
 abstract class Enemy extends Entity {
   public health: number;
+  public isKilled = false;
   protected levelContext: ILevelContext;
 
   constructor(
@@ -26,7 +27,7 @@ abstract class Enemy extends Entity {
     console.log("owwwww");
     console.log(this.health);
     if (this.health < 1) {
-      //kill
+      this.isKilled = true;
     }
   }
 
