@@ -1,5 +1,6 @@
 /// <reference path="enemy.ts" />
 class BlueEnemy extends Enemy {
+  private patrolDirectionIndex = 0;
   private shootCooldown = 0;
   private directions = [
     { x:-1, y:0, img: images.weapons.fireball_left },  //left 
@@ -26,30 +27,37 @@ class BlueEnemy extends Enemy {
   public onCollision(other: Entity): void {}
 
   public move(){
-    // this.speed.set(0,0);
     const walkSpeed = 0.05; // labba med detta
-    for (let dir of this.directions) {
-      let speed = createVector(dir.x, dir.y).mult(walkSpeed);
-      return speed;
-    }
-    console.log(this.speed);
-    
+    let dir = random(this.directions);
+    let speed = createVector(dir.x, dir.y).mult(walkSpeed);
+    this.speed.set(speed);
+
   }
 
+  private changePatrolDir(){
+    if (this.patrolDirectionIndex < 3){
+      this.patrolDirectionIndex++;
+    } else {
+      this.patrolDirectionIndex = 0;
+    }
+  }
   //den blå monstret ska kunna gå ett steg och skjuta åt alla håll, har ett fast rörelsemönster 
   protected engage(){ 
-    if (this.shootCooldown > 0){
-      this.shootCooldown -= deltaTime;
-      if (this.shootCooldown > 200) { //labba med detta
-        this.speed.set(0,0); // stanna
+    if (this.playerIsNearby()){
+      if (this.shootCooldown > 0){
+        this.shootCooldown -= deltaTime;
+        if (this.shootCooldown < 200) { //labba med detta
+          this.speed.set(0,0); // stanna
+        }
+        return;
       }
-      return;
+      this.shootProjectile();
+      this.shootCooldown = random(1_500, 2_500);  //labba med detta
+      this.move();// 
+      this.changePatrolDir();
+  
     }
-    this.shootProjectile();
-    this.shootCooldown = random(1_500, 2_500);  //labba med detta
-    this.move();// starta
   }
-
 
   private playerIsNearby() {
     if (!this.levelContext.player) return false;
@@ -83,5 +91,5 @@ class BlueEnemy extends Enemy {
       );
       this.levelContext.entities.push(fireball);
       }
-  }
+  }   
 }
