@@ -151,6 +151,7 @@ function preload() {
  */
 function setup() {
   createCanvas(GamePanel.screenWidth, GamePanel.screenHeight);
+  cursor("assets/images/swordcursor.png");
 
   frameRate(60);
   music.menuMusic.setVolume(0.3);
