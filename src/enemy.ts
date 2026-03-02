@@ -24,6 +24,7 @@ abstract class Enemy extends Entity {
 
   public takeDamage(damage: number) {
     this.health -= damage;
+    soundEffects.explosion.play();
     console.log(this.worldX, this.worldY);
     if (this.health < 1) {
       this.isKilled = true;
