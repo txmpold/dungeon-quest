@@ -90,28 +90,24 @@ class Player extends Entity {
       this.speed.x = 0.25;
       this.row = 1;
       this.totalCol = 4;
-      // this.direction.set(1, 0);
+      this.direction.set(1, 0);
     }
     if (keyIsDown(LEFT_ARROW)) {
       this.speed.x = -0.25;
       this.row = 5;
       this.totalCol = 4;
-      // this.direction.set(-1, 0);
+      this.direction.set(-1, 0);
     }
     if (keyIsDown(DOWN_ARROW)) {
       this.speed.y = 0.25;
       this.row = 3;
       this.totalCol = 4;
-      // this.direction.set(0, 1);
+      this.direction.set(0, 1);
     }
     if (keyIsDown(UP_ARROW)) {
       this.speed.y = -0.25;
       this.row = 2;
       this.direction.set(0, -1);
-<<<<<<< HEAD
-      // console.log(this.direction);
-=======
->>>>>>> development
     }
   }
 
