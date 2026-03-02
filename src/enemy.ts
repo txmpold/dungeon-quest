@@ -19,9 +19,14 @@ abstract class Enemy extends Entity {
     this.levelContext = levelContext;
   }
 
-  public update() {
+  public move() {
+    this.speed.set(random(width), random(height));
+    this.row = 0;
+    // this.totalCol = 3;
+  }
+  public update(entities: Entity[]) {
     this.engage();
-    super.update();
+    super.update(entities);
   }
 
   protected abstract engage(): void;

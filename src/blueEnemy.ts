@@ -12,9 +12,29 @@ class BlueEnemy extends Enemy {
     const row = 1;
     const col = 0;
     const totalCol = 8;
-    super(worldX, worldY, images.slime, row, col, totalCol, health,levelContext);
+    super(
+      worldX,
+      worldY,
+      images.slime,
+      row,
+      col,
+      totalCol,
+      health,
+      levelContext,
+    );
   }
   public onCollision(other: Entity): void {}
+
+  public move(){
+    // this.speed.set(0,0);
+    const walkSpeed = 0.05; // labba med detta
+    for (let dir of this.directions) {
+      let speed = createVector(dir.x, dir.y).mult(walkSpeed);
+      return speed;
+    }
+    console.log(this.speed);
+    
+  }
 
   //den blå monstret ska kunna gå ett steg och skjuta åt alla håll, har ett fast rörelsemönster 
   protected engage(){ 
@@ -30,14 +50,6 @@ class BlueEnemy extends Enemy {
     this.move();// starta
   }
 
-  private move(){
-    // this.speed.set(0,0);
-    const walkSpeed = 0.05; // labba med detta
-    for (let dir of this.directions) {
-      let speed = createVector(dir.x, dir.y).mult(walkSpeed);
-      return speed;
-    }
-  }
 
   private playerIsNearby() {
     if (!this.levelContext.player) return false;

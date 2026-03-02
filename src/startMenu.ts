@@ -1,5 +1,6 @@
-class StartMenu {
-  public game: Game;
+/// <reference path="scene.ts" />
+
+class StartMenu extends Scene {
   public levelFactory: LevelFactory;
   public level: Level;
   private startButton: Button;
@@ -7,11 +8,11 @@ class StartMenu {
   private closeControls: Button;
   private controlsOnScreen: boolean = false;
 
-  constructor(game: Game) {
-    this.game = game;
+  constructor() {
+    super("startMenu");
     this.startButton = new Button(
       "Start Game",
-      () => this.game.startGame(),
+      () => game.startGame(),
       createVector(200, 60),
       createVector(
         GamePanel.worldWidth / 2 - 100,
@@ -50,6 +51,9 @@ class StartMenu {
   }
 
   public draw() {
+    if (!music.menuMusic.isPlaying()) {
+      music.menuMusic.loop();
+    }
     image(
       images.menuImages.background,
       0,
