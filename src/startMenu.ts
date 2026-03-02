@@ -9,7 +9,7 @@ class StartMenu extends Scene {
   private controlsOnScreen: boolean = false;
 
   constructor() {
-    super(game, "startMenu");
+    super("startMenu");
     this.startButton = new Button(
       "Start Game",
       () => game.startGame(),
