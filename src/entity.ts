@@ -34,7 +34,7 @@ abstract class Entity {
     this.zIndex = zIndex;
   }
 
-  public setSolidArea(
+  public setHitBox(
     hitBoxX = 0,
     hitBoxY = 0,
     hitBoxW = GamePanel.tileSize,

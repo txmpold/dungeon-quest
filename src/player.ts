@@ -139,7 +139,7 @@ class Player extends Entity {
       );
 
       this.level.entities.push(fireball);
-      fireball.setSolidArea(
+      fireball.setHitBox(
         GamePanel.tileSize * 0.27,
         GamePanel.tileSize * 0.4,
         GamePanel.tileSize * 0.5,

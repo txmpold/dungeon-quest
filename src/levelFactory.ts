@@ -83,12 +83,7 @@ class LevelFactory {
       if (entityNumber === "5") {
         const obstacle = new Obstacle(worldX, worldY, images.tiles.wallTop);
         entities.push(obstacle);
-        obstacle.setSolidArea(
-          0,
-          0,
-          GamePanel.tileSize,
-          GamePanel.tileSize * 0.5,
-        );
+        obstacle.setHitBox(0, 0, GamePanel.tileSize, GamePanel.tileSize * 0.5);
       }
       if (entityNumber === ".") {
         entities.push(new Floor(worldX, worldY, images.tiles.floor));
@@ -133,7 +128,7 @@ class LevelFactory {
       if (entityNumber === "H") {
         const obstacle = new Obstacle(worldX, worldY, images.tiles.wallBottom);
         entities.push(obstacle);
-        obstacle.setSolidArea(
+        obstacle.setHitBox(
           0,
           GamePanel.tileSize * 0.5,
           GamePanel.tileSize,
@@ -147,7 +142,7 @@ class LevelFactory {
           images.tiles.wallCornerSpec,
         );
         entities.push(obstacle);
-        obstacle.setSolidArea(
+        obstacle.setHitBox(
           0,
           GamePanel.tileSize * 0.5,
           GamePanel.tileSize,
@@ -161,7 +156,7 @@ class LevelFactory {
           images.tiles.wallCornerSpec2,
         );
         entities.push(obstacle);
-        obstacle.setSolidArea(
+        obstacle.setHitBox(
           0,
           GamePanel.tileSize * 0.5,
           GamePanel.tileSize,
@@ -175,12 +170,7 @@ class LevelFactory {
           images.tiles.wallCornerSpec3,
         );
         entities.push(obstacle);
-        obstacle.setSolidArea(
-          0,
-          0,
-          GamePanel.tileSize,
-          GamePanel.tileSize * 0.5,
-        );
+        obstacle.setHitBox(0, 0, GamePanel.tileSize, GamePanel.tileSize * 0.5);
       }
       if (entityNumber === "K") {
         const obstacle = new Obstacle(
@@ -189,12 +179,7 @@ class LevelFactory {
           images.tiles.wallCornerSpec4,
         );
         entities.push(obstacle);
-        obstacle.setSolidArea(
-          0,
-          0,
-          GamePanel.tileSize,
-          GamePanel.tileSize * 0.5,
-        );
+        obstacle.setHitBox(0, 0, GamePanel.tileSize, GamePanel.tileSize * 0.5);
       }
       if (entityNumber === "L") {
         entities.push(new Floor(worldX, worldY, images.tiles.floorCircle));
@@ -209,12 +194,7 @@ class LevelFactory {
           images.tiles.wallCornerSpec5,
         );
         entities.push(obstacle);
-        obstacle.setSolidArea(
-          0,
-          0,
-          GamePanel.tileSize,
-          GamePanel.tileSize * 0.5,
-        );
+        obstacle.setHitBox(0, 0, GamePanel.tileSize, GamePanel.tileSize * 0.5);
       }
       if (entityNumber === "g") {
         entities.push(
@@ -260,7 +240,7 @@ class LevelFactory {
       if (entityNumber === "X") {
         const enemy = new GreenEnemy(worldX, worldY, 3, level);
         entities.push(enemy);
-        enemy.setSolidArea(
+        enemy.setHitBox(
           GamePanel.tileSize * 0.27,
           GamePanel.tileSize * 0.3,
           GamePanel.tileSize * 0.6,
@@ -270,7 +250,7 @@ class LevelFactory {
       if (entityNumber === "Y") {
         const enemy = new BlueEnemy(worldX, worldY, 3, level);
         entities.push(enemy);
-        enemy.setSolidArea(
+        enemy.setHitBox(
           GamePanel.tileSize * 0.27,
           GamePanel.tileSize * 0.3,
           GamePanel.tileSize * 0.6,
@@ -280,7 +260,7 @@ class LevelFactory {
       if (entityNumber === "Z") {
         const enemy = new RedEnemy(worldX, worldY, 3, level);
         entities.push(enemy);
-        enemy.setSolidArea(
+        enemy.setHitBox(
           GamePanel.tileSize * 0.27,
           GamePanel.tileSize * 0.3,
           GamePanel.tileSize * 0.6,
@@ -302,7 +282,7 @@ class LevelFactory {
         );
         entities.push(prop);
 
-        prop.setSolidArea(
+        prop.setHitBox(
           GamePanel.tileSize * 0.27,
           GamePanel.tileSize * 0.4,
           GamePanel.tileSize * 0.6,
@@ -321,7 +301,7 @@ class LevelFactory {
         );
         entities.push(prop);
 
-        prop.setSolidArea(
+        prop.setHitBox(
           GamePanel.tileSize * 0.2,
           GamePanel.tileSize * 0.1,
           GamePanel.tileSize * 0.6,
