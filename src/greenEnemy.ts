@@ -1,12 +1,7 @@
 /// <reference path="enemy.ts" />
 class GreenEnemy extends Enemy {
   protected engage(): void {}
-  constructor(
-    worldX: number,
-    worldY: number,
-    health: number,
-    levelContext: ILevelContext,
-  ) {
+  constructor(worldX: number, worldY: number, levelContext: ILevelContext) {
     const row = 0;
     const col = 0;
     const totalCol = 8;

@@ -1,11 +1,6 @@
 /// <reference path="enemy.ts" />
 class RedEnemy extends Enemy {
-  constructor(
-    worldX: number,
-    worldY: number,
-    health: number,
-    levelContext: ILevelContext,
-  ) {
+  constructor(worldX: number, worldY: number, levelContext: ILevelContext) {
     const row = 2;
     const col = 0;
     const totalCol = 8;
