@@ -24,8 +24,9 @@ abstract class Enemy extends Entity {
     this.row = 0;
     // this.totalCol = 3;
   }
-  public update() {
+  public update(entities: Entity[]) {
     this.engage();
+    super.update(entities);
   }
 
   protected abstract engage(): void;

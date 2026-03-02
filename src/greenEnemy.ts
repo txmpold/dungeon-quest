@@ -1,8 +1,6 @@
 /// <reference path="enemy.ts" />
 class GreenEnemy extends Enemy {
-  protected engage(): void {
-    throw new Error("Method not implemented.");
-  }
+  protected engage(): void {}
   constructor(
     worldX: number,
     worldY: number,
@@ -25,8 +23,9 @@ class GreenEnemy extends Enemy {
   }
   public onCollision(other: Entity): void {}
 
-  public update() {
+  public update(entities: Entity[]) {
     this.chasePlayerWhenNearby();
+    super.update(entities);
   }
   private chasePlayerWhenNearby() {
     if (!this.levelContext.player) return;
