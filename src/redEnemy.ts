@@ -10,16 +10,7 @@ class RedEnemy extends Enemy {
     const col = 0;
     const totalCol = 8;
 
-    super(
-      worldX,
-      worldY,
-      images.slime,
-      row,
-      col,
-      totalCol,
-      health,
-      levelContext,
-    );
+    super(worldX, worldY, images.slime, row, col, totalCol, 7, levelContext);
   }
 
   //den blå monstret ska kunna flygga, dessa kan ta sig över väggar och vatten som finns i rummen
