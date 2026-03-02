@@ -58,7 +58,9 @@ abstract class Entity {
       if (
         obstacle === this ||
         (this instanceof Projectile && obstacle instanceof Player) ||
-        obstacle instanceof Projectile
+        obstacle instanceof Projectile ||
+        (this instanceof Player && obstacle instanceof Enemy) ||
+        (this instanceof Enemy && obstacle instanceof Player)
       )
         continue;
       if (this.isCollidingWith(obstacle) && obstacle.isCollidingWith(this)) {
@@ -75,7 +77,8 @@ abstract class Entity {
         obstacle === this ||
         (this instanceof Projectile && obstacle instanceof Player) ||
         obstacle instanceof Projectile ||
-        obstacle instanceof Enemy
+        (this instanceof Player && obstacle instanceof Enemy) ||
+        (this instanceof Enemy && obstacle instanceof Player)
       )
         continue;
 
