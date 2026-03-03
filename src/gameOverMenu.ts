@@ -1,17 +1,13 @@
 /// <reference path="scene.ts" />
 
 class GameOverMenu extends Scene {
-  public levelFactory: LevelFactory;
-  public level: Level;
   private restartButton: Button;
   private mainMenuButton: Button;
 
   constructor() {
     super("gameOverMenu");
-    this.levelFactory = new LevelFactory(tiles, 0, 0);
-    this.level = this.levelFactory.generateLevel(0);
     this.restartButton = new Button(
-      "Restart",
+      "Retry",
       () =>
         game.changeScene(
           new TransitionScene("Level 1", 1500, () => game.startGame()),
