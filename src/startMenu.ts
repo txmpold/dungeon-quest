@@ -12,7 +12,10 @@ class StartMenu extends Scene {
     super("startMenu");
     this.startButton = new Button(
       "Start Game",
-      () => game.startGame(),
+      () =>
+        game.changeScene(
+          new TransitionScene("Level 1", 1500, () => game.startGame()),
+        ),
       createVector(200, 60),
       createVector(
         GamePanel.worldWidth / 2 - 100,
