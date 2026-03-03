@@ -8,10 +8,12 @@ class GameOverMenu extends Scene {
     super("gameOverMenu");
     this.restartButton = new Button(
       "Retry",
-      () =>
+      () => {
+        music.gameMusic.loop();
         game.changeScene(
-          new TransitionScene("Level 1", 1500, () => game.startGame()),
-        ),
+          new TransitionScene("Level 1", 2000, () => game.startGame()),
+        );
+      },
       createVector(200, 60),
       createVector(
         GamePanel.worldWidth / 2 - 100,

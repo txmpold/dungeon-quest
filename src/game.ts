@@ -17,17 +17,16 @@ class Game {
   public startGame() {
     this.gameIsStarted = true;
     this.level = this.levelFactory.generateLevel(0);
+    if (!music.gameMusic.isPlaying()) {
+      music.gameMusic.loop();
+    }
   }
 
   public draw() {
     background(0);
     if (this.gameIsStarted === true) {
       this.level.draw();
-      if (!music.gameMusic.isPlaying()) {
-        music.gameMusic.loop();
-      }
     } else {
-      music.gameMusic.stop();
       this.currentScene.draw();
     }
   }
