@@ -17,6 +17,8 @@ class AnimatedProp extends Entity {
   public onCollision(other: Entity): void {}
 
   public update() {
+    if (this.animationSpeed <= 0) return;
+
     if (frameCount % this.animationSpeed === 0) {
       this.col++;
 

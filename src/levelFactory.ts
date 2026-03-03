@@ -53,6 +53,7 @@ class LevelFactory {
         entityNumber === "p" ||
         entityNumber === "q" ||
         entityNumber === "r" ||
+        entityNumber === "s" ||
         entityNumber === "Y" ||
         entityNumber === "Z" ||
         entityNumber === "V"
@@ -78,6 +79,35 @@ class LevelFactory {
       if (entityNumber === "r") {
         entities.push(
           new MoreProps(worldX, worldY, images.tiles.moreProps, 0, 0, 6, 15),
+        );
+      }
+      if (entityNumber === "c") {
+        entities.push(
+          new MoreProps(worldX, worldY, images.tiles.moreProps, 3, 6, 6, 10),
+        );
+      }
+      if (entityNumber === "s") {
+        entities.push(
+          new MoreProps(
+            worldX,
+            worldY - GamePanel.tileSize * 0.7,
+            images.tiles.moreProps,
+            5,
+            0,
+            4,
+            0,
+          ),
+        );
+        entities.push(
+          new MoreProps(
+            worldX,
+            worldY + GamePanel.tileSize * 0.3,
+            images.tiles.moreProps,
+            6,
+            0,
+            4,
+            0,
+          ),
         );
       }
       if (entityNumber === "5") {
@@ -202,7 +232,7 @@ class LevelFactory {
             worldX,
             worldY,
             images.tiles.animatedProps,
-            13,
+            12,
             2,
             5,
             30,
