@@ -50,6 +50,10 @@ class LevelFactory {
         entityNumber === "L" ||
         entityNumber === "M" ||
         entityNumber === "N" ||
+        entityNumber === "p" ||
+        entityNumber === "q" ||
+        entityNumber === "r" ||
+        entityNumber === "s" ||
         entityNumber === "Y" ||
         entityNumber === "Z" ||
         entityNumber === "V"
@@ -60,10 +64,56 @@ class LevelFactory {
         entities.push(new Obstacle(worldX, worldY, images.tiles.wall));
       }
       if (entityNumber === "W") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.water));
+        entities.push(
+          new AnimatedProp(
+            worldX,
+            worldY,
+            images.tiles.animatedProps,
+            15,
+            1,
+            3,
+            5,
+          ),
+        );
+      }
+      if (entityNumber === "r") {
+        entities.push(
+          new MoreProps(worldX, worldY, images.tiles.moreProps, 0, 0, 6, 15),
+        );
+      }
+      if (entityNumber === "c") {
+        entities.push(
+          new MoreProps(worldX, worldY, images.tiles.moreProps, 3, 6, 6, 10),
+        );
+      }
+      if (entityNumber === "s") {
+        entities.push(
+          new MoreProps(
+            worldX,
+            worldY - GamePanel.tileSize * 0.7,
+            images.tiles.moreProps,
+            5,
+            0,
+            4,
+            0,
+          ),
+        );
+        entities.push(
+          new MoreProps(
+            worldX,
+            worldY + GamePanel.tileSize * 0.3,
+            images.tiles.moreProps,
+            6,
+            0,
+            4,
+            0,
+          ),
+        );
       }
       if (entityNumber === "5") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.wallTop));
+        const obstacle = new Obstacle(worldX, worldY, images.tiles.wallTop);
+        entities.push(obstacle);
+        obstacle.setHitBox(0, 0, GamePanel.tileSize, GamePanel.tileSize * 0.5);
       }
       if (entityNumber === ".") {
         entities.push(new Floor(worldX, worldY, images.tiles.floor));
@@ -106,27 +156,60 @@ class LevelFactory {
         entities.push(new Obstacle(worldX, worldY, images.tiles.wallShadow));
       }
       if (entityNumber === "H") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.wallBottom));
+        const obstacle = new Obstacle(worldX, worldY, images.tiles.wallBottom);
+        entities.push(obstacle);
+        obstacle.setHitBox(
+          0,
+          GamePanel.tileSize * 0.5,
+          GamePanel.tileSize,
+          GamePanel.tileSize * 0.5,
+        );
       }
       if (entityNumber === "E") {
-        entities.push(
-          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec),
+        const obstacle = new Obstacle(
+          worldX,
+          worldY,
+          images.tiles.wallCornerSpec,
+        );
+        entities.push(obstacle);
+        obstacle.setHitBox(
+          0,
+          GamePanel.tileSize * 0.5,
+          GamePanel.tileSize,
+          GamePanel.tileSize * 0.5,
         );
       }
       if (entityNumber === "I") {
-        entities.push(
-          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec2),
+        const obstacle = new Obstacle(
+          worldX,
+          worldY,
+          images.tiles.wallCornerSpec2,
+        );
+        entities.push(obstacle);
+        obstacle.setHitBox(
+          0,
+          GamePanel.tileSize * 0.5,
+          GamePanel.tileSize,
+          GamePanel.tileSize * 0.5,
         );
       }
       if (entityNumber === "J") {
-        entities.push(
-          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec3),
+        const obstacle = new Obstacle(
+          worldX,
+          worldY,
+          images.tiles.wallCornerSpec3,
         );
+        entities.push(obstacle);
+        obstacle.setHitBox(0, 0, GamePanel.tileSize, GamePanel.tileSize * 0.5);
       }
       if (entityNumber === "K") {
-        entities.push(
-          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec4),
+        const obstacle = new Obstacle(
+          worldX,
+          worldY,
+          images.tiles.wallCornerSpec4,
         );
+        entities.push(obstacle);
+        obstacle.setHitBox(0, 0, GamePanel.tileSize, GamePanel.tileSize * 0.5);
       }
       if (entityNumber === "L") {
         entities.push(new Floor(worldX, worldY, images.tiles.floorCircle));
@@ -135,18 +218,42 @@ class LevelFactory {
         entities.push(new Floor(worldX, worldY, images.tiles.floorStone));
       }
       if (entityNumber === "M") {
-        entities.push(
-          new Obstacle(worldX, worldY, images.tiles.wallCornerSpec5),
+        const obstacle = new Obstacle(
+          worldX,
+          worldY,
+          images.tiles.wallCornerSpec5,
         );
+        entities.push(obstacle);
+        obstacle.setHitBox(0, 0, GamePanel.tileSize, GamePanel.tileSize * 0.5);
       }
       if (entityNumber === "g") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.ghost));
+        entities.push(
+          new AnimatedProp(
+            worldX,
+            worldY,
+            images.tiles.animatedProps,
+            12,
+            2,
+            5,
+            30,
+          ),
+        );
       }
       if (entityNumber === "b") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.barrel));
       }
       if (entityNumber === "t") {
-        entities.push(new Obstacle(worldX, worldY, images.tiles.treasure));
+        entities.push(
+          new AnimatedProp(
+            worldX,
+            worldY,
+            images.tiles.animatedProps,
+            6,
+            1,
+            3,
+            130,
+          ),
+        );
       }
       if (entityNumber === "c") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.candelabra));
@@ -161,18 +268,76 @@ class LevelFactory {
         entities.push(new Obstacle(worldX, worldY, images.tiles.box3));
       }
       if (entityNumber === "X") {
-        entities.push(new GreenEnemy(worldX, worldY, 3, level));
+        const enemy = new GreenEnemy(worldX, worldY, 3, level);
+        entities.push(enemy);
+        enemy.setHitBox(
+          GamePanel.tileSize * 0.27,
+          GamePanel.tileSize * 0.3,
+          GamePanel.tileSize * 0.6,
+          GamePanel.tileSize * 0.6,
+        );
       }
       if (entityNumber === "Y") {
-        entities.push(new BlueEnemy(worldX, worldY, 4, level));
+        const enemy = new BlueEnemy(worldX, worldY, 3, level);
+        entities.push(enemy);
+        enemy.setHitBox(
+          GamePanel.tileSize * 0.27,
+          GamePanel.tileSize * 0.3,
+          GamePanel.tileSize * 0.6,
+          GamePanel.tileSize * 0.6,
+        );
       }
       if (entityNumber === "Z") {
-        entities.push(new RedEnemy(worldX, worldY, 5, level));
+        const enemy = new RedEnemy(worldX, worldY, 3, level);
+        entities.push(enemy);
+        enemy.setHitBox(
+          GamePanel.tileSize * 0.27,
+          GamePanel.tileSize * 0.3,
+          GamePanel.tileSize * 0.6,
+          GamePanel.tileSize * 0.6,
+        );
       }
       if (entityNumber === "V") {
         entities.push(new Boss(worldX, worldY, 10, level));
       }
+      if (entityNumber === "p") {
+        const prop = new AnimatedProp(
+          worldX,
+          worldY,
+          images.tiles.animatedProps,
+          1,
+          1,
+          3,
+          5,
+        );
+        entities.push(prop);
 
+        prop.setHitBox(
+          GamePanel.tileSize * 0.27,
+          GamePanel.tileSize * 0.4,
+          GamePanel.tileSize * 0.6,
+          GamePanel.tileSize * 0.7,
+        );
+      }
+      if (entityNumber === "q") {
+        const prop = new AnimatedProp(
+          worldX,
+          worldY,
+          images.tiles.animatedProps,
+          5,
+          1,
+          3,
+          10,
+        );
+        entities.push(prop);
+
+        prop.setHitBox(
+          GamePanel.tileSize * 0.2,
+          GamePanel.tileSize * 0.1,
+          GamePanel.tileSize * 0.6,
+          GamePanel.tileSize * 0.7,
+        );
+      }
       worldCol++;
 
       if (worldCol === levelGrid[0].length) {

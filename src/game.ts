@@ -33,7 +33,9 @@ class Game {
     if (this.gameIsStarted === true) {
       this.level.update();
       this.level.entities = this.level.entities.filter(
-        (entity) => !(entity instanceof Projectile) || !entity.isRemoved,
+        (entity) =>
+          (!(entity instanceof Projectile) || !entity.isRemoved) &&
+          (!(entity instanceof Enemy) || !entity.isKilled),
       );
     } else {
       this.currentScene.update();
