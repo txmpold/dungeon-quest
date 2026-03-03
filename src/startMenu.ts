@@ -1,8 +1,6 @@
 /// <reference path="scene.ts" />
 
 class StartMenu extends Scene {
-  public levelFactory: LevelFactory;
-  public level: Level;
   private startButton: Button;
   private showControls: Button;
   private closeControls: Button;
@@ -38,8 +36,6 @@ class StartMenu extends Scene {
       ),
     );
     this.controlsOnScreen = this.controlsOnScreen;
-    this.levelFactory = new LevelFactory(tiles, 0, 0);
-    this.level = this.levelFactory.generateLevel(0);
   }
 
   public update() {
