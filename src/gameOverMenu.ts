@@ -12,7 +12,10 @@ class GameOverMenu extends Scene {
     this.level = this.levelFactory.generateLevel(0);
     this.restartButton = new Button(
       "Restart",
-      () => game.startGame(),
+      () =>
+        game.changeScene(
+          new TransitionScene("Level 1", 1500, () => game.startGame()),
+        ),
       createVector(200, 60),
       createVector(
         GamePanel.worldWidth / 2 - 100,
