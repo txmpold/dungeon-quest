@@ -68,14 +68,14 @@ class Level implements ILevelContext {
     pop();
   }
 
-  isAllEnemiesDefeated() {
+  isAllEnemiesDefeated(): boolean {
     const allDefeated = this.entities.every((entity) => {
       if (entity instanceof Enemy) {
         return entity.isKilled;
       }
       return true;
     });
-    console.log("isAllEnemiesDefeated", allDefeated);
+    // console.log("isAllEnemiesDefeated", allDefeated);
     return allDefeated;
   }
   public drawTreasure() {}
