@@ -3,6 +3,8 @@ let game: Game;
 let button: Button;
 let music: {
   menuMusic: p5.SoundFile;
+  gameMusic: p5.SoundFile;
+  gameOverMusic: p5.SoundFile;
 };
 let soundEffects: {
   shoot: p5.SoundFile;
@@ -65,6 +67,7 @@ let images: {
     controlsbg: p5.Image;
     arrowkeys: p5.Image;
     spacebar: p5.Image;
+    gameOver: p5.Image;
   };
 };
 
@@ -79,7 +82,9 @@ let levels: string[][];
  */
 function preload() {
   music = {
-    menuMusic: loadSound("assets/music/menu-music.mp3"),
+    menuMusic: loadSound("assets/music/menu-music.wav"),
+    gameMusic: loadSound("assets/music/game-music.wav"),
+    gameOverMusic: loadSound("assets/music/game-over-music.mp3"),
   };
   soundEffects = {
     shoot: loadSound("assets/soundEffects/laserShoot.mp3"),
@@ -142,12 +147,15 @@ function preload() {
       controlsbg: loadImage("assets/images/controls_bg.png"),
       arrowkeys: loadImage("assets/images/arrowkeys.png"),
       spacebar: loadImage("assets/images/spacebar.png"),
+      gameOver: loadImage("assets/images/gameover.png"),
     },
   };
 
   levels = [
+    [],
     loadStrings("assets/levels/level1.txt"), // Level 1
     loadStrings("assets/levels/level2.txt"), // Level 2
+    loadStrings("assets/levels/level3.txt"), // Level 3
   ];
 
   /* isCollision = [loadImage("assets/tiles/water.png")]; kanske behöver */
@@ -164,21 +172,13 @@ let musicOff = false;
 function setup() {
   createCanvas(GamePanel.screenWidth, GamePanel.screenHeight);
   cursor("assets/images/swordcursor.png");
-
   frameRate(60);
-  music.menuMusic.setVolume(0.1);
+  music.menuMusic.setVolume(1);
+  music.gameOverMusic.setVolume(0.1);
   soundEffects.shoot.setVolume(0.4);
   soundEffects.menuButtonSound.setVolume(0.3);
 
   game = new Game();
-}
-
-function startMusic() {
-  userStartAudio();
-
-  if (!musicOff && !music.menuMusic.isPlaying()) {
-    music.menuMusic.loop();
-  }
 }
 
 /**
@@ -186,8 +186,8 @@ function startMusic() {
  * This is a good place to call public methods of the object
  * you created in the setup function above
  */
+
 function draw() {
-  startMusic();
   game.update();
   game.draw();
 }

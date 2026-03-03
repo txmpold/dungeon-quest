@@ -16,13 +16,15 @@ class Game {
 
   public startGame() {
     this.gameIsStarted = true;
-    this.level = this.levelFactory.generateLevel(0);
+    this.level = this.levelFactory.generateLevel(1);
+    if (!music.gameMusic.isPlaying()) {
+      music.gameMusic.loop();
+    }
   }
 
   public draw() {
     background(0);
     if (this.gameIsStarted === true) {
-      noCursor();
       this.level.draw();
     } else {
       this.currentScene.draw();

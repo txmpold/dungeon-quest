@@ -85,7 +85,9 @@ class Player extends Entity {
   private isPlayerDead() {
     if (this.health <= 0) {
       game.gameIsStarted = false;
-      this.level.isGameOver = true;
+      music.gameMusic.stop();
+      game.changeScene(new GameOverMenu());
+      // this.level.isGameOver = true;
     }
   }
 

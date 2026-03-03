@@ -1,8 +1,6 @@
 /// <reference path="scene.ts" />
 
 class StartMenu extends Scene {
-  public levelFactory: LevelFactory;
-  public level: Level;
   private startButton: Button;
   private showControls: Button;
   private closeControls: Button;
@@ -12,7 +10,12 @@ class StartMenu extends Scene {
     super("startMenu");
     this.startButton = new Button(
       "Start Game",
-      () => game.startGame(),
+      () => {
+        music.gameMusic.loop();
+        game.changeScene(
+          new TransitionScene("Level 1", 2000, () => game.startGame()),
+        );
+      },
       createVector(200, 60),
       createVector(
         GamePanel.worldWidth / 2 - 100,
@@ -38,8 +41,6 @@ class StartMenu extends Scene {
       ),
     );
     this.controlsOnScreen = this.controlsOnScreen;
-    this.levelFactory = new LevelFactory(tiles, 0, 0);
-    this.level = this.levelFactory.generateLevel(0);
   }
 
   public update() {
@@ -51,9 +52,6 @@ class StartMenu extends Scene {
   }
 
   public draw() {
-    if (!music.menuMusic.isPlaying()) {
-      music.menuMusic.loop();
-    }
     image(
       images.menuImages.background,
       0,
