@@ -25,6 +25,7 @@ class GameOverMenu extends Scene {
       ),
     );
     music.gameOverMusic.play();
+    cursor("assets/images/swordcursor.png");
   }
 
   public update() {

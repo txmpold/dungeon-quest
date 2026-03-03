@@ -36,6 +36,7 @@ class StartMenu extends Scene {
       ),
     );
     this.controlsOnScreen = this.controlsOnScreen;
+    cursor("assets/images/swordcursor.png");
   }
 
   public update() {
