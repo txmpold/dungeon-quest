@@ -22,6 +22,9 @@ class Level implements ILevelContext {
 
   private updateEntities() {
     for (let entity of this.entities) {
+      if (entity instanceof Floor || entity instanceof Obstacle) {
+        continue;
+      }
       entity.update(this.entities);
     }
   }

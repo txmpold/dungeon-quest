@@ -147,7 +147,7 @@ function preload() {
 
   levels = [
     loadStrings("assets/levels/level1.txt"), // Level 1
-    // loadStrings("assets/levels/level2.txt"), // Level 2
+    //loadStrings("assets/levels/level2.txt"), // Level 2
   ];
 
   /* isCollision = [loadImage("assets/tiles/water.png")]; kanske behöver */
