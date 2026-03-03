@@ -73,7 +73,6 @@ class Player extends Entity {
 
   public getWeapon() {}
   public getHealth() {}
-  public checkDamage() {}
 
   public update(entities: Entity[]) {
     this.move();
