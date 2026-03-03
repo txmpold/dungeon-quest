@@ -3,6 +3,7 @@ let game: Game;
 let button: Button;
 let music: {
   menuMusic: p5.SoundFile;
+  gameOverMusic: p5.SoundFile;
 };
 let soundEffects: {
   shoot: p5.SoundFile;
@@ -65,6 +66,7 @@ let images: {
     controlsbg: p5.Image;
     arrowkeys: p5.Image;
     spacebar: p5.Image;
+    gameOver: p5.Image;
   };
 };
 
@@ -80,6 +82,7 @@ let levels: string[][];
 function preload() {
   music = {
     menuMusic: loadSound("assets/music/menu-music.mp3"),
+    gameOverMusic: loadSound("assets/music/game-over-music.mp3"),
   };
   soundEffects = {
     shoot: loadSound("assets/soundEffects/laserShoot.mp3"),
@@ -142,6 +145,7 @@ function preload() {
       controlsbg: loadImage("assets/images/controls_bg.png"),
       arrowkeys: loadImage("assets/images/arrowkeys.png"),
       spacebar: loadImage("assets/images/spacebar.png"),
+      gameOver: loadImage("assets/images/gameover.png"),
     },
   };
 
@@ -168,6 +172,7 @@ function setup() {
 
   frameRate(60);
   music.menuMusic.setVolume(0.1);
+  music.gameOverMusic.setVolume(0.1);
   soundEffects.shoot.setVolume(0.4);
   soundEffects.menuButtonSound.setVolume(0.3);
 
@@ -177,9 +182,9 @@ function setup() {
 function startMusic() {
   userStartAudio();
 
-  if (!musicOff && !music.menuMusic.isPlaying()) {
-    music.menuMusic.loop();
-  }
+  // if (!musicOff && !music.menuMusic.isPlaying()) {
+  //   music.menuMusic.loop();
+  // }
 }
 
 /**
