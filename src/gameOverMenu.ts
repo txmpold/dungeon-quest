@@ -28,7 +28,6 @@ class GameOverMenu extends Scene {
         GamePanel.worldHeight / 2 + 110,
       ),
     );
-    music.menuMusic.stop();
     music.gameOverMusic.play();
   }
 
