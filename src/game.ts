@@ -22,7 +22,6 @@ class Game {
   public draw() {
     background(0);
     if (this.gameIsStarted === true) {
-      noCursor();
       this.level.draw();
     } else {
       this.currentScene.draw();
