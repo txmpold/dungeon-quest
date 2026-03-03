@@ -11,6 +11,7 @@ class StartMenu extends Scene {
     this.startButton = new Button(
       "Start Game",
       () => {
+        noCursor();
         music.gameMusic.loop();
         game.changeScene(
           new TransitionScene("Level 1", 2000, () => game.startGame()),
@@ -41,6 +42,7 @@ class StartMenu extends Scene {
       ),
     );
     this.controlsOnScreen = this.controlsOnScreen;
+    cursor("assets/images/swordcursor.png");
   }
 
   public update() {

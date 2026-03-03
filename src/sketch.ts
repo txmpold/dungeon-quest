@@ -171,7 +171,6 @@ let musicOff = false;
 
 function setup() {
   createCanvas(GamePanel.screenWidth, GamePanel.screenHeight);
-  cursor("assets/images/swordcursor.png");
   frameRate(60);
   music.menuMusic.setVolume(1);
   music.gameOverMusic.setVolume(0.1);
