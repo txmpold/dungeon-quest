@@ -1,9 +1,13 @@
-class Entity {
+abstract class Entity {
   public worldX: number;
   public worldY: number;
+  public zIndex: number;
   public speed: p5.Vector;
   public image: p5.Image;
-  public collisionOn: boolean = false;
+  public hitBoxX = 0;
+  public hitBoxY = 0;
+  public hitBoxW = GamePanel.tileSize;
+  public hitBoxH = GamePanel.tileSize;
   //animation
   protected row: number; // animationen
   protected col: number;
@@ -18,6 +22,7 @@ class Entity {
     row: number = 0,
     col: number = 0,
     totalCol: number = 1,
+    zIndex = 0,
   ) {
     this.worldX = worldX;
     this.worldY = worldY;
@@ -26,16 +31,63 @@ class Entity {
     this.row = row;
     this.col = col;
     this.totalCol = totalCol;
+    this.zIndex = zIndex;
   }
 
-  public update() {
-    this.entityAnimation();
+  public setHitBox(
+    hitBoxX = 0,
+    hitBoxY = 0,
+    hitBoxW = GamePanel.tileSize,
+    hitBoxH = GamePanel.tileSize,
+  ) {
+    this.hitBoxX = hitBoxX;
+    this.hitBoxY = hitBoxY;
+    this.hitBoxW = hitBoxW;
+    this.hitBoxH = hitBoxH;
   }
 
-  protected entityAnimation() {
+  public update(entities: Entity[]) {
+    this.entityAnimation(entities);
+  }
+
+  protected entityAnimation(entities: Entity[]) {
     //deltaTime enheter per sekund
+    // Flytta X
     this.worldX += this.speed.x * deltaTime;
+    for (const obstacle of entities) {
+      if (
+        obstacle === this ||
+        (this instanceof Projectile && obstacle instanceof Player) ||
+        obstacle instanceof Projectile ||
+        (this instanceof Player && obstacle instanceof Enemy) ||
+        (this instanceof Enemy && obstacle instanceof Player)
+      )
+        continue;
+      if (this.isCollidingWith(obstacle) && obstacle.isCollidingWith(this)) {
+        this.worldX -= this.speed.x * deltaTime;
+        this.onCollision(obstacle);
+        break;
+      }
+    }
+
+    // Flytta Y
     this.worldY += this.speed.y * deltaTime;
+    for (const obstacle of entities) {
+      if (
+        obstacle === this ||
+        (this instanceof Projectile && obstacle instanceof Player) ||
+        obstacle instanceof Projectile ||
+        (this instanceof Player && obstacle instanceof Enemy) ||
+        (this instanceof Enemy && obstacle instanceof Player)
+      )
+        continue;
+
+      if (this.isCollidingWith(obstacle) && obstacle.isCollidingWith(this)) {
+        this.worldY -= this.speed.y * deltaTime;
+        this.onCollision(obstacle);
+        break;
+      }
+    }
 
     if (this.speed.x !== 0 || this.speed.y !== 0) {
       if (frameCount % 10 === 0) {
@@ -47,6 +99,12 @@ class Entity {
     } else {
       this.col = 0;
     }
+
+    /* for (const player of entities) {
+      if (player instanceof Player && this.isCollidingWith(player)) {
+        this.speed.set(4, 0);
+      }
+    } */
   }
 
   public draw() {
@@ -64,6 +122,20 @@ class Entity {
     );
     pop();
   }
+
+  public isCollidingWith(other: Entity): boolean {
+    return (
+      this.worldX + this.hitBoxX <
+        other.worldX + other.hitBoxX + other.hitBoxW &&
+      this.worldX + this.hitBoxX + this.hitBoxW >
+        other.worldX + other.hitBoxX &&
+      this.worldY + this.hitBoxY <
+        other.worldY + other.hitBoxY + other.hitBoxH &&
+      this.worldY + this.hitBoxY + this.hitBoxH > other.worldY + other.hitBoxY
+    );
+  }
+
+  public abstract onCollision(other: Entity): void;
 }
 
 // class MyMath {

@@ -1,6 +1,8 @@
 /// <reference path="entity.ts" />
-class Enemy extends Entity {
-  protected health: number;
+abstract class Enemy extends Entity {
+  public health: number;
+  public isKilled = false;
+  protected levelContext: ILevelContext;
 
   constructor(
     worldX: number,
@@ -10,19 +12,37 @@ class Enemy extends Entity {
     col: number,
     totalCol: number,
     health: number,
+    levelContext: ILevelContext,
   ) {
     const speed = createVector(0, 0);
-    super(worldX, worldY, image, speed, row, col, totalCol);
+    super(worldX, worldY, image, speed, row, col, totalCol, 10);
     this.health = health;
+    this.levelContext = levelContext;
   }
 
-  public update() {
-    super.update();
+  public onCollision(other: Entity): void {}
+
+  public takeDamage(damage: number) {
+    this.health -= damage;
+    soundEffects.explosion.play(0, 1, 0.5);
+    console.log(this.worldX, this.worldY);
+    if (this.health < 1) {
+      this.isKilled = true;
+    }
   }
 
-  public move() {
-    this.speed.set(random(width), random(height));
-    this.row = 0;
-    // this.totalCol = 3;
+  public draw() {
+    push();
+    super.draw();
+    for (let hp = 0; hp < this.health; hp++) {
+      image(images.heart, this.worldX + hp * 17, this.worldY - 16, 16, 16);
+    }
   }
+
+  public update(entities: Entity[]) {
+    this.engage();
+    super.update(entities);
+  }
+
+  protected abstract engage(): void;
 }

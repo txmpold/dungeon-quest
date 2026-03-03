@@ -1,21 +1,44 @@
 class Game {
   public levelFactory: LevelFactory;
   public level: Level;
-  // private startMenu: Menu;
+  private currentScene: Scene;
+  public gameIsStarted: boolean = false;
 
   constructor() {
-    // this.startMenu = new Menu();
     this.levelFactory = new LevelFactory(tiles, 0, 0);
+    this.level = new Level([]);
+    this.currentScene = new StartMenu();
+  }
+
+  public changeScene(scene: Scene) {
+    this.currentScene = scene;
+  }
+
+  public startGame() {
+    this.gameIsStarted = true;
     this.level = this.levelFactory.generateLevel(0);
   }
 
-  public update() {
-    this.level.update();
+  public draw() {
+    background(0);
+    if (this.gameIsStarted === true) {
+      noCursor();
+      this.level.draw();
+    } else {
+      this.currentScene.draw();
+    }
   }
 
-  public draw() {
-    background("white");
-    this.level.draw();
-    // this.levelFactory.draw();
+  public update() {
+    if (this.gameIsStarted === true) {
+      this.level.update();
+      this.level.entities = this.level.entities.filter(
+        (entity) =>
+          (!(entity instanceof Projectile) || !entity.isRemoved) &&
+          (!(entity instanceof Enemy) || !entity.isKilled),
+      );
+    } else {
+      this.currentScene.update();
+    }
   }
 }
