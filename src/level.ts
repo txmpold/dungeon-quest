@@ -12,7 +12,6 @@ class Level implements ILevelContext {
   constructor(entities: Entity[]) {
     // Vad ska skapas direkt när leveln skapas?
     this.entities = entities;
-    //hej
     this.isGameOver = false;
   }
 
