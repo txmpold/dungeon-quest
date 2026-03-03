@@ -90,11 +90,15 @@ class Player extends Entity {
   }
 
   private checkEnemyCollision(entities: Entity[]) {
+    let healthPos = screen.width / 2 - GamePanel.tileSize / 2;
     for (const entity of entities) {
       if (entity instanceof Enemy && this.isCollidingWith(entity)) {
         if (this.damageCooldown <= 0) {
           this.health -= 1;
           this.damageCooldown = 4000;
+          //lägg till hjärtin som visar spelarens hälsa
+
+          console.log("Player health:", this.health);
         }
       }
     }
