@@ -6,13 +6,11 @@ class Level implements ILevelContext {
   public player?: Player;
   public entities: Entity[];
   private isLevelCompleted: boolean;
-  public isGameOver: boolean;
 
   constructor(entities: Entity[]) {
     // Vad ska skapas direkt när leveln skapas?
     this.entities = entities;
     this.isLevelCompleted = false;
-    this.isGameOver = false;
   }
 
   public update() {
