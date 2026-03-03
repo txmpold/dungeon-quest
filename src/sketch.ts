@@ -3,6 +3,7 @@ let game: Game;
 let button: Button;
 let music: {
   menuMusic: p5.SoundFile;
+  gameMusic: p5.SoundFile;
   gameOverMusic: p5.SoundFile;
 };
 let soundEffects: {
@@ -81,7 +82,8 @@ let levels: string[][];
  */
 function preload() {
   music = {
-    menuMusic: loadSound("assets/music/menu-music.mp3"),
+    menuMusic: loadSound("assets/music/menu-music.wav"),
+    gameMusic: loadSound("assets/music/game-music.wav"),
     gameOverMusic: loadSound("assets/music/game-over-music.mp3"),
   };
   soundEffects = {
@@ -169,9 +171,8 @@ let musicOff = false;
 function setup() {
   createCanvas(GamePanel.screenWidth, GamePanel.screenHeight);
   cursor("assets/images/swordcursor.png");
-
   frameRate(60);
-  music.menuMusic.setVolume(0.1);
+  music.menuMusic.setVolume(1);
   music.gameOverMusic.setVolume(0.1);
   soundEffects.shoot.setVolume(0.4);
   soundEffects.menuButtonSound.setVolume(0.3);
@@ -179,21 +180,13 @@ function setup() {
   game = new Game();
 }
 
-function startMusic() {
-  userStartAudio();
-
-  // if (!musicOff && !music.menuMusic.isPlaying()) {
-  //   music.menuMusic.loop();
-  // }
-}
-
 /**
  * Built in draw function in P5
  * This is a good place to call public methods of the object
  * you created in the setup function above
  */
+
 function draw() {
-  startMusic();
   game.update();
   game.draw();
 }

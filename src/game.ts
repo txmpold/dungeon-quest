@@ -23,11 +23,11 @@ class Game {
     background(0);
     if (this.gameIsStarted === true) {
       this.level.draw();
-      if (!music.menuMusic.isPlaying()) {
-        music.menuMusic.loop();
+      if (!music.gameMusic.isPlaying()) {
+        music.gameMusic.loop();
       }
     } else {
-      music.menuMusic.stop();
+      music.gameMusic.stop();
       this.currentScene.draw();
     }
   }
