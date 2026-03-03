@@ -9,6 +9,7 @@ class GameOverMenu extends Scene {
     this.restartButton = new Button(
       "Retry",
       () => {
+        noCursor();
         music.gameMusic.loop();
         game.changeScene(
           new TransitionScene("Level 1", 2000, () => game.startGame()),
