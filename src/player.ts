@@ -9,6 +9,9 @@ class Player extends Entity {
   private level: Level;
   private damageCooldown: number = 0;
   private attackCooldown: number = 0;
+  private isDead: boolean = false;
+  private deathTimer: number = 0;
+
   constructor(worldX: number, worldY: number, health: number, level: Level) /* 
     weaponInventory: p5.Image[],
     attackCoolDown: number, */ {
@@ -75,18 +78,34 @@ class Player extends Entity {
   public getHealth() {}
 
   public update(entities: Entity[]) {
+    this.isPlayerDead();
+    if (this.isDead) {
+      this.deathTimer += deltaTime;
+
+      if (this.deathTimer > 1200) {
+        game.gameIsStarted = false;
+        game.changeScene(new GameOverMenu());
+      }
+      return;
+    }
     this.move();
     this.playerAttack();
     super.update(entities);
     this.checkEnemyCollision(entities);
-    this.isPlayerDead();
   }
 
   private isPlayerDead() {
-    if (this.health <= 0) {
-      game.gameIsStarted = false;
+    if (this.health <= 0 && !this.isDead) {
+      this.isDead = true;
+
+      this.row = 4;
+      this.col = 2;
+      this.totalCol = 1;
+      this.speed.set(0, 0);
+
+      // game.gameIsStarted = false;
       music.gameMusic.stop();
-      game.changeScene(new GameOverMenu());
+      // game.changeScene(new GameOverMenu());
       // this.level.isGameOver = true;
     }
   }
@@ -108,6 +127,7 @@ class Player extends Entity {
   }
 
   public move() {
+    if (this.isDead) return;
     this.speed.set(0, 0);
 
     if (keyIsDown(RIGHT_ARROW)) {
@@ -175,5 +195,24 @@ class Player extends Entity {
       }
     }
     this.attackCooldown -= deltaTime * 6;
+  }
+  public draw() {
+    if (this.isDead) {
+      push();
+      image(
+        this.image,
+        this.worldX,
+        this.worldY,
+        GamePanel.tileSize,
+        GamePanel.tileSize,
+        2 * GamePanel.originalTileSize,
+        4 * GamePanel.originalTileSize,
+        GamePanel.originalTileSize,
+        GamePanel.originalTileSize,
+      );
+      pop();
+      return;
+    }
+    super.draw();
   }
 }
