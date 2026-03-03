@@ -54,7 +54,15 @@ abstract class Entity {
     //deltaTime enheter per sekund
     // Flytta X
     this.worldX += this.speed.x * deltaTime;
-    for (const obstacle of entities) {
+
+    // Only check collisions with nearby entities (viewport culling for updates)
+    const nearbyEntities = entities.filter((obstacle) => {
+      const distX = Math.abs(obstacle.worldX - this.worldX);
+      const distY = Math.abs(obstacle.worldY - this.worldY);
+      return distX < GamePanel.screenWidth && distY < GamePanel.screenHeight;
+    });
+
+    for (const obstacle of nearbyEntities) {
       if (
         obstacle === this ||
         (this instanceof Projectile && obstacle instanceof Player) ||
@@ -72,7 +80,7 @@ abstract class Entity {
 
     // Flytta Y
     this.worldY += this.speed.y * deltaTime;
-    for (const obstacle of entities) {
+    for (const obstacle of nearbyEntities) {
       if (
         obstacle === this ||
         (this instanceof Projectile && obstacle instanceof Player) ||

@@ -8,6 +8,7 @@ class Player extends Entity {
   private playerPos = createVector(0, 0);
   private level: Level;
   private damageCooldown: number = 0;
+  private attackCooldown: number = 0;
   constructor(worldX: number, worldY: number, health: number, level: Level) /* 
     weaponInventory: p5.Image[],
     attackCoolDown: number, */ {
@@ -72,7 +73,6 @@ class Player extends Entity {
 
   public getWeapon() {}
   public getHealth() {}
-  public checkDamage() {}
 
   public update(entities: Entity[]) {
     this.move();
@@ -85,7 +85,8 @@ class Player extends Entity {
   private isPlayerDead() {
     if (this.health <= 0) {
       game.gameIsStarted = false;
-      this.level.isGameOver = true;
+      game.changeScene(new GameOverMenu());
+      // this.level.isGameOver = true;
     }
   }
 
@@ -136,8 +137,9 @@ class Player extends Entity {
   public playerAttack() {
     let x = this.direction.x;
     let y = this.direction.y;
-    if (keyIsDown(32)) {
+    if (keyIsDown(32) && this.attackCooldown <= 0) {
       soundEffects.fireball.play(0, 1, 5);
+      this.attackCooldown = 7000;
 
       let fireballImage = images.weapons.fireball_right;
       if (y < 0) {
@@ -171,5 +173,6 @@ class Player extends Entity {
         fireball.speed.set(0.4, 0);
       }
     }
+    this.attackCooldown -= deltaTime * 6;
   }
 }

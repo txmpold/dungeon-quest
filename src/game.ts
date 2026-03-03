@@ -22,9 +22,12 @@ class Game {
   public draw() {
     background(0);
     if (this.gameIsStarted === true) {
-      noCursor();
       this.level.draw();
+      if (!music.gameMusic.isPlaying()) {
+        music.gameMusic.loop();
+      }
     } else {
+      music.gameMusic.stop();
       this.currentScene.draw();
     }
   }
