@@ -17,8 +17,30 @@ class Game {
   public startGame() {
     this.gameIsStarted = true;
     this.level = this.levelFactory.generateLevel(1);
+    this.levelFactory.currentLevel = 1;
     if (!music.gameMusic.isPlaying()) {
       music.gameMusic.loop();
+    }
+  }
+
+  public goToNextLevel() {
+    this.levelFactory.currentLevel++;
+
+    switch (this.levelFactory.currentLevel) {
+      case 1:
+        this.levelFactory.currentLevel = 2;
+        this.level = this.levelFactory.generateLevel(2);
+        break;
+      case 2:
+        this.levelFactory.currentLevel = 3;
+        this.level = this.levelFactory.generateLevel(3);
+        break;
+      case 3:
+        this.levelFactory.currentLevel = 4;
+        new EndScreen(); // skapa en endscreen
+        break;
+      default:
+        console.log("No more levels available");
     }
   }
 
