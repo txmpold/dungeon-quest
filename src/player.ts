@@ -97,6 +97,8 @@ class Player extends Entity {
         if (this.damageCooldown <= 0) {
           this.health -= 1;
           this.damageCooldown = 4000;
+          soundEffects.takingdmg.play(0, 1, 0.5);
+          console.log("Player health: " + this.health);
         }
       }
     }
@@ -175,5 +177,20 @@ class Player extends Entity {
       }
     }
     this.attackCooldown -= deltaTime * 6;
+  }
+
+  public draw() {
+    push();
+    super.draw();
+
+    // Draw health hearts in top-left corner
+    push();
+    resetMatrix();
+    for (let hp = 0; hp < this.health; hp++) {
+      image(images.heart, 10 + hp * 35, 10, 32, 32);
+    }
+    pop();
+
+    pop();
   }
 }
