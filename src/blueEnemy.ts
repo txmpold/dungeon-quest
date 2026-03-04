@@ -5,10 +5,10 @@ class BlueEnemy extends Enemy {
   private nrOfPatrolSteps = 120; 
   private shootCooldown = 0; //frames per håll
    private directions = [
-    { x:-1, y:0, img: images.weapons.fireball_left }, //left 
     { x:0, y: -1, img: images.weapons.fireball_up }, //up
-    { x:1, y: 0, img: images.weapons.fireball_right }, //right
     { x:0, y: 1, img: images.weapons.fireball_down }, //down
+    { x:-1, y:0, img: images.weapons.fireball_left }, //left 
+    { x:1, y: 0, img: images.weapons.fireball_right }, //right
   ];
 
 
@@ -44,17 +44,9 @@ class BlueEnemy extends Enemy {
       
       if (this.patrolTimer >= this.nrOfPatrolSteps){
         this.patrolTimer= 0; 
-        this.changePatrolDirection();
+        this.patrolDirectionIndex = floor(random() * this.directions.length);
       }
   } 
-  
-  private changePatrolDirection() {
-      if (this.patrolDirectionIndex < 3){
-      this.patrolDirectionIndex++;
-    } else {
-      this.patrolDirectionIndex = 0;
-    }
-  }
   
   protected engage() {
     this.move();
