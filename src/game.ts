@@ -1,12 +1,14 @@
 class Game {
   public levelFactory: LevelFactory;
   public level: Level;
+  public playerinventory: p5.Image[];
   private currentScene: Scene;
   public gameIsStarted: boolean = false;
 
   constructor() {
     this.levelFactory = new LevelFactory(tiles, 0, 0);
     this.level = new Level([]);
+    this.playerinventory = [];
     this.currentScene = new StartMenu();
   }
 
