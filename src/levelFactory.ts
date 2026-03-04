@@ -26,6 +26,7 @@ class LevelFactory {
     const level = new Level(entities);
     this.levelGrid = this.loadMap(levels[index]);
     const levelGrid = this.levelGrid;
+    this.currentLevel = index;
 
     while (worldCol < levelGrid[0].length && worldRow < levelGrid.length) {
       let worldX = worldCol * GamePanel.tileSize;
@@ -120,7 +121,7 @@ class LevelFactory {
         entities.push(new Floor(worldX, worldY, images.tiles.floor));
       }
       if (entityNumber === "4") {
-        const player = new Player(worldX, worldY, 99999, level);
+        const player = new Player(worldX, worldY, 5, level);
         level.player = player;
         entities.push(player);
       }
