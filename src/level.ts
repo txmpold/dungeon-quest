@@ -78,8 +78,8 @@ class Level implements ILevelContext {
     // console.log("isAllEnemiesDefeated", allDefeated);
     if (allDefeated && !this.isLevelCleared) {
       music.gameMusic.stop();
-      soundEffects.treasureOpen.play();
-      soundEffects.treasureOpen.onended(() => {
+      soundEffects.treasureIsUnlocked.play();
+      soundEffects.treasureIsUnlocked.onended(() => {
         music.menuMusic.play();
       });
     }
