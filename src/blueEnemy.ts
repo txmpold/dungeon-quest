@@ -84,7 +84,6 @@ class BlueEnemy extends Enemy {
         this.worldY,
         speed,
         dir.img,
-        soundEffects.shoot,
         1,
         0,
         this.totalCol,
