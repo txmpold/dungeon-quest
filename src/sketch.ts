@@ -201,7 +201,7 @@ function setup() {
   soundEffects.shoot.setVolume(0.4);
   soundEffects.menuButtonSound.setVolume(0.3);
   soundEffects.treasureIsUnlocked.setVolume(0.4);
-  soundEffects.takingdmg.setVolume(0.5);
+  soundEffects.takingdmg.setVolume(0.1);
 
   game = new Game();
 }
