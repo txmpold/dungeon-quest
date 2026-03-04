@@ -8,8 +8,14 @@ class Player extends Entity {
   private level: Level;
   private damageCooldown: number = 0;
   private attackCooldown: number = 0;
-  constructor(worldX: number, worldY: number, health: number, level: Level) {
-    // weaponInventory: p5.Image[],
+  private isDead: boolean = false;
+  private deathTimer: number = 0;
+  private flashTimer: number = 0;
+  private isFlashing: boolean = false;
+
+  constructor(worldX: number, worldY: number, health: number, level: Level) /* 
+    weaponInventory: p5.Image[],
+    attackCoolDown: number, */ {
     const row = 0;
     const col = 0;
     const totalCol = 6;
@@ -86,16 +92,34 @@ class Player extends Entity {
   public getHealth() {}
 
   public update(entities: Entity[]) {
+    this.isPlayerDead();
+    if (this.isDead) {
+      this.deathTimer += deltaTime;
+
+      if (this.deathTimer > 1200) {
+        game.gameIsStarted = false;
+        game.changeScene(new GameOverMenu());
+      }
+      return;
+    }
     this.move();
     this.playerAttack();
     super.update(entities);
     this.checkEnemyCollision(entities);
-    this.isPlayerDead();
   }
 
   private isPlayerDead() {
-    if (this.health <= 0) {
-      game.changeScene(new GameOverMenu());
+    if (this.health <= 0 && !this.isDead) {
+      this.isDead = true;
+
+      this.row = 4;
+      this.col = 2;
+      this.totalCol = 1;
+      this.speed.set(0, 0);
+
+      // game.gameIsStarted = false;
+      music.gameMusic.stop();
+      // game.changeScene(new GameOverMenu());
       // this.level.isGameOver = true;
     }
   }
@@ -106,14 +130,27 @@ class Player extends Entity {
       if (entity instanceof Enemy && this.isCollidingWith(entity)) {
         if (this.damageCooldown <= 0) {
           this.health -= 1;
-          this.damageCooldown = 4000;
-          //lägg till hjärtin som visar spelarens hälsa
+          this.damageCooldown = 1000;
+          this.isFlashing = true;
+          this.flashTimer = 0;
 
-          console.log("Player health:", this.health);
+          soundEffects.takingdmg.play(0, 1, 0.5);
+          console.log("Player health: " + this.health);
         }
       }
     }
-    this.damageCooldown -= deltaTime * 6;
+
+    if (this.damageCooldown > 0) {
+      this.damageCooldown -= deltaTime;
+    }
+
+    if (this.isFlashing) {
+      this.flashTimer += deltaTime;
+      if (this.damageCooldown <= 0) {
+        this.isFlashing = false;
+        this.flashTimer = 0;
+      }
+    }
   }
 
   public updatePlayerPos() {
@@ -121,6 +158,7 @@ class Player extends Entity {
   }
 
   public move() {
+    if (this.isDead) return;
     this.speed.set(0, 0);
 
     if (keyIsDown(RIGHT_ARROW)) {
@@ -188,5 +226,46 @@ class Player extends Entity {
       }
     }
     this.attackCooldown -= deltaTime * 6;
+  }
+  public draw() {
+    push();
+
+    push();
+    resetMatrix();
+    for (let hp = 0; hp < this.health; hp++) {
+      image(images.heart, 10 + hp * 35, 10, 32, 32);
+    }
+    pop();
+
+    if (this.isDead) {
+      push();
+      image(
+        this.image,
+        this.worldX,
+        this.worldY,
+        GamePanel.tileSize,
+        GamePanel.tileSize,
+        2 * GamePanel.originalTileSize,
+        4 * GamePanel.originalTileSize,
+        GamePanel.originalTileSize,
+        GamePanel.originalTileSize,
+      );
+      pop();
+      pop();
+      return;
+    }
+
+    if (this.isFlashing) {
+      const flashInterval = 150;
+      const shouldShow = Math.floor(this.flashTimer / flashInterval) % 2 === 0;
+
+      if (shouldShow) {
+        super.draw();
+      }
+    } else {
+      super.draw();
+    }
+
+    pop();
   }
 }

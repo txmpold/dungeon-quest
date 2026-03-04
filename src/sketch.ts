@@ -16,6 +16,7 @@ let soundEffects: {
   heal: p5.SoundFile;
   boots: p5.SoundFile;
   swordAttack: p5.SoundFile;
+  takingdmg: p5.SoundFile;
 };
 let fonts: {
   font: p5.Font;
@@ -108,6 +109,7 @@ function preload() {
     heal: loadSound("assets/soundEffects/heal.wav"),
     boots: loadSound("assets/soundEffects/boots.wav"),
     swordAttack: loadSound("assets/soundEffects/sword-attack.wav"),
+    takingdmg: loadSound("assets/soundEffects/takingdmg.wav"),
   };
   fonts = {
     font: loadFont("assets/fonts/PixelifySans-VariableFont_wght.ttf"),
@@ -199,6 +201,7 @@ function setup() {
   soundEffects.shoot.setVolume(0.4);
   soundEffects.menuButtonSound.setVolume(0.3);
   soundEffects.treasureIsUnlocked.setVolume(0.4);
+  soundEffects.takingdmg.setVolume(0.5);
 
   game = new Game();
 }
