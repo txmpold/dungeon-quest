@@ -1,13 +1,16 @@
 /// <reference path="enemy.ts" />
 class BlueEnemy extends Enemy {
   private patrolDirectionIndex = 0;
-  private shootCooldown = 0;
-  private directions = [
-    { x:-1, y:0, img: images.weapons.fireball_left },  //left 
+  private patrolTimer = 0;
+  private nrOfPatrolSteps = 120; 
+  private shootCooldown = 0; //frames per håll
+   private directions = [
+    { x:-1, y:0, img: images.weapons.fireball_left }, //left 
     { x:0, y: -1, img: images.weapons.fireball_up }, //up
     { x:1, y: 0, img: images.weapons.fireball_right }, //right
-    { x:0, y: 1, img: images.weapons.fireball_down } //down
+    { x:0, y: 1, img: images.weapons.fireball_down }, //down
   ];
+
 
   constructor(worldX: number, worldY: number, health: number, levelContext:ILevelContext) {
     const row = 1;
@@ -26,23 +29,35 @@ class BlueEnemy extends Enemy {
   }
   public onCollision(other: Entity): void {}
 
-  public move(){
-    const walkSpeed = 0.05; // labba med detta
-    let dir = random(this.directions);
-    let speed = createVector(dir.x, dir.y).mult(walkSpeed);
-    this.speed.set(speed);
-
+  public update(entities: Entity[]) {
+    this.engage();
+    super.update(entities);
   }
-
-  private changePatrolDir(){
-    if (this.patrolDirectionIndex < 3){
+  
+  //den blå monstret ska kunna gå ett steg och skjuta åt alla håll, har ett fast rörelsemönster 
+  public move(){
+      const walkSpeed = 0.08;
+      const dir = this.directions[this.patrolDirectionIndex]; 
+      let speed = createVector(dir.x, dir.y).mult(walkSpeed);
+      this.speed.set(speed);
+      this.patrolTimer++;
+      
+      if (this.patrolTimer >= this.nrOfPatrolSteps){
+        this.patrolTimer= 0; 
+        this.changePatrolDirection();
+      }
+  } 
+  
+  private changePatrolDirection() {
+      if (this.patrolDirectionIndex < 3){
       this.patrolDirectionIndex++;
     } else {
       this.patrolDirectionIndex = 0;
     }
   }
-  //den blå monstret ska kunna gå ett steg och skjuta åt alla håll, har ett fast rörelsemönster 
-  protected engage(){ 
+  
+  protected engage() {
+    this.move();
     if (this.playerIsNearby()){
       if (this.shootCooldown > 0){
         this.shootCooldown -= deltaTime;
@@ -53,32 +68,24 @@ class BlueEnemy extends Enemy {
       }
       this.shootProjectile();
       this.shootCooldown = random(1_500, 2_500);  //labba med detta
-      this.move();// 
-      this.changePatrolDir();
-  
     }
   }
-
   private playerIsNearby() {
-    if (!this.levelContext.player) return false;
-    let distX = abs(this.levelContext.player.worldX - this.worldX);
-    let distY = abs(this.levelContext.player.worldY - this.worldY);
-
-    let shootLimit = 0.4;  //procentuellt av skärmens yta
-    return distX < GamePanel.worldWidth * shootLimit && distY < GamePanel.worldHeight * shootLimit;
+  if (!this.levelContext.player) return false;
+  let distX = abs(this.levelContext.player.worldX - this.worldX);
+  let distY = abs(this.levelContext.player.worldY - this.worldY);
+  let shootLimit = 0.4;  //procentuellt av skärmens yta
+  return distX < GamePanel.worldWidth * shootLimit && distY < GamePanel.worldHeight * shootLimit;
   }
-  
-  private shootProjectile() {
-    //1. leta efter spelaren, beräkna avståndet
-    //2. Om spelaren är nära skjut åt all håll 
-    if (!this.levelContext.player) return;
-    if (!this.playerIsNearby()) return;
-    
-    let shootSpeed = 0.2; //labba med detta
-  
-    for (let dir of this.directions) {
-      let speed = createVector(dir.x, dir.y).mult(shootSpeed)
 
+  private shootProjectile() {
+    //Om spelaren är nära stanna, skjut åt all håll 
+    if (!this.levelContext.player) return;
+    const shootSpeed = 0.2;
+    
+    for (let dir of this.directions){
+      let speed = createVector(dir.x, dir.y).mult(shootSpeed);
+  
       let fireball = new Projectile(
         this.worldX,
         this.worldY,
@@ -87,8 +94,11 @@ class BlueEnemy extends Enemy {
         1,
         0,
         this.totalCol,
+        false,
       );
       this.levelContext.entities.push(fireball);
-      }
+    }
+
   }   
 }
+
