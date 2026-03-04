@@ -5,16 +5,20 @@ interface ILevelContext {
 class Level implements ILevelContext {
   public player?: Player;
   public entities: Entity[];
-  private isLevelCompleted: boolean;
+
+  public isGameOver: boolean;
+  public isLevelCleared: boolean = false;
 
   constructor(entities: Entity[]) {
     // Vad ska skapas direkt när leveln skapas?
     this.entities = entities;
-    this.isLevelCompleted = false;
+    this.isGameOver = false;
   }
 
   public update() {
     this.updateEntities();
+    this.isLevelCleared = this.isAllEnemiesDefeated();
+
     /* this.checkCollisions(); */
   }
 
@@ -63,7 +67,25 @@ class Level implements ILevelContext {
 
     pop();
   }
-  public drawTreasure() {}
 
+  isAllEnemiesDefeated(): boolean {
+    const allDefeated = this.entities.every((entity) => {
+      if (entity instanceof Enemy) {
+        return entity.isKilled;
+      }
+      return true;
+    });
+
+    if (allDefeated && !this.isLevelCleared) {
+      music.gameMusic.stop();
+      soundEffects.treasureIsUnlocked.play();
+      soundEffects.treasureIsUnlocked.onended(() => {
+        music.menuMusic.play();
+      });
+    }
+
+    return allDefeated;
+  }
+  public drawTreasure() {}
   public updateGame() {}
 }

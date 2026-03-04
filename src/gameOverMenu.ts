@@ -32,6 +32,8 @@ class GameOverMenu extends Scene {
     );
     music.gameOverMusic.play();
     cursor("assets/images/swordcursor.png");
+    game.gameIsStarted = false;
+    music.gameMusic.stop();
   }
 
   public update() {
@@ -40,6 +42,7 @@ class GameOverMenu extends Scene {
   }
 
   public draw() {
+    background(0);
     image(
       images.menuImages.gameOver,
       GamePanel.worldWidth / 2 - 100,

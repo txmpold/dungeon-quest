@@ -5,6 +5,7 @@ class LevelFactory {
   public y: number = 0;
   public levelGrid: string[][] = [];
   public collisionTiles: number[] = [];
+  public currentLevel: number = 0;
 
   constructor(
     tiles: p5.Image[],
@@ -25,6 +26,7 @@ class LevelFactory {
     const level = new Level(entities);
     this.levelGrid = this.loadMap(levels[index]);
     const levelGrid = this.levelGrid;
+    this.currentLevel = index;
 
     while (worldCol < levelGrid[0].length && worldRow < levelGrid.length) {
       let worldX = worldCol * GamePanel.tileSize;
@@ -243,17 +245,7 @@ class LevelFactory {
         entities.push(new Obstacle(worldX, worldY, images.tiles.barrel));
       }
       if (entityNumber === "t") {
-        entities.push(
-          new AnimatedProp(
-            worldX,
-            worldY,
-            images.tiles.animatedProps,
-            6,
-            1,
-            3,
-            130,
-          ),
-        );
+        entities.push(new Treasure(worldX, worldY, images.tiles.treasure));
       }
       if (entityNumber === "c") {
         entities.push(new Obstacle(worldX, worldY, images.tiles.candelabra));

@@ -5,6 +5,7 @@ class TransitionScene extends Scene {
   private transitionDuration: number;
   private elapsedTime: number = 0;
   private onTransitionComplete: () => void;
+  public transitionActive: boolean;
 
   constructor(
     transitionText: string,
@@ -15,18 +16,20 @@ class TransitionScene extends Scene {
     this.transitionText = transitionText;
     this.transitionDuration = transitionDuration;
     this.onTransitionComplete = onTransitionComplete;
+    this.transitionActive = true;
   }
 
   public update() {
+    if (!this.transitionActive) return;
     this.elapsedTime += deltaTime;
     if (this.elapsedTime >= this.transitionDuration) {
+      this.transitionActive = false;
       this.onTransitionComplete();
     }
   }
 
   public draw() {
-    const alpha = map(this.elapsedTime, 0, this.transitionDuration, 255, 0);
-    fill(0, alpha);
+    fill(0);
     rect(0, 0, GamePanel.screenWidth, GamePanel.screenHeight);
     textFont(fonts.font);
     textSize(32);

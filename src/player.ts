@@ -2,8 +2,7 @@ class Player extends Entity {
   public screenX: number;
   public screenY: number;
   protected health: number;
-  /* protected weaponInventory: p5.Image[];
-  public attackCoolDown: number; */
+  //  protected weaponInventory: p5.Image[];
   protected direction: p5.Vector;
   private playerPos = createVector(0, 0);
   private level: Level;
@@ -30,7 +29,6 @@ class Player extends Entity {
       totalCol,
       20,
     );
-    /* this.attackCoolDown = attackCoolDown; */
     this.health = health;
     this.level = level;
     this.direction = this.speed.copy();
@@ -43,7 +41,20 @@ class Player extends Entity {
     this.hitBoxH = 32;
   }
 
-  public onCollision(other: Entity): void {}
+  public onCollision(other: Entity): void {
+    if (other instanceof Treasure && this.level.isLevelCleared) {
+      soundEffects.treasureOpening.play();
+      console.log("Player collided with treasure");
+      game.gameIsStarted = false;
+      if (game.levelFactory.currentLevel === 1) {
+        game.changeScene(new TreasureChoiceScene(images.treasureChoices.boots));
+      } else if (game.levelFactory.currentLevel === 2) {
+        game.changeScene(
+          new TreasureChoiceScene(images.treasureChoices.fireball),
+        );
+      }
+    }
+  }
 
   public resolveObstaclesCollisions(obstacles: Obstacle[]) {
     if (obstacles.length === 0) return;
@@ -113,6 +124,7 @@ class Player extends Entity {
   }
 
   private checkEnemyCollision(entities: Entity[]) {
+    let healthPos = screen.width / 2 - GamePanel.tileSize / 2;
     for (const entity of entities) {
       if (entity instanceof Enemy && this.isCollidingWith(entity)) {
         if (this.damageCooldown <= 0) {
@@ -178,7 +190,7 @@ class Player extends Entity {
     let y = this.direction.y;
     if (keyIsDown(32) && this.attackCooldown <= 0) {
       soundEffects.fireball.play(0, 1, 5);
-      this.attackCooldown = 7000;
+      this.attackCooldown = 3500;
 
       let fireballImage = images.weapons.fireball_right;
       if (y < 0) {

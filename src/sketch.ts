@@ -11,6 +11,11 @@ let soundEffects: {
   menuButtonSound: p5.SoundFile;
   explosion: p5.SoundFile;
   fireball: p5.SoundFile;
+  treasureIsUnlocked: p5.SoundFile;
+  treasureOpening: p5.SoundFile;
+  heal: p5.SoundFile;
+  boots: p5.SoundFile;
+  swordAttack: p5.SoundFile;
   takingdmg: p5.SoundFile;
 };
 let fonts: {
@@ -28,6 +33,11 @@ let images: {
     fireball_left: p5.Image;
     fireball_up: p5.Image;
     fireball_down: p5.Image;
+  };
+  treasureChoices: {
+    heal: p5.Image;
+    fireball: p5.Image;
+    boots: p5.Image;
   };
   tiles: {
     floor: p5.Image;
@@ -92,6 +102,13 @@ function preload() {
     menuButtonSound: loadSound("assets/soundEffects/menu-button-sound.mp3"),
     explosion: loadSound("assets/soundEffects/explosion.mp3"),
     fireball: loadSound("assets/soundEffects/fireball.mp3"),
+    treasureIsUnlocked: loadSound(
+      "assets/soundEffects/treasure-is-unlocked.mp3",
+    ),
+    treasureOpening: loadSound("assets/soundEffects/treasure-open.wav"),
+    heal: loadSound("assets/soundEffects/heal.wav"),
+    boots: loadSound("assets/soundEffects/boots.wav"),
+    swordAttack: loadSound("assets/soundEffects/sword-attack.wav"),
     takingdmg: loadSound("assets/soundEffects/takingdmg.wav"),
   };
   fonts = {
@@ -109,6 +126,11 @@ function preload() {
       fireball_left: loadImage("assets/images/fireball_left.png"),
       fireball_up: loadImage("assets/images/fireball_up.png"),
       fireball_down: loadImage("assets/images/fireball_down.png"),
+    },
+    treasureChoices: {
+      heal: loadImage("assets/treasure-choices/heal.png"),
+      fireball: loadImage("assets/treasure-choices/fireball.png"),
+      boots: loadImage("assets/treasure-choices/fast.png"),
     },
     tiles: {
       floor: loadImage("assets/tiles/floor.png"),
@@ -178,6 +200,7 @@ function setup() {
   music.gameOverMusic.setVolume(0.1);
   soundEffects.shoot.setVolume(0.4);
   soundEffects.menuButtonSound.setVolume(0.3);
+  soundEffects.treasureIsUnlocked.setVolume(0.4);
   soundEffects.takingdmg.setVolume(0.5);
 
   game = new Game();
