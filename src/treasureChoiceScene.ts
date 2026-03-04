@@ -12,8 +12,10 @@ class TreasureChoiceScene extends Scene {
         noCursor();
         if (choice1Image === images.treasureChoices.boots) {
           soundEffects.boots.play();
+          game.playerinventory.push(images.treasureChoices.boots);
         } else if (choice1Image === images.treasureChoices.fireball) {
           soundEffects.fireball.play();
+          game.playerinventory.push(images.treasureChoices.fireball);
         }
         game.changeScene(
           new TransitionScene(
