@@ -11,7 +11,11 @@ let soundEffects: {
   menuButtonSound: p5.SoundFile;
   explosion: p5.SoundFile;
   fireball: p5.SoundFile;
-  treasureOpen: p5.SoundFile;
+  treasureIsUnlocked: p5.SoundFile;
+  treasureOpening: p5.SoundFile;
+  heal: p5.SoundFile;
+  boots: p5.SoundFile;
+  swordAttack: p5.SoundFile;
 };
 let fonts: {
   font: p5.Font;
@@ -97,7 +101,13 @@ function preload() {
     menuButtonSound: loadSound("assets/soundEffects/menu-button-sound.mp3"),
     explosion: loadSound("assets/soundEffects/explosion.mp3"),
     fireball: loadSound("assets/soundEffects/fireball.mp3"),
-    treasureOpen: loadSound("assets/soundEffects/treasure-open.mp3"),
+    treasureIsUnlocked: loadSound(
+      "assets/soundEffects/treasure-is-unlocked.mp3",
+    ),
+    treasureOpening: loadSound("assets/soundEffects/treasure-open.wav"),
+    heal: loadSound("assets/soundEffects/heal.wav"),
+    boots: loadSound("assets/soundEffects/boots.wav"),
+    swordAttack: loadSound("assets/soundEffects/sword-attack.wav"),
   };
   fonts = {
     font: loadFont("assets/fonts/PixelifySans-VariableFont_wght.ttf"),
@@ -188,7 +198,7 @@ function setup() {
   music.gameOverMusic.setVolume(0.1);
   soundEffects.shoot.setVolume(0.4);
   soundEffects.menuButtonSound.setVolume(0.3);
-  soundEffects.treasureOpen.setVolume(0.4);
+  soundEffects.treasureIsUnlocked.setVolume(0.4);
 
   game = new Game();
 }
