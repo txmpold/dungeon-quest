@@ -9,6 +9,7 @@ class GameOverMenu extends Scene {
     this.restartButton = new Button(
       "Retry",
       () => {
+        game.playerinventory = []; // Clear inventory
         noCursor();
         music.gameMusic.loop();
         game.changeScene(
@@ -23,7 +24,10 @@ class GameOverMenu extends Scene {
     );
     this.mainMenuButton = new Button(
       "Main Menu",
-      () => game.changeScene(new StartMenu()),
+      () => {
+        game.playerinventory = []; // Clear inventory
+        game.changeScene(new StartMenu());
+      },
       createVector(200, 60),
       createVector(
         GamePanel.worldWidth / 2 - 100,
