@@ -11,6 +11,7 @@ let soundEffects: {
   menuButtonSound: p5.SoundFile;
   explosion: p5.SoundFile;
   fireball: p5.SoundFile;
+  treasureOpen: p5.SoundFile;
 };
 let fonts: {
   font: p5.Font;
@@ -27,6 +28,11 @@ let images: {
     fireball_left: p5.Image;
     fireball_up: p5.Image;
     fireball_down: p5.Image;
+  };
+  treasureChoices: {
+    heal: p5.Image;
+    fireball: p5.Image;
+    boots: p5.Image;
   };
   tiles: {
     floor: p5.Image;
@@ -91,6 +97,7 @@ function preload() {
     menuButtonSound: loadSound("assets/soundEffects/menu-button-sound.mp3"),
     explosion: loadSound("assets/soundEffects/explosion.mp3"),
     fireball: loadSound("assets/soundEffects/fireball.mp3"),
+    treasureOpen: loadSound("assets/soundEffects/treasure-open.mp3"),
   };
   fonts = {
     font: loadFont("assets/fonts/PixelifySans-VariableFont_wght.ttf"),
@@ -107,6 +114,11 @@ function preload() {
       fireball_left: loadImage("assets/images/fireball_left.png"),
       fireball_up: loadImage("assets/images/fireball_up.png"),
       fireball_down: loadImage("assets/images/fireball_down.png"),
+    },
+    treasureChoices: {
+      heal: loadImage("assets/treasure-choices/heal.png"),
+      fireball: loadImage("assets/treasure-choices/fireball.png"),
+      boots: loadImage("assets/treasure-choices/fast.png"),
     },
     tiles: {
       floor: loadImage("assets/tiles/floor.png"),
@@ -176,6 +188,7 @@ function setup() {
   music.gameOverMusic.setVolume(0.1);
   soundEffects.shoot.setVolume(0.4);
   soundEffects.menuButtonSound.setVolume(0.3);
+  soundEffects.treasureOpen.setVolume(0.4);
 
   game = new Game();
 }
