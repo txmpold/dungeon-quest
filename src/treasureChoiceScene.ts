@@ -38,6 +38,7 @@ class TreasureChoiceScene extends Scene {
         music.menuMusic.stop();
         soundEffects.heal.play();
         music.gameMusic.play();
+        game.playerHealth.push("hp", "hp", "hp");
         noCursor();
         game.changeScene(
           new TransitionScene(
