@@ -121,7 +121,7 @@ class LevelFactory {
         entities.push(new Floor(worldX, worldY, images.tiles.floor));
       }
       if (entityNumber === "4") {
-        const player = new Player(worldX, worldY, 5, level);
+        const player = new Player(worldX, worldY, game.playerHealth, level);
         level.player = player;
         entities.push(player);
       }

@@ -1,12 +1,16 @@
 class Game {
   public levelFactory: LevelFactory;
   public level: Level;
+  public playerinventory: p5.Image[];
+  public playerHealth: string[];
   private currentScene: Scene;
   public gameIsStarted: boolean = false;
 
   constructor() {
     this.levelFactory = new LevelFactory(tiles, 0, 0);
     this.level = new Level([]);
+    this.playerinventory = [];
+    this.playerHealth = ["hp", "hp", "hp", "hp", "hp"];
     this.currentScene = new StartMenu();
   }
 
