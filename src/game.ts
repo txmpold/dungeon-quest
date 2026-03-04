@@ -22,12 +22,41 @@ class Game {
     }
   }
 
+  public goToNextLevel() {
+    if (this.levelFactory.currentLevel === 0) {
+      this.level = this.levelFactory.generateLevel(
+        this.levelFactory.currentLevel + 1,
+      );
+      this.gameIsStarted = true;
+    } else if (this.levelFactory.currentLevel === 1) {
+      this.level = this.levelFactory.generateLevel(
+        this.levelFactory.currentLevel + 1,
+      );
+      this.gameIsStarted = true;
+    } else if (this.levelFactory.currentLevel === 2) {
+      this.level = this.levelFactory.generateLevel(
+        this.levelFactory.currentLevel + 1,
+      );
+      this.gameIsStarted = true;
+    } else if (this.levelFactory.currentLevel === 3) {
+      this.gameIsStarted = false;
+      //spelet är slut
+    }
+  }
+
   public draw() {
     background(0);
-    if (this.gameIsStarted === true) {
-      this.level.draw();
-    } else {
+
+    if (
+      (this.currentScene instanceof TransitionScene &&
+        this.currentScene.transitionActive) ||
+      this.currentScene instanceof TreasureChoiceScene ||
+      this.currentScene instanceof GameOverMenu ||
+      this.currentScene instanceof StartMenu
+    ) {
       this.currentScene.draw();
+    } else if (this.gameIsStarted === true) {
+      this.level.draw();
     }
   }
 
