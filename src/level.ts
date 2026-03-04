@@ -76,6 +76,13 @@ class Level implements ILevelContext {
       return true;
     });
     // console.log("isAllEnemiesDefeated", allDefeated);
+    if (allDefeated && !this.isLevelCleared) {
+      music.gameMusic.stop();
+      soundEffects.treasureOpen.play();
+      soundEffects.treasureOpen.onended(() => {
+        music.menuMusic.play();
+      });
+    }
     return allDefeated;
   }
   public drawTreasure() {}
