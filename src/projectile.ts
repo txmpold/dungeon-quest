@@ -1,5 +1,6 @@
 /// <reference path="entity.ts" />
 class Projectile extends Entity {
+  public friendly: boolean = true;
   public isRemoved = false;
   public update(entities: Entity[]) {
     super.update(entities);
@@ -15,16 +16,16 @@ class Projectile extends Entity {
     row: number,
     col: number,
     totalCol: number,
+    friendly: boolean,
   ) {
     super(worldX, worldY, image, direction, row, col, totalCol);
+    this.friendly = friendly;
   }
 
   public onCollision(other: Entity) {
     this.isRemoved = true;
-    if (other instanceof Obstacle) {
-      console.log("im colliding with an obstacle");
-    }
-    if (other instanceof Enemy) {
+
+    if (other instanceof Enemy && this.friendly) {
       other.takeDamage(1);
     }
   }

@@ -118,9 +118,8 @@ class Player extends Entity {
   }
 
   private checkEnemyCollision(entities: Entity[]) {
-    let healthPos = screen.width / 2 - GamePanel.tileSize / 2;
     for (const entity of entities) {
-      if (entity instanceof Enemy && this.isCollidingWith(entity)) {
+      if (entity instanceof Enemy && this.isCollidingWith(entity) || entity instanceof Projectile && this.isCollidingWith(entity) && !entity.friendly) {
         if (this.damageCooldown <= 0) {
           this.health.pop();
           this.damageCooldown = 1000;
@@ -220,15 +219,16 @@ class Player extends Entity {
         1, // <----- ????
         0,
         this.totalCol,
+        true
       );
 
-      this.level.entities.push(fireball);
       fireball.setHitBox(
         GamePanel.tileSize * 0.27,
         GamePanel.tileSize * 0.4,
         GamePanel.tileSize * 0.5,
         GamePanel.tileSize * 0.7,
       );
+      this.level.entities.push(fireball);
 
       if (x === 0 && y === 0) {
         fireball.speed.set(0.4, 0);

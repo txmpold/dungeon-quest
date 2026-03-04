@@ -10,6 +10,7 @@ class GameOverMenu extends Scene {
       "Retry",
       () => {
         game.playerinventory = []; // Clear inventory
+        game.playerHealth.push("hp", "hp", "hp", "hp", "hp")
         noCursor();
         music.gameMusic.loop();
         game.changeScene(
