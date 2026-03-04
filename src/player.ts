@@ -11,6 +11,8 @@ class Player extends Entity {
   private attackCooldown: number = 0;
   private isDead: boolean = false;
   private deathTimer: number = 0;
+  private flashTimer: number = 0;
+  private isFlashing: boolean = false;
 
   constructor(worldX: number, worldY: number, health: number, level: Level) /* 
     weaponInventory: p5.Image[],
@@ -115,11 +117,27 @@ class Player extends Entity {
       if (entity instanceof Enemy && this.isCollidingWith(entity)) {
         if (this.damageCooldown <= 0) {
           this.health -= 1;
-          this.damageCooldown = 4000;
+          this.damageCooldown = 1000;
+          this.isFlashing = true;
+          this.flashTimer = 0;
+
+          soundEffects.takingdmg.play(0, 1, 0.5);
+          console.log("Player health: " + this.health);
         }
       }
     }
-    this.damageCooldown -= deltaTime * 6;
+
+    if (this.damageCooldown > 0) {
+      this.damageCooldown -= deltaTime;
+    }
+
+    if (this.isFlashing) {
+      this.flashTimer += deltaTime;
+      if (this.damageCooldown <= 0) {
+        this.isFlashing = false;
+        this.flashTimer = 0;
+      }
+    }
   }
 
   public updatePlayerPos() {
@@ -197,6 +215,15 @@ class Player extends Entity {
     this.attackCooldown -= deltaTime * 6;
   }
   public draw() {
+    push();
+
+    push();
+    resetMatrix();
+    for (let hp = 0; hp < this.health; hp++) {
+      image(images.heart, 10 + hp * 35, 10, 32, 32);
+    }
+    pop();
+
     if (this.isDead) {
       push();
       image(
@@ -211,8 +238,21 @@ class Player extends Entity {
         GamePanel.originalTileSize,
       );
       pop();
+      pop();
       return;
     }
-    super.draw();
+
+    if (this.isFlashing) {
+      const flashInterval = 150;
+      const shouldShow = Math.floor(this.flashTimer / flashInterval) % 2 === 0;
+
+      if (shouldShow) {
+        super.draw();
+      }
+    } else {
+      super.draw();
+    }
+
+    pop();
   }
 }
