@@ -45,7 +45,7 @@ class Player extends Entity {
     if (other instanceof Treasure) {
       soundEffects.treasureOpening.play();
       console.log("Player collided with treasure");
-      other.isOpened = true;
+      other.isUnlocked = true;
       game.gameIsStarted = false;
       if (game.levelFactory.currentLevel === 1) {
         game.changeScene(new TreasureChoiceScene(images.treasureChoices.boots));
