@@ -22,11 +22,25 @@ class Game {
     }
   }
 
+  public goToNextLevel() {
+    console.log("Current level: " + this.levelFactory.currentLevel);
+    if (this.levelFactory.currentLevel === 1) {
+      this.level = this.levelFactory.generateLevel(2);
+      this.gameIsStarted = true;
+    }
+  }
+
   public draw() {
     background(0);
-    if (this.gameIsStarted === true) {
-      this.level.draw();
-    } else {
+    this.level.draw();
+    if (this.currentScene instanceof StartMenu) {
+      this.currentScene.draw();
+    }
+    if (
+      (this.currentScene instanceof TransitionScene &&
+        this.currentScene.transitionActive) ||
+      this.currentScene instanceof TreasureChoiceScene //|| this.currentScene instanceof GameOverMenu
+    ) {
       this.currentScene.draw();
     }
   }
@@ -37,7 +51,8 @@ class Game {
       this.level.entities = this.level.entities.filter(
         (entity) =>
           (!(entity instanceof Projectile) || !entity.isRemoved) &&
-          (!(entity instanceof Enemy) || !entity.isKilled),
+          (!(entity instanceof Enemy) || !entity.isKilled) &&
+          (!(entity instanceof Treasure) || !entity.isOpened),
       );
     } else {
       this.currentScene.update();
