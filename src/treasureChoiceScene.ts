@@ -9,6 +9,7 @@ class TreasureChoiceScene extends Scene {
       () => {
         music.menuMusic.stop();
         music.gameMusic.play();
+        noCursor();
         if (choice1Image === images.treasureChoices.boots) {
           soundEffects.boots.play();
         } else if (choice1Image === images.treasureChoices.fireball) {
@@ -35,6 +36,7 @@ class TreasureChoiceScene extends Scene {
         music.menuMusic.stop();
         soundEffects.heal.play();
         music.gameMusic.play();
+        noCursor();
         game.changeScene(
           new TransitionScene(
             "Level " + (game.levelFactory.currentLevel + 1),
