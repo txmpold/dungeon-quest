@@ -244,6 +244,9 @@ class Player extends Entity {
     for (let hp = 0; hp < this.health.length; hp++) {
       image(images.heart, 10 + hp * 35, 10, 32, 32);
     }
+    for (let hp = 5; hp < this.health.length; hp++) {
+      image(images.treasureChoices.heal, 10 + hp * 35, 10, 32, 32);
+    }
     for (
       let itemIndex = 0;
       itemIndex < game.playerinventory.length;
