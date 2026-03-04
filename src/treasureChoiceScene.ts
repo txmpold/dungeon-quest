@@ -7,6 +7,7 @@ class TreasureChoiceScene extends Scene {
     this.choice1 = new Button(
       null,
       () => {
+        music.menuMusic.stop();
         music.gameMusic.play();
         game.changeScene(
           new TransitionScene(
@@ -26,6 +27,7 @@ class TreasureChoiceScene extends Scene {
     this.choice2 = new Button(
       null,
       () => {
+        music.menuMusic.stop();
         music.gameMusic.play();
         game.changeScene(
           new TransitionScene(
@@ -42,7 +44,6 @@ class TreasureChoiceScene extends Scene {
       ),
       choice2Image,
     );
-    music.gameMusic.stop();
     cursor("assets/images/swordcursor.png");
     game.gameIsStarted = false;
   }
