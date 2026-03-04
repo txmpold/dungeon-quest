@@ -2,16 +2,14 @@ class Player extends Entity {
   public screenX: number;
   public screenY: number;
   protected health: number;
-  /* protected weaponInventory: p5.Image[];
-  public attackCoolDown: number; */
+  //  protected weaponInventory: p5.Image[];
   protected direction: p5.Vector;
   private playerPos = createVector(0, 0);
   private level: Level;
   private damageCooldown: number = 0;
   private attackCooldown: number = 0;
-  constructor(worldX: number, worldY: number, health: number, level: Level) /* 
-    weaponInventory: p5.Image[],
-    attackCoolDown: number, */ {
+  constructor(worldX: number, worldY: number, health: number, level: Level) {
+    // weaponInventory: p5.Image[],
     const row = 0;
     const col = 0;
     const totalCol = 6;
@@ -25,7 +23,6 @@ class Player extends Entity {
       totalCol,
       20,
     );
-    /* this.attackCoolDown = attackCoolDown; */
     this.health = health;
     this.level = level;
     this.direction = this.speed.copy();
@@ -38,7 +35,28 @@ class Player extends Entity {
     this.hitBoxH = 32;
   }
 
-  public onCollision(other: Entity): void {}
+  public onCollision(other: Entity): void {
+    if (other instanceof Treasure) {
+      console.log("Player collided with treasure");
+      other.isOpened = true;
+      game.gameIsStarted = false;
+      if (game.levelFactory.currentLevel === 1) {
+        game.changeScene(
+          new TreasureChoiceScene(
+            images.treasureChoices.boots,
+            images.treasureChoices.heal,
+          ),
+        );
+      } else if (game.levelFactory.currentLevel === 2) {
+        game.changeScene(
+          new TreasureChoiceScene(
+            images.treasureChoices.fireball,
+            images.treasureChoices.heal,
+          ),
+        );
+      }
+    }
+  }
 
   public resolveObstaclesCollisions(obstacles: Obstacle[]) {
     if (obstacles.length === 0) return;
@@ -84,8 +102,6 @@ class Player extends Entity {
 
   private isPlayerDead() {
     if (this.health <= 0) {
-      game.gameIsStarted = false;
-      music.gameMusic.stop();
       game.changeScene(new GameOverMenu());
       // this.level.isGameOver = true;
     }
