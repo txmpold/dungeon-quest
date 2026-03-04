@@ -37,22 +37,15 @@ class Player extends Entity {
 
   public onCollision(other: Entity): void {
     if (other instanceof Treasure) {
+      soundEffects.treasureOpening.play();
       console.log("Player collided with treasure");
       other.isOpened = true;
       game.gameIsStarted = false;
       if (game.levelFactory.currentLevel === 1) {
-        game.changeScene(
-          new TreasureChoiceScene(
-            images.treasureChoices.boots,
-            images.treasureChoices.heal,
-          ),
-        );
+        game.changeScene(new TreasureChoiceScene(images.treasureChoices.boots));
       } else if (game.levelFactory.currentLevel === 2) {
         game.changeScene(
-          new TreasureChoiceScene(
-            images.treasureChoices.fireball,
-            images.treasureChoices.heal,
-          ),
+          new TreasureChoiceScene(images.treasureChoices.fireball),
         );
       }
     }
@@ -160,7 +153,7 @@ class Player extends Entity {
     let y = this.direction.y;
     if (keyIsDown(32) && this.attackCooldown <= 0) {
       soundEffects.fireball.play(0, 1, 5);
-      this.attackCooldown = 7000;
+      this.attackCooldown = 0;
 
       let fireballImage = images.weapons.fireball_right;
       if (y < 0) {

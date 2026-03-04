@@ -2,13 +2,18 @@ class TreasureChoiceScene extends Scene {
   private choice1: Button;
   private choice2: Button;
 
-  constructor(choice1Image: p5.Image, choice2Image: p5.Image) {
+  constructor(choice1Image: p5.Image) {
     super("treasureChoiceScene");
     this.choice1 = new Button(
       null,
       () => {
         music.menuMusic.stop();
         music.gameMusic.play();
+        if (choice1Image === images.treasureChoices.boots) {
+          soundEffects.boots.play();
+        } else if (choice1Image === images.treasureChoices.fireball) {
+          soundEffects.fireball.play();
+        }
         game.changeScene(
           new TransitionScene(
             "Level " + (game.levelFactory.currentLevel + 1),
@@ -28,6 +33,7 @@ class TreasureChoiceScene extends Scene {
       null,
       () => {
         music.menuMusic.stop();
+        soundEffects.heal.play();
         music.gameMusic.play();
         game.changeScene(
           new TransitionScene(
@@ -42,7 +48,7 @@ class TreasureChoiceScene extends Scene {
         GamePanel.worldWidth / 2 + 50,
         GamePanel.worldHeight / 2 - 100,
       ),
-      choice2Image,
+      images.treasureChoices.heal,
     );
     cursor("assets/images/swordcursor.png");
     game.gameIsStarted = false;
