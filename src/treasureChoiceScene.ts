@@ -2,14 +2,18 @@ class TreasureChoiceScene extends Scene {
   private choice1: Button;
   private choice2: Button;
 
-  constructor(choice1Imgage: p5.Image, choice2Image: p5.Image) {
+  constructor(choice1Image: p5.Image, choice2Image: p5.Image) {
     super("treasureChoiceScene");
     this.choice1 = new Button(
       null,
       () => {
         music.gameMusic.play();
         game.changeScene(
-          new TransitionScene("Level 2", 2000, () => game.goToNextLevel()),
+          new TransitionScene(
+            "Level " + (game.levelFactory.currentLevel + 1),
+            2000,
+            () => game.goToNextLevel(),
+          ),
         );
       },
       createVector(200, 200),
@@ -17,14 +21,18 @@ class TreasureChoiceScene extends Scene {
         GamePanel.worldWidth / 2 - 250,
         GamePanel.worldHeight / 2 - 100,
       ),
-      choice1Imgage,
+      choice1Image,
     );
     this.choice2 = new Button(
       null,
       () => {
         music.gameMusic.play();
         game.changeScene(
-          new TransitionScene("Level 2", 2000, () => game.goToNextLevel()),
+          new TransitionScene(
+            "Level " + (game.levelFactory.currentLevel + 1),
+            2000,
+            () => game.goToNextLevel(),
+          ),
         );
       },
       createVector(200, 200),
