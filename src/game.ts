@@ -24,24 +24,40 @@ class Game {
 
   public goToNextLevel() {
     console.log("Current level: " + this.levelFactory.currentLevel);
-    if (this.levelFactory.currentLevel === 1) {
-      this.level = this.levelFactory.generateLevel(2);
+    if (this.levelFactory.currentLevel === 0) {
+      this.level = this.levelFactory.generateLevel(
+        this.levelFactory.currentLevel + 1,
+      );
       this.gameIsStarted = true;
+    } else if (this.levelFactory.currentLevel === 1) {
+      this.level = this.levelFactory.generateLevel(
+        this.levelFactory.currentLevel + 1,
+      );
+      this.gameIsStarted = true;
+    } else if (this.levelFactory.currentLevel === 2) {
+      this.level = this.levelFactory.generateLevel(
+        this.levelFactory.currentLevel + 1,
+      );
+      this.gameIsStarted = true;
+    } else if (this.levelFactory.currentLevel === 3) {
+      this.gameIsStarted = false;
+      //spelet är slut
     }
   }
 
   public draw() {
     background(0);
-    this.level.draw();
-    if (this.currentScene instanceof StartMenu) {
-      this.currentScene.draw();
-    }
+
     if (
       (this.currentScene instanceof TransitionScene &&
         this.currentScene.transitionActive) ||
-      this.currentScene instanceof TreasureChoiceScene //|| this.currentScene instanceof GameOverMenu
+      this.currentScene instanceof TreasureChoiceScene ||
+      this.currentScene instanceof GameOverMenu ||
+      this.currentScene instanceof StartMenu
     ) {
       this.currentScene.draw();
+    } else if (this.gameIsStarted === true) {
+      this.level.draw();
     }
   }
 
