@@ -68,7 +68,7 @@ class Game {
         (entity) =>
           (!(entity instanceof Projectile) || !entity.isRemoved) &&
           (!(entity instanceof Enemy) || !entity.isKilled) &&
-          (!(entity instanceof Treasure) || !entity.isOpened),
+          (!(entity instanceof Treasure) || !entity.isUnlocked),
       );
     } else {
       this.currentScene.update();

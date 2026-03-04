@@ -1,8 +1,7 @@
 /// <reference path="entity.ts" />
 
 class Treasure extends Entity {
-  isOpened: boolean = false;
-  public opened: boolean = false;
+  public isUnlocked: boolean = false;
   constructor(worldX: number, worldY: number, image: p5.Image) {
     super(worldX, worldY, image);
   }
