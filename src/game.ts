@@ -23,7 +23,6 @@ class Game {
   }
 
   public goToNextLevel() {
-    console.log("Current level: " + this.levelFactory.currentLevel);
     if (this.levelFactory.currentLevel === 0) {
       this.level = this.levelFactory.generateLevel(
         this.levelFactory.currentLevel + 1,
