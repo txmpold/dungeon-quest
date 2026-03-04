@@ -119,7 +119,12 @@ class Player extends Entity {
 
   private checkEnemyCollision(entities: Entity[]) {
     for (const entity of entities) {
-      if (entity instanceof Enemy && this.isCollidingWith(entity) || entity instanceof Projectile && this.isCollidingWith(entity) && !entity.friendly) {
+      if (
+        (entity instanceof Enemy && this.isCollidingWith(entity)) ||
+        (entity instanceof Projectile &&
+          this.isCollidingWith(entity) &&
+          !entity.friendly)
+      ) {
         if (this.damageCooldown <= 0) {
           this.health.pop();
           this.damageCooldown = 1000;
@@ -196,7 +201,7 @@ class Player extends Entity {
     let y = this.direction.y;
     if (keyIsDown(32) && this.attackCooldown <= 0) {
       soundEffects.fireball.play(0, 1, 5);
-      this.attackCooldown = 5000;
+      this.attackCooldown = 0;
       if (game.playerinventory.includes(images.treasureChoices.fireball)) {
         this.attackCooldown = 1500;
       }
@@ -219,7 +224,7 @@ class Player extends Entity {
         1, // <----- ????
         0,
         this.totalCol,
-        true
+        true,
       );
 
       fireball.setHitBox(
