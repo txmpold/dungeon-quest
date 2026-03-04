@@ -1,6 +1,6 @@
 /// <reference path="entity.ts" />
 class Projectile extends Entity {
-  private friendly: boolean;
+  public friendly: boolean = true;
   public isRemoved = false;
   public update(entities: Entity[]) {
     super.update(entities);
@@ -16,7 +16,7 @@ class Projectile extends Entity {
     row: number,
     col: number,
     totalCol: number,
-    friendly = true,
+    friendly: boolean,
   ) {
     super(worldX, worldY, image, direction, row, col, totalCol);
     this.friendly = friendly;
@@ -27,10 +27,6 @@ class Projectile extends Entity {
 
     if (other instanceof Enemy && this.friendly) {
       other.takeDamage(1);
-    }
-    if (other instanceof Enemy && !this.friendly) {
-      this.isRemoved = false;
-
     }
   }
 

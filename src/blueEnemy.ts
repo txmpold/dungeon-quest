@@ -93,6 +93,12 @@ class BlueEnemy extends Enemy {
         false,
       );
       this.levelContext.entities.push(fireball);
+      fireball.setHitBox(
+       GamePanel.tileSize * 0.27,
+       GamePanel.tileSize * 0.4,
+       GamePanel.tileSize * 0.5,
+       GamePanel.tileSize * 0.7,
+     );
     }
 
   }   
