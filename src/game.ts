@@ -66,8 +66,7 @@ class Game {
       this.level.entities = this.level.entities.filter(
         (entity) =>
           (!(entity instanceof Projectile) || !entity.isRemoved) &&
-          (!(entity instanceof Enemy) || !entity.isKilled) &&
-          (!(entity instanceof Treasure) || !entity.isUnlocked),
+          (!(entity instanceof Enemy) || !entity.isKilled),
       );
     } else {
       this.currentScene.update();

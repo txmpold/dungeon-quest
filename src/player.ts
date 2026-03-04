@@ -42,10 +42,9 @@ class Player extends Entity {
   }
 
   public onCollision(other: Entity): void {
-    if (other instanceof Treasure) {
+    if (other instanceof Treasure && this.level.isLevelCleared) {
       soundEffects.treasureOpening.play();
       console.log("Player collided with treasure");
-      other.isUnlocked = true;
       game.gameIsStarted = false;
       if (game.levelFactory.currentLevel === 1) {
         game.changeScene(new TreasureChoiceScene(images.treasureChoices.boots));
@@ -191,7 +190,7 @@ class Player extends Entity {
     let y = this.direction.y;
     if (keyIsDown(32) && this.attackCooldown <= 0) {
       soundEffects.fireball.play(0, 1, 5);
-      this.attackCooldown = 3000;
+      this.attackCooldown = 0;
 
       let fireballImage = images.weapons.fireball_right;
       if (y < 0) {
