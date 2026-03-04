@@ -2,8 +2,8 @@
 class BlueEnemy extends Enemy {
   private patrolDirectionIndex = 0;
   private patrolTimer = 0;
-  private nrOfPatrolSteps = 120; 
-  private shootCooldown = 0; //frames per håll
+  private nrOfPatrolSteps = 120; //frames per håll
+  private shootCooldown = 0;
    private directions = [
     { x:0, y: -1, img: images.weapons.fireball_up }, //up
     { x:0, y: 1, img: images.weapons.fireball_down }, //down
@@ -74,18 +74,22 @@ class BlueEnemy extends Enemy {
     //Om spelaren är nära stanna, skjut åt all håll 
     if (!this.levelContext.player) return;
     const shootSpeed = 0.2;
+    const offset = 40;
     
     for (let dir of this.directions){
       let speed = createVector(dir.x, dir.y).mult(shootSpeed);
+
+      let shootX = this.worldX + (dir.x * offset)
+      let shootY = this.worldY + (dir.y * offset)
   
       let fireball = new Projectile(
-        this.worldX,
-        this.worldY,
+        shootX,
+        shootY,
         speed,
         dir.img,
         1,
-        0,
-        this.totalCol,
+        2,  
+        5,
         false,
       );
       this.levelContext.entities.push(fireball);
