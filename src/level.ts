@@ -75,7 +75,7 @@ class Level implements ILevelContext {
       }
       return true;
     });
-    // console.log("isAllEnemiesDefeated", allDefeated);
+
     if (allDefeated && !this.isLevelCleared) {
       music.gameMusic.stop();
       soundEffects.treasureIsUnlocked.play();
@@ -83,6 +83,7 @@ class Level implements ILevelContext {
         music.menuMusic.play();
       });
     }
+
     return allDefeated;
   }
   public drawTreasure() {}
