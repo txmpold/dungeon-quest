@@ -20,7 +20,7 @@ abstract class Enemy extends Entity {
     this.levelContext = levelContext;
   }
 
-  public onCollision(other: Entity): void {}
+  public onCollision(): void {}
 
   public takeDamage(damage: number) {
     this.health -= damage;

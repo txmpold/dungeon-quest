@@ -25,5 +25,5 @@ class Boss extends Enemy {
 
   protected engage(): void {}
   public shootProjectile() {}
-  public onCollision(_other: Entity): void {}
+  public onCollision(): void {}
 }

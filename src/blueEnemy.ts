@@ -27,7 +27,7 @@ class BlueEnemy extends Enemy {
       levelContext,
     );
   }
-  public onCollision(other: Entity): void {}
+  public onCollision(): void {}
 
   public update(entities: Entity[]) {
     this.engage();

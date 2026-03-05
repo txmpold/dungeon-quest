@@ -5,5 +5,5 @@ class Treasure extends Entity {
     super(worldX, worldY, image);
   }
 
-  public onCollision(other: Entity): void {}
+  public onCollision(): void {}
 }

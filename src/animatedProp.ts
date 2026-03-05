@@ -14,7 +14,7 @@ class AnimatedProp extends Entity {
     this.animationSpeed = animationSpeed;
   }
 
-  public onCollision(other: Entity): void {}
+  public onCollision(): void {}
 
   public update() {
     if (this.animationSpeed <= 0) return;
@@ -43,7 +43,7 @@ class MoreProps extends Entity {
     this.animationSpeed = animationSpeed;
   }
 
-  public onCollision(other: Entity): void {}
+  public onCollision(): void {}
 
   public update() {
     if (frameCount % this.animationSpeed === 0) {

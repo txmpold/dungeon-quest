@@ -1,13 +1,12 @@
-class pauseMenu {
-  private game: Game;
-  private showControls: boolean;
+// class pauseMenu {
+//   private showControls: boolean;
 
-  constructor(game: Game, showControls: boolean) {
-    this.game = game;
-    this.showControls = showControls;
-  }
-  public update() {}
-  public draw() {}
-  public drawControls() {}
-  public startGame() {}
-}
+//   constructor(showControls: boolean) {
+
+//     this.showControls = showControls;
+//   }
+//   public update() {}
+//   public draw() {}
+//   public drawControls() {}
+//   public startGame() {}
+// }
