@@ -10,7 +10,18 @@ class Game {
     this.levelFactory = new LevelFactory(tiles, 0, 0);
     this.level = new Level([]);
     this.playerinventory = [];
-    this.playerHealth = ["hp", "hp", "hp", "hp", "hp"];
+    this.playerHealth = [
+      "hp",
+      "hp",
+      "hp",
+      "hp",
+      "hp",
+      "hp",
+      "hp",
+      "hp",
+      "hp",
+      "hp",
+    ];
     this.currentScene = new StartMenu();
   }
 
@@ -20,7 +31,7 @@ class Game {
 
   public startGame() {
     this.gameIsStarted = true;
-    this.level = this.levelFactory.generateLevel(1);
+    this.level = this.levelFactory.generateLevel(3);
     if (!music.gameMusic.isPlaying()) {
       music.gameMusic.loop();
     }
@@ -38,13 +49,7 @@ class Game {
       );
       this.gameIsStarted = true;
     } else if (this.levelFactory.currentLevel === 2) {
-      this.level = this.levelFactory.generateLevel(
-        this.levelFactory.currentLevel + 1,
-      );
-      this.gameIsStarted = true;
-    } else if (this.levelFactory.currentLevel === 3) {
-      this.gameIsStarted = false;
-      //spelet är slut
+      this.changeScene(new VictoryScene());
     }
   }
 
@@ -56,6 +61,7 @@ class Game {
         this.currentScene.transitionActive) ||
       this.currentScene instanceof TreasureChoiceScene ||
       this.currentScene instanceof GameOverMenu ||
+      this.currentScene instanceof VictoryScene ||
       this.currentScene instanceof StartMenu
     ) {
       this.currentScene.draw();
