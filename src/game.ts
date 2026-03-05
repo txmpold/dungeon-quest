@@ -38,13 +38,7 @@ class Game {
       );
       this.gameIsStarted = true;
     } else if (this.levelFactory.currentLevel === 2) {
-      this.level = this.levelFactory.generateLevel(
-        this.levelFactory.currentLevel + 1,
-      );
-      this.gameIsStarted = true;
-    } else if (this.levelFactory.currentLevel === 3) {
-      this.gameIsStarted = false;
-      //spelet är slut
+      this.changeScene(new VictoryScene());
     }
   }
 
@@ -56,6 +50,7 @@ class Game {
         this.currentScene.transitionActive) ||
       this.currentScene instanceof TreasureChoiceScene ||
       this.currentScene instanceof GameOverMenu ||
+      this.currentScene instanceof VictoryScene ||
       this.currentScene instanceof StartMenu
     ) {
       this.currentScene.draw();

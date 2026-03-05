@@ -49,6 +49,8 @@ class Player extends Entity {
         game.changeScene(
           new TreasureChoiceScene(images.treasureChoices.fireball),
         );
+      } else if (game.levelFactory.currentLevel === 3) {
+        game.changeScene(new VictoryScene());
       }
     }
   }
@@ -119,7 +121,12 @@ class Player extends Entity {
 
   private checkEnemyCollision(entities: Entity[]) {
     for (const entity of entities) {
-      if (entity instanceof Enemy && this.isCollidingWith(entity) || entity instanceof Projectile && this.isCollidingWith(entity) && !entity.friendly) {
+      if (
+        (entity instanceof Enemy && this.isCollidingWith(entity)) ||
+        (entity instanceof Projectile &&
+          this.isCollidingWith(entity) &&
+          !entity.friendly)
+      ) {
         if (this.damageCooldown <= 0) {
           this.health.pop();
           this.damageCooldown = 1000;
@@ -219,7 +226,7 @@ class Player extends Entity {
         1, // <----- ????
         0,
         this.totalCol,
-        true
+        true,
       );
 
       fireball.setHitBox(

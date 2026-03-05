@@ -5,6 +5,7 @@ let music: {
   menuMusic: p5.SoundFile;
   gameMusic: p5.SoundFile;
   gameOverMusic: p5.SoundFile;
+  victoryMusic: p5.SoundFile;
 };
 let soundEffects: {
   shoot: p5.SoundFile;
@@ -79,6 +80,7 @@ let images: {
     arrowkeys: p5.Image;
     spacebar: p5.Image;
     gameOver: p5.Image;
+    victory: p5.Image;
   };
 };
 
@@ -96,6 +98,7 @@ function preload() {
     menuMusic: loadSound("assets/music/menu-music.wav"),
     gameMusic: loadSound("assets/music/game-music.wav"),
     gameOverMusic: loadSound("assets/music/game-over-music.mp3"),
+    victoryMusic: loadSound("assets/music/victory-music.mp3"),
   };
   soundEffects = {
     shoot: loadSound("assets/soundEffects/laserShoot.mp3"),
@@ -172,6 +175,7 @@ function preload() {
       arrowkeys: loadImage("assets/images/arrowkeys.png"),
       spacebar: loadImage("assets/images/spacebar.png"),
       gameOver: loadImage("assets/images/gameover.png"),
+      victory: loadImage("assets/images/victory.png"),
     },
   };
 
@@ -198,10 +202,11 @@ function setup() {
   frameRate(60);
   music.menuMusic.setVolume(1);
   music.gameOverMusic.setVolume(0.1);
+  music.victoryMusic.setVolume(0.5);
   soundEffects.shoot.setVolume(0.4);
   soundEffects.menuButtonSound.setVolume(0.3);
   soundEffects.treasureIsUnlocked.setVolume(0.4);
-  soundEffects.takingdmg.setVolume(0.1);
+  soundEffects.takingdmg.setVolume(0.01);
 
   game = new Game();
 }

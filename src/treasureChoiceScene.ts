@@ -9,6 +9,7 @@ class TreasureChoiceScene extends Scene {
       () => {
         music.menuMusic.stop();
         music.gameMusic.play();
+        music.gameMusic.loop();
         noCursor();
         if (choice1Image === images.treasureChoices.boots) {
           soundEffects.boots.play();
@@ -38,6 +39,7 @@ class TreasureChoiceScene extends Scene {
         music.menuMusic.stop();
         soundEffects.heal.play();
         music.gameMusic.play();
+        music.gameMusic.loop();
         game.playerHealth.push("hp", "hp", "hp");
         noCursor();
         game.changeScene(
