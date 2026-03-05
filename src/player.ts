@@ -203,7 +203,7 @@ class Player extends Entity {
     let y = this.direction.y;
     if (keyIsDown(32) && this.attackCooldown <= 0) {
       soundEffects.fireball.play(0, 1, 5);
-      this.attackCooldown = 0;
+      this.attackCooldown = 5000;
       if (game.playerinventory.includes(images.treasureChoices.fireball)) {
         this.attackCooldown = 1500;
       }
