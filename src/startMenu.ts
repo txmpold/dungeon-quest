@@ -56,7 +56,7 @@ class StartMenu extends Scene {
       GamePanel.screenWidth,
       GamePanel.screenHeight,
     );
-    image(images.menuImages.logo, GamePanel.worldWidth / 2 - 150, 60, 300, 145);
+    image(images.menuImages.logo, GamePanel.worldWidth / 2 - 175, 50, 350, 250;
     this.startButton.draw();
     this.showControls.draw();
   }
