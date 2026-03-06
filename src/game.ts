@@ -51,7 +51,8 @@ class Game {
       this.currentScene instanceof TreasureChoiceScene ||
       this.currentScene instanceof GameOverMenu ||
       this.currentScene instanceof VictoryScene ||
-      this.currentScene instanceof StartMenu
+      this.currentScene instanceof StartMenu ||
+      this.currentScene instanceof ShowControlsScene
     ) {
       this.currentScene.draw();
     } else if (this.gameIsStarted === true) {

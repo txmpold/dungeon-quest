@@ -3,8 +3,6 @@
 class StartMenu extends Scene {
   private startButton: Button;
   private showControls: Button;
-  private closeControls: Button;
-  private controlsOnScreen: boolean = false;
   private sceneStartTime: number = 0;
   private interactionDelay: number = 500;
 
@@ -31,35 +29,24 @@ class StartMenu extends Scene {
     );
     this.showControls = new Button(
       "Controls",
-      () => (this.controlsOnScreen = true),
+      () => game.changeScene(new ShowControlsScene()),
       createVector(200, 60),
       createVector(
         GamePanel.worldWidth / 2 - 100,
         GamePanel.worldHeight / 2 + 110,
       ),
     );
-    this.closeControls = new Button(
-      "Close",
-      () => (this.controlsOnScreen = false),
-      createVector(200, 60),
-      createVector(
-        GamePanel.worldWidth / 2 - 100,
-        GamePanel.worldHeight / 2 + 170,
-      ),
-    );
     cursor("assets/images/swordcursor.png");
   }
 
   public update() {
+    this.startButton.update();
+    this.showControls.update();
     const currentTime = millis();
     const timeSinceSceneStart = currentTime - this.sceneStartTime;
-
     if (timeSinceSceneStart > this.interactionDelay) {
       this.startButton.update();
       this.showControls.update();
-      if (this.controlsOnScreen === true) {
-        this.closeControls.update();
-      }
     }
   }
 
@@ -71,41 +58,8 @@ class StartMenu extends Scene {
       GamePanel.screenWidth,
       GamePanel.screenHeight,
     );
-    image(images.menuImages.logo, GamePanel.worldWidth / 2 - 175, 50, 350, 250);
-    if (this.controlsOnScreen === true) {
-      this.drawControls();
-      this.closeControls.draw();
-    } else {
-      this.startButton.draw();
-      this.showControls.draw();
-    }
-  }
-
-  public drawControls() {
-    image(
-      images.menuImages.controlsbg,
-      GamePanel.worldWidth / 2 - GamePanel.worldWidth / 2 + 100,
-      GamePanel.worldHeight / 2 - GamePanel.worldHeight / 2 + 50,
-      GamePanel.worldWidth - 200,
-      GamePanel.worldHeight - 200,
-    );
-    textFont(fonts.font);
-    textSize(18);
-    text("Use the arrow keys to move around", 300, 140);
-    image(
-      images.menuImages.arrowkeys,
-      GamePanel.worldWidth / 2 - 220,
-      GamePanel.worldHeight / 2 - GamePanel.worldHeight / 2 + 120,
-      150,
-      100,
-    );
-    text("Use spacebar to attack", 180, 280);
-    image(
-      images.menuImages.spacebar,
-      GamePanel.worldWidth / 2 - 70,
-      GamePanel.worldHeight / 2 - GamePanel.worldHeight / 2 + 310,
-      300,
-      45,
-    );
+    image(images.menuImages.logo, GamePanel.worldWidth / 2 - 175, 50, 350, 250;
+    this.startButton.draw();
+    this.showControls.draw();
   }
 }
