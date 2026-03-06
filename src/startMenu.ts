@@ -20,7 +20,7 @@ class StartMenu extends Scene {
       createVector(200, 60),
       createVector(
         GamePanel.worldWidth / 2 - 100,
-        GamePanel.worldHeight / 2 - 30,
+        GamePanel.worldHeight / 2 + 40,
       ),
     );
     this.showControls = new Button(
@@ -29,7 +29,7 @@ class StartMenu extends Scene {
       createVector(200, 60),
       createVector(
         GamePanel.worldWidth / 2 - 100,
-        GamePanel.worldHeight / 2 + 40,
+        GamePanel.worldHeight / 2 + 110,
       ),
     );
     this.closeControls = new Button(
@@ -61,7 +61,7 @@ class StartMenu extends Scene {
       GamePanel.screenWidth,
       GamePanel.screenHeight,
     );
-    image(images.menuImages.logo, GamePanel.worldWidth / 2 - 150, 60, 300, 145);
+    image(images.menuImages.logo, GamePanel.worldWidth / 2 - 175, 50, 350, 250);
     if (this.controlsOnScreen === true) {
       this.drawControls();
       this.closeControls.draw();
