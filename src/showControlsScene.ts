@@ -1,10 +1,9 @@
 /// <reference path="scene.ts" />
 
-class ShowControls extends Scene {
+class ShowControlsScene extends Scene {
   private closeControls: Button;
 
   constructor() {
-    console.log("ShowControls constructor called");
     super("showControls");
     this.closeControls = new Button(
       "Close",

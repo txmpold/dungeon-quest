@@ -23,7 +23,7 @@ class StartMenu extends Scene {
     );
     this.showControls = new Button(
       "Controls",
-      () => game.changeScene(new ShowControls()),
+      () => game.changeScene(new ShowControlsScene()),
       createVector(200, 60),
       createVector(
         GamePanel.worldWidth / 2 - 100,
