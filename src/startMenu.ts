@@ -5,14 +5,18 @@ class StartMenu extends Scene {
   private showControls: Button;
   private closeControls: Button;
   private controlsOnScreen: boolean = false;
+  private sceneStartTime: number = 0;
+  private interactionDelay: number = 500;
 
   constructor() {
     super("startMenu");
+    this.sceneStartTime = millis();
     this.startButton = new Button(
       "Start Game",
       () => {
         noCursor();
         music.gameMusic.loop();
+        game.playerHealth.push("hp", "hp", "hp", "hp", "hp");
         game.changeScene(
           new TransitionScene("Level 1", 2000, () => game.startGame()),
         );
@@ -41,15 +45,19 @@ class StartMenu extends Scene {
         GamePanel.worldHeight / 2 + 170,
       ),
     );
-    this.controlsOnScreen = this.controlsOnScreen;
     cursor("assets/images/swordcursor.png");
   }
 
   public update() {
-    this.startButton.update();
-    this.showControls.update();
-    if (this.controlsOnScreen === true) {
-      this.closeControls.update();
+    const currentTime = millis();
+    const timeSinceSceneStart = currentTime - this.sceneStartTime;
+
+    if (timeSinceSceneStart > this.interactionDelay) {
+      this.startButton.update();
+      this.showControls.update();
+      if (this.controlsOnScreen === true) {
+        this.closeControls.update();
+      }
     }
   }
 
