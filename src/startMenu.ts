@@ -3,14 +3,18 @@
 class StartMenu extends Scene {
   private startButton: Button;
   private showControls: Button;
+  private sceneStartTime: number = 0;
+  private interactionDelay: number = 500;
 
   constructor() {
     super("startMenu");
+    this.sceneStartTime = millis();
     this.startButton = new Button(
       "Start Game",
       () => {
         noCursor();
         music.gameMusic.loop();
+        game.playerHealth.push("hp", "hp", "hp", "hp", "hp");
         game.changeScene(
           new TransitionScene("Level 1", 2000, () => game.startGame()),
         );
@@ -18,7 +22,7 @@ class StartMenu extends Scene {
       createVector(200, 60),
       createVector(
         GamePanel.worldWidth / 2 - 100,
-        GamePanel.worldHeight / 2 - 30,
+        GamePanel.worldHeight / 2 + 40,
       ),
     );
     this.showControls = new Button(
@@ -27,7 +31,7 @@ class StartMenu extends Scene {
       createVector(200, 60),
       createVector(
         GamePanel.worldWidth / 2 - 100,
-        GamePanel.worldHeight / 2 + 40,
+        GamePanel.worldHeight / 2 + 110,
       ),
     );
     cursor("assets/images/swordcursor.png");
@@ -36,6 +40,12 @@ class StartMenu extends Scene {
   public update() {
     this.startButton.update();
     this.showControls.update();
+    const currentTime = millis();
+    const timeSinceSceneStart = currentTime - this.sceneStartTime;
+    if (timeSinceSceneStart > this.interactionDelay) {
+      this.startButton.update();
+      this.showControls.update();
+    }
   }
 
   public draw() {

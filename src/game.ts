@@ -10,7 +10,7 @@ class Game {
     this.levelFactory = new LevelFactory(tiles, 0, 0);
     this.level = new Level([]);
     this.playerinventory = [];
-    this.playerHealth = ["hp", "hp", "hp", "hp", "hp"];
+    this.playerHealth = [];
     this.currentScene = new StartMenu();
   }
 
