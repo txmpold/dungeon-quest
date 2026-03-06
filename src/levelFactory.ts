@@ -74,7 +74,7 @@ class LevelFactory {
             15,
             1,
             3,
-            5,
+            10,
           ),
         );
       }
@@ -318,8 +318,8 @@ class LevelFactory {
           images.tiles.animatedProps,
           5,
           1,
-          3,
-          10,
+          2,
+          50,
         );
         entities.push(prop);
 
