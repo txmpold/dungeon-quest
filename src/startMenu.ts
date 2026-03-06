@@ -16,7 +16,9 @@ class StartMenu extends Scene {
       () => {
         noCursor();
         music.gameMusic.loop();
-        game.playerHealth.push("hp", "hp", "hp", "hp", "hp");
+        if (game.playerHealth.length === 0) {
+          game.playerHealth.push("hp", "hp", "hp", "hp", "hp");
+        }
         game.changeScene(
           new TransitionScene("Level 1", 2000, () => game.startGame()),
         );
